@@ -7,6 +7,8 @@ resturang booking
 
 hovmester tar i mot bestillinger
 
+Booking med navn og nummer
+
 system som gjør det enklere 
 
 internt for bedriften
@@ -17,7 +19,7 @@ internt for bedriften
 
 tidspunkt for booking
 
-burnummer a b c
+bordnummer a b c
 
 skal kunne endre eller slette tidspunkt
 

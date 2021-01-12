@@ -25,5 +25,9 @@ skal kunne endre eller slette tidspunkt
 
 gå til spesiell dato å sjekke hvor mange bestillinger
 
+kan sorteres etter dato 
+
+Kanskje en funksjon hvor man lagrer ferdige bestillinger(Kan være nyttig for smittevern)
+
 Skal være enkelt å bruke
 p	

@@ -31,3 +31,14 @@ Kanskje en funksjon hvor man lagrer ferdige bestillinger(Kan være nyttig for sm
 
 Skal være enkelt å bruke
 p	
+
+### Mikael
+
+- Resturang booking, for å legge in booking og bestilling.
+- Nettside for programmet.
+- Bare for bedriften, oversikt over hvilken bord som er ledig og plassene på bordet, ingen spesielle roller.
+- 20 bord. 10 bord med 4 plasser og 10 bord med 6 plasser.
+- Legge inn tidspunkt til kundene, navn og nummer for gjesten som har bestilt.
+- Kunne slette og redigere bestillinger.
+- Ingen behov for logføring i førsteomgang.
+- Enkelt som mulig, lett og oversiketelig. Simpelt.

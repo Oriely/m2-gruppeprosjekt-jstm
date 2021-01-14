@@ -42,3 +42,12 @@ p
 - Kunne slette og redigere bestillinger.
 - Ingen behov for logføring i førsteomgang.
 - Enkelt som mulig, lett og oversiketelig. Simpelt.
+
+
+plan for å dele opp kode:
+Update View()
+View Create Booking()
+View Check Bookings()
+Create Booking()
+Change booking()
+End Booking()

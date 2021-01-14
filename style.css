@@ -12,5 +12,112 @@
     justify-content: center;
     flex-direction: column;
     align-items: flex-start;
-    
+}
+
+.tableOverview {
+    background-color: grey;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas: "a . f . k . p" ". . . . . . ." "b . g . l . q" ". . . . . . ." "c . h . m . r" ". . . . . . ." "d . i . n . s" ". . . . . . ." "e . j . o . t";
+}
+
+.a {
+    grid-area: a;
+}
+
+.b {
+    grid-area: b;
+}
+
+.c {
+    grid-area: c;
+}
+
+.d {
+    grid-area: d;
+}
+
+.e {
+    grid-area: e;
+}
+
+.f {
+    grid-area: f;
+}
+
+.g {
+    grid-area: g;
+}
+
+.h {
+    grid-area: h;
+}
+
+.i {
+    grid-area: i;
+}
+
+.j {
+    grid-area: j;
+}
+
+.k {
+    grid-area: k;
+}
+
+.l {
+    grid-area: l;
+}
+
+.m {
+    grid-area: m;
+}
+
+.n {
+    grid-area: n;
+}
+
+.o {
+    grid-area: o;
+}
+
+.p {
+    grid-area: p;
+}
+
+.q {
+    grid-area: q;
+}
+
+.r {
+    grid-area: r;
+}
+
+.s {
+    grid-area: s;
+}
+
+.t {
+    grid-area: t;
+}
+
+.box {
+    margin: auto;
+    background-color: palegoldenrod;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.booked {
+    background-color: red;
+}
+
+.open {
+    background-color: green;
 }

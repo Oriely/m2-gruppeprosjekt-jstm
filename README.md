@@ -18,7 +18,7 @@ internt for bedriften
 10 bord med seks plaser
 
 tidspunkt for booking
-
+aa
 bordnummer a b c
 
 skal kunne endre eller slette tidspunkt
@@ -42,3 +42,16 @@ p
 - Kunne slette og redigere bestillinger.
 - Ingen behov for logføring i førsteomgang.
 - Enkelt som mulig, lett og oversiketelig. Simpelt.
+
+
+- plan for å dele opp kode: 
+- Model (x)
+- Update View() 
+- View Create Booking(-Theodor) 
+- View Check Bookings(-Jonas) 
+- Create Booking(-Theodor) 
+- Change booking() 
+- End Booking()
+- Check Bookings Date(Update View?)
+- varsel om at bordet snart er booket, Gult bord? Kanskje ha en liste som kommer opp med informasjon om bordet gjennom dagen.
+- CSS(-Sigve)

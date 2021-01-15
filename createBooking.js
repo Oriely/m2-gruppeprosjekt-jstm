@@ -1,4 +1,9 @@
 function createBooking() {
+    if (model.inputs.inputTimeEnd !== '') {
+        var bookingTimeEnd = new Date(model.inputs.inputTimeEnd).toISOString()
+    } else if (model.inputs.inputTimeEnd == '') {
+        bookingTimeEnd = '';
+    }
     if (model.app.selectedTable == '') {
         alert('Du må velge bord!')
     }
@@ -9,8 +14,8 @@ function createBooking() {
             bookingInfo: {
                 bookedName: model.inputs.inputName,
                 bookedNumber: model.inputs.inputNumber,
-                bookedTime: model.inputs.inputTime,
-                bookedTimeEnd: model.inputs.inputTimeEnd,
+                bookedTime: new Date(model.inputs.inputTime).toISOString(),
+                bookedTimeEnd: bookingTimeEnd,
                 bookedGuestCount: model.inputs.inputNumberOfGuests,
                 bookedChild: model.inputs.inputChildChair,
             }

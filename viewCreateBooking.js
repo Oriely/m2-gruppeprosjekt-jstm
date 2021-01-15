@@ -28,7 +28,7 @@ function viewCreateBooking() {
         <div></div>
             <div class="tableInformation">
                 <div class="currentTable" id="check">Valgt Bord: <strong>${model.app.selectedTable}</strong></div>
-                <div class0"maxTableGuests">Bordet har plass til: <strong>${rangeCount || 'Velg bord'}</strong>${rangeCount ? ' personer' : ''}</div>
+                <div class="maxTableGuests">Bordet har plass til: <strong>${rangeCount || 'Velg bord'}</strong>${rangeCount ? ' personer' : ''}</div>
             </div>
 
             <div class="createName"><div>Navn:</div> <input oninput="model.inputs.inputName = this.value" value="${model.inputs.inputName}"></input></div>
@@ -44,7 +44,7 @@ function viewCreateBooking() {
             <div class="createBooking"><button onclick="createBooking()">Book</button></div>
         </div>
         <div class="tableDescription">
-        <div>Bord med 4 plasser:</div><div>Bord med 6 plasser:</div>
+        <div class="fourSeats">Bord med 4 plasser:</div><div class="sixSeats">Bord med 6 plasser:</div>
         </div>
         <div class="tableOverview">
         

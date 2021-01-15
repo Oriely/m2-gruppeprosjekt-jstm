@@ -2,7 +2,7 @@ const model = {
     app: {
         selectedTable: '',
         selectedDate: '',
-        currentPage: '',
+        currentPage: 'viewCreateBooking',
 
     },
     tables: {

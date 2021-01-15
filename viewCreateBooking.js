@@ -1,8 +1,22 @@
+
+
+
 let tableOverview = '';
 let childBool = false;
-viewCreateBooking()
+let rangeCount;
+let checkedChildChair = false;
+
+console.log(checkedChildChair)
+
 
 function viewCreateBooking() {
+    if (model.tables.fits4.includes(model.app.selectedTable)) {
+        rangeCount = 4;
+    } else if (model.tables.fits6.includes(model.app.selectedTable)) {
+        rangeCount = 6;
+    } else {
+        rangeCount;
+    }
     
     let date = new Date();
     
@@ -11,20 +25,28 @@ function viewCreateBooking() {
     <div class="page">
         <div class="date">I dag: ${date}</div>
         <div class="inputs">
-            <div class="createName"><div>Name:</div> <input oninput="model.inputs.inputName = this.value"></input></div>
-            <div class="createNumber"><div>Number:</div> <input oninput="model.inputs.inputNumber = this.value"></div>
+            <div class="tableInformation">
+                <div class="currentTable" id="check">Valgt Bord: <strong>${model.app.selectedTable}</strong></div>
+                <div class0"maxTableGuests">Bordet har plass til: <strong>${rangeCount || 'Velg bord'}</strong>${rangeCount ? ' personer' : ''}</div>
+            </div>
+
+            <div class="createName"><div>Navn:</div> <input oninput="model.inputs.inputName = this.value" value="${model.inputs.inputName}"></input></div>
+            <div class="createNumber"><div>Nummer:</div> <input oninput="model.inputs.inputNumber = this.value" value="${model.inputs.inputNumber}"></div>
             Starttid:
-            <div class="createDateAndTime"><input type="datetime-local" oninput="model.inputs.inputTime = this.value"></div>
+            <div class="createDateAndTime"><input type="datetime-local" oninput="model.inputs.inputTime = this.value" value="${model.inputs.inputTime}"></div>
             Slutttid:
-            <div class="createDateAndTime"><input type="datetime-local" oninput="model.inputs.inputTimeEnd = this.value"></div>
-            <div class="createGuests"><input type="range" min="1" max="6" oninput="model.inputs.inputNumberOfGuests = this.value"><br>Antall gjester</div>
+            <div class="createDateAndTime"><input type="datetime-local" oninput="model.inputs.inputTimeEnd = this.value" value="${model.inputs.inputTimeEnd}"></div>
+            <div class="createGuests"><input type="range" min="1" max="${rangeCount || '4'}" oninput="model.inputs.inputNumberOfGuests = this.value" value="${model.inputs.inputNumberOfGuests}"><br>Antall gjester</div>
             <div class="createTableInfo"></div>
-            <div class="createChildChair">Barnestol<input type="checkbox" onclick="checkChildChair()"></div>
-            <div class="currentTable" id="check">Valgt Bord: ${model.app.selectedTable}</div>
+            <div class="createChildChair">Barnestol<input type="checkbox" ${childBool ? 'checked' : ''} onclick="checkChildChair()" ></div>
+            
             <div class="createBooking"><button onclick="createBooking()">Book</button></div>
         </div>
-        
+        <div class="tableDescription">
+        <div>Bord med 4 plasser:</div><div>Bord med 6 plasser:</div>
+        </div>
         <div class="tableOverview">
+        
             <div class="a box" onclick="select('a')">A</div>
             <div class="b box" onclick="select('b')">B</div>
             <div class="c box" onclick="select('c')">C</div>

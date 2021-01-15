@@ -4,8 +4,13 @@
     height: 50%;
 }
 
+.date {
+    margin-left: 3%;
+}
+
 .inputs {
     margin-top: 15%;
+    margin-left: 3%;
     width: 50%;
     height: 50%;
     display: flex;
@@ -15,14 +20,31 @@
 }
 
 .tableOverview {
-    background-color: grey;
-    width: 100%;
+    margin-top: 17%;
+    width: 70%;
     height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     gap: 0px 0px;
     grid-template-areas: "a . f . k . p" ". . . . . . ." "b . g . l . q" ". . . . . . ." "c . h . m . r" ". . . . . . ." "d . i . n . s" ". . . . . . ." "e . j . o . t";
+}
+
+.tableDescription {
+    width: 57%;
+    margin-left: 3%;
+    margin-top: 15%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: -15%;
+}
+
+
+.tableInformation {
+    border: solid black 2px;
+    border-radius: 3px;
+    position: absolute;
+    margin-left: 20%;
 }
 
 .a {
@@ -106,8 +128,10 @@
 }
 
 .box {
+    border: solid 1px black;
+    border-radius: 3px;
     margin: auto;
-    background-color: palegoldenrod;
+    background-color: green;
     width: 30px;
     height: 30px;
     text-align: center;
@@ -118,6 +142,6 @@
     background-color: red;
 }
 
-.open {
-    background-color: green;
+.bookedLater {
+    background-color: yellow;
 }

@@ -1,15 +1,24 @@
+body {
+    background-color: rgb(238, 232, 170, 0.3);
+}
+
 .page {
     margin: auto;
     width: 50%;
     height: 50%;
+    background-color: rgb(238, 232, 170, 0.2);
 }
 
 .date {
     margin-left: 3%;
+    border: solid black 2px;
+    display: inline-block;
+    padding: 3px;
+    border-radius: 3px;
 }
 
 .inputs {
-    margin-top: 15%;
+    margin-top: 6%;
     margin-left: 3%;
     width: 50%;
     height: 50%;
@@ -136,6 +145,19 @@
     height: 30px;
     text-align: center;
     vertical-align: middle;
+    transition: 0.3s;
+}
+
+.box:hover {
+    border: solid 1px blueviolet;
+    border-radius: 20px;
+    margin: auto;
+    background-color: green;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    vertical-align: middle;
+    transition: 0.3s;
 }
 
 .booked {

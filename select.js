@@ -1,4 +1,4 @@
-function select(index) {
+function selectTable(index) {
     model.app.selectedTable = index;
     viewCreateBooking();
 }

@@ -1,189 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+
 body {
-    background-color: rgb(238, 232, 170, 0.3);
+    background:rgb(38, 38, 38);
+    font-family: 'Roboto Slab', serif;
+
 }
 
+#app {
+    display:flex;
+    justify-content: center;
+    align-content:center;
+    align-items: center;
+    height:100vh;
+}
 .page {
-    width: auto !important;
-    max-width: 50%;
-    min-width: 1000px;
-    margin: auto;
-    width: 50%;
-    height: 50%;
-    background-color: rgb(238, 232, 170, 0.2);
+width:65%;
 }
 
 .date {
-    margin-left: 3%;
-    border: solid black 2px;
-    display: inline-block;
-    padding: 3px;
-    border-radius: 3px;
+    position:absolute;
+    top:0;
+    right:0;
+    background: rgb(60, 60, 60);
+    padding:10px;
 }
 
 .inputs {
-    margin-top: 6%;
-    margin-left: 3%;
-    min-width: 50%;
-    width: 50%;
-    height: 50%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: flex-start;
+    display:flex;
+    flex-direction:row;
+    width:100%;
 }
 
+.inputs-col {
+    display:flex;
+    flex-direction:column;
+    width:100%;
+}
+
+.inputs-col {
+    display:flex;
+    flex-direction:column;
+    width:100%;
+}
+
+
+.inputs-col1 {
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    padding:10px;
+}
+
+.inputs-col2 {
+    display:flex;
+    flex-direction:;
+    width:100%;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding:10px;
+
+}
+
+
+
 .tableOverview {
-    min-width: 50%;
-    max-height: 30%;
-    margin-top: 10%;
-    width: 70%;
-    height: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    gap: 0px 0px;
-    grid-template-areas: "a . f . k . p" ". . . . . . ." "b . g . l . q" ". . . . . . ." "c . h . m . r" ". . . . . . ." "d . i . n . s" ". . . . . . ." "e . j . o . t";
+   display:flex;
+    flex-direction: row;
+    width:100%;
+
 }
 
 .tableDescription {
-    width: 57%;
-    margin-left: 3%;
-    margin-top: 9%;
-    display: flex;
+    display:flex;
+    flex-direction: row;
+    width:100%;
     justify-content: space-between;
-    margin-bottom: -15%;
+
 }
 
 .tableInformation {
-    min-width: 10%;
-    border: solid black 2px;
-    border-radius: 3px;
-    position: absolute;
-    margin-left: 20%;
-}
+    display:flex;
+    flex-direction: column;
+}   
 
 
 .fourSeats {
-    margin-top: -10%;
-    margin-bottom: 10%;
-    background-color: burlywood;
-    border: solid burlywood 1px;
-    border-radius: 3px;
+    display:flex;
+    flex-direction: row;
+    width:100%;
+    justify-content: center;
+    padding:5px;
 }
 
 .sixSeats {
-    margin-left: 10%;
-    margin-top: -10%;
-    margin-bottom: 10%;
-    background-color: burlywood;
-    border: solid burlywood 1px;
-    border-radius: 3px;
+
+    display:flex;
+    flex-direction: row;
+    width:100%;
+    justify-content: center;
+    padding:5px;
 }
 
-
-
-.a {
-    grid-area: a;
-}
-
-.b {
-    grid-area: b;
-}
-
-.c {
-    grid-area: c;
-}
-
-.d {
-    grid-area: d;
-}
-
-.e {
-    grid-area: e;
-}
-
-.f {
-    grid-area: f;
-}
-
-.g {
-    grid-area: g;
-}
-
-.h {
-    grid-area: h;
-}
-
-.i {
-    grid-area: i;
-}
-
-.j {
-    grid-area: j;
-}
-
-.k {
-    grid-area: k;
-}
-
-.l {
-    grid-area: l;
-}
-
-.m {
-    grid-area: m;
-}
-
-.n {
-    grid-area: n;
-}
-
-.o {
-    grid-area: o;
-}
-
-.p {
-    grid-area: p;
-}
-
-.q {
-    grid-area: q;
-}
-
-.r {
-    grid-area: r;
-}
-
-.s {
-    grid-area: s;
-}
-
-.t {
-    grid-area: t;
-}
 
 .box {
+    margin:10px;
+    display:flex;
+    justify-content: center;
+    align-items:center;
     border: solid 1px black;
     border-radius: 3px;
-    margin: auto;
     background-color: green;
     width: 30px;
     height: 30px;
-    text-align: center;
-    vertical-align: middle;
-    transition: 0.3s;
+
+    transition: ease 0.2s;
 }
 
 .box:hover {
     border: solid 1px blueviolet;
-    border-radius: 20px;
-    margin: auto;
-    background-color: green;
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    vertical-align: middle;
-    transition: 0.3s;
+    border-radius: 5px;
+
 }
 
 .booked {
@@ -192,4 +128,12 @@ body {
 
 .bookedLater {
     background-color: yellow;
+}
+
+input {
+    border:none;
+    outline:none;
+    padding:5px;
+    background: rgba(151, 151, 151, 0.652);
+    color:white;
 }

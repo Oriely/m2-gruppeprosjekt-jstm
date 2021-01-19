@@ -53,6 +53,6 @@ p
 - Change Page() []
 - Change booking(-Mikael) []
 - End Booking() []
-- Bookings DateView(Update View?)
+- PlannedBookingsView(Update View?)
 - varsel om at bordet snart er booket, Gult bord? Kanskje ha en liste som kommer opp med informasjon om bordet gjennom dagen.
 - CSS(-Sigve)

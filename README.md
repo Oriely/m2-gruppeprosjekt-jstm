@@ -44,7 +44,7 @@ p
 - Enkelt som mulig, lett og oversiketelig. Simpelt.
 
 
-- plan for å dele opp kode: 
+### plan for å dele opp kode: 
 - Model (x) [done]
 - Update View(-Theodor) []
 - View Create Booking(-Theodor) [Done]

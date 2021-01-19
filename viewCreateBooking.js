@@ -20,8 +20,9 @@ function viewCreateBooking() {
     let date = new Date();
     date = date.toISOString()
     var date1 = date.substring(0, 10);
+    date1 = new Date(date1).toLocaleDateString()
     var date2 = date.substring(11, 16);
-    date = `${date1}  ${date2}`
+    date = `${date1}  ${date2}`;
 
     let html = '';
     html = `

@@ -18,13 +18,17 @@ function viewCreateBooking() {
     }
 
     let date = new Date();
+    date = date.toISOString()
+    var date1 = date.substring(0, 10);
+    var date2 = date.substring(11, 16);
+    date = `${date1}  ${date2}`
 
     let html = '';
     html = `
 
     <div class="page">
 
-    <div class="date">I dag: ${date.toISOString()}</div>
+    <div class="date">I dag: ${date}</div>
 
     <div class="inputs">
         <div class="inputs-col1">

@@ -24,6 +24,8 @@ function viewCreateBooking() {
     var date2 = date.substring(11, 16);
     date = `${date1}  ${date2}`;
 
+    console.log(date2)
+
     let html = '';
     html = `
 
@@ -40,7 +42,8 @@ function viewCreateBooking() {
             <div class="createDateAndTime"><input type="datetime-local" oninput="model.inputs.inputTime = this.value" value="${model.inputs.inputTime}"></div>
             Slutttid:
             <div class="createDateAndTime"><input type="datetime-local" oninput="model.inputs.inputTimeEnd = this.value" value="${model.inputs.inputTimeEnd}"></div>
-            <div class="createGuests"><input type="range" min="1" max="${rangeCount || '4'}" oninput="model.inputs.inputNumberOfGuests = this.value" value="${model.inputs.inputNumberOfGuests}"><br>Antall gjester</div>
+            Antall gjester:
+            <div class="createGuests"><input type="range" min="1" max="${rangeCount || '4'}" oninput="model.inputs.inputNumberOfGuests = this.value" value="${model.inputs.inputNumberOfGuests}"><br></div>
             <div class="createTableInfo"></div>
             <div class="createChildChair">Barnestol<input type="checkbox" ${childBool ? 'checked' : ''} onclick="checkChildChair()" ></div>
             

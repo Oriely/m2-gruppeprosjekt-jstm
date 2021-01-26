@@ -1,9 +1,11 @@
 
+var currentTime = new Date();
+
 function checkTableStatus() {
 let statusObj = {};
 console.log(model);
 let bookings = model.bookingTimes;
-let currentTime = new Date();
+
 //let dayEndDate = getDayEndDate(currentTime);
 
 
@@ -12,57 +14,63 @@ bookings.forEach(booking => {
     console.log(`${booking.table}: ${booking.bookedInfo.bookedTime}`);
     
     let startBookDate = new Date(booking.bookedInfo.bookedTime);
-    let endBookDate = (booking.bookedInfo.bookedTimeEnd == "" ? getDayEndDate() : new Date(booking.bookedInfo.bookedTimeEnd) );
-    let endBookDate = new Date(booking.bookedInfo.bookedTimeEnd);
+    let endBookDate = (booking.bookedInfo.bookedTimeEnd == "" ? getDayEndDate(startBookDate) : new Date(booking.bookedInfo.bookedTimeEnd) );
     let tableLetter = booking.table;
-    determineTableStatus(startBookDate, endBookDate, tableLetter)
-
-
+    let timeTillNextBooking = checkHoursLeftBeforeBooking(startBookDate, currentTime);
+    let bookingEnded = checkBookingEnded(endBookDate);
+    let bookingStatus = determinebookingStatus(timeTillNextBooking, bookingEnded)
     
+     tempObj["timeLeft"] = checkHoursLeftBeforeBooking(startBookDate, currentTime);
 
-    
-    console.log(statusObj[booking.table]);
-    
-
-    
+    if (tableLetter in statusObj) {resolveStatusConflict(tableLetter, bookingStatus, statusObj)};
 
 
+     console.log(tableLetter + " has more than one booking " + (tableLetter in statusObj));
 
-
-
-    tempObj["timeLeft"] = timeToBooking;
-    statusObj[booking.table] = tempObj;
-    statusObj.Test = "blablabla";
+     statusObj[booking.table] = {bookingStatus, bookingEnded, timeTillNextBooking, startBookDate};
 });
 
+console.log(currentTime.toISOString());
 return statusObj;
 }
 
 
 
 
-function determineTableStatus(startBookDate, endBookDate, letter) {
+function determinebookingStatus(timeTillNextBooking, bookingEnded) {
 
-    let timeTillNextBooking = checkHoursLeftBeforeBooking(startBookDate, endBookDate);
     
-    if (timeTillNextBooking >= 0 && timeTillNextBooking <= 2) {
-        return 1;
-    }
-
-    else if (timeTillNextBooking >= 2) {
+    console.log(timeTillNextBooking);
+    
+    if  (timeTillNextBooking < -2 || bookingEnded) {
         return 0;
     }
 
-    else if (timeTillNextBooking >= 2) {}
+    else if (timeTillNextBooking <= -1 && timeTillNextBooking >= -2) {
+        return 1;
+    }
+
+    else if (timeTillNextBooking <= 0 && !bookingEnded) {
+        return 2;
+    }
+    else {
+        return -1;
+    }
 
 }
 
 
 
 //note: HoursLeft is rounded up to nearest whole number
-function checkHoursLeftBeforeBooking(startBookDate) {
-    let timeToBooking = (Math.ceil(currentTime - startBookDate) / 1000 / 60 / 60);
+function checkHoursLeftBeforeBooking(startBookDate, currentTime) {
+    let timeToBooking = (Math.ceil(startBookDate - currentTime) / 1000 / 60 / 60);
     return timeToBooking;
+}
+
+function checkBookingEnded(endDate) {
+    time = new Date();
+    let timeLeft = (Math.ceil((endDate - time) / 1000 / 60 / 60));
+    return (timeLeft <= 0 ? true : false);
 }
 
 // if (timeToBooking >= -2) {
@@ -77,15 +85,26 @@ function checkHoursLeftBeforeBooking(startBookDate) {
 
 // }
 
-function getDayEndDate (time) {
+function getDayEndDate (startBookDate) {
     time = new Date();
-    let tempDate = new Date();
+    let tempDate = startBookDate;
     tempDate.setDate(tempDate.getDate()+1);
     let timeString = tempDate.toISOString();
     
     timeString = timeString.substring(0, 10);
-    endDate = new Date(timeString);
-    console.log(endDate);
-    let timeLeft = (Math.ceil((endDate - time) / 1000 / 60 / 60));
-    return {timeLeft, endDate, bookingEnded};
+    endDate = new Date(timeString);   
+    return endDate;
+}
+
+//If the table in question already has a status, compare the current statuses and 
+//keep the one with the highest priority. For instance, if a table has 2 bookings
+//Where one starts in 5 hours(vacant status) and one is currently ongoing(taken status),
+//This function sets the current status to taken.
+function resolveStatusConflict(tableLetter, bookingStatus, statusObj) {
+
+    let existingStatus = statusObj[tableLetter]['bookingStatus'];
+
+    if (bookingStatus > existingStatus) {return bookingStatus}
+    else {return existingStatus};
+
 }

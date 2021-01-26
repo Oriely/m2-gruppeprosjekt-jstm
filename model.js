@@ -25,7 +25,7 @@ const model = {
             bookedInfo: {
                 bookedName: 'Per Larsen',
                 bookedNumber: '98126143',
-                bookedTime: '2021-01-15T16:00:00.000Z',
+                bookedTime: '2021-01-25T11:20:00.000Z',
                 bookedTimeEnd: '',
                 bookedChild: false,
                 bookedGuestCount: 5,

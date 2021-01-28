@@ -1,6 +1,7 @@
 function createBooking() {
-    if (model.inputs.inputTimeEnd !== '') {
-        var bookingTimeEnd = new Date(model.inputs.inputTimeEnd).toISOString()
+    var bookingTimeEnd = '';
+    if (model.inputs.inputTimeEnd != '') {
+        bookingTimeEnd = new Date(model.inputs.inputTimeEnd).toISOString()
     } else if (model.inputs.inputTimeEnd == '') {
         bookingTimeEnd = '';
     }
@@ -11,7 +12,7 @@ function createBooking() {
         {
             table: model.app.selectedTable,
             chairCount: checkChairCount(model.app.selectedTable),
-            bookingInfo: {
+            bookedInfo: {
                 bookedName: model.inputs.inputName,
                 bookedNumber: model.inputs.inputNumber,
                 bookedTime: new Date(model.inputs.inputTime).toISOString(),
@@ -20,6 +21,8 @@ function createBooking() {
                 bookedChild: model.inputs.inputChildChair,
             }
         })
+        checkTableStatus();
+        updateView();
 };
 
 function checkChairCount(index) {

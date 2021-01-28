@@ -12,16 +12,20 @@
         <link rel="icon" type="image/png" href="favicon/logo_size_invert.jpg"/>
     </head>
     <body>
+        <nav>
+            <ul>
+                <li><a onclick="changeScreen('booktables')">Book Tables</a></li>
+                <li><a onclick="changeScreen('listbookings')">List bookings</a></li>
+                <li><a onclick="changeScreen('managebookings')">Manage bookings</a></li>
+            </ul>
+        </nav>
         <div id="app"></div>
         
         
-        <script src="model.js"></script>
-        <script src="viewCreateBooking.js"></script>
-        <script src="viewEditBooking.js"></script>
-        <script src="select.js"></script>
-        <script src="createBooking.js"></script>
-        <script src="updateView.js"></script>
-        <script src="ControllerCreateBooking.js"></script>
-        <script src="endBooking.js"></script>
+        <script src="js/model.js"></script>
+        <script src="js/ControllerCreateBooking.js"></script>
+        <script src="js/Views.js"></script>
+        <script src="js/Misc.js"></script>
+        <script src="js/updateView.js"></script>
     </body>
 </html>

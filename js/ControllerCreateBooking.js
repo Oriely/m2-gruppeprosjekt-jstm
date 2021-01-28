@@ -10,10 +10,8 @@ function checkTableStatus() {
     bookings.forEach(booking => {
         let tempObj = {};
 
-        let bookedBy = "";
-        let bookerPhoneNumber = 0;
         let startBookDate = new Date(booking.bookedInfo.bookedTime);
-        
+
 
         let endBookDate = (booking.bookedInfo.bookedTimeEnd == "" ? getDayEndDate(startBookDate) : new Date(booking.bookedInfo.bookedTimeEnd));
 
@@ -34,12 +32,8 @@ function checkTableStatus() {
             bookingStatus = resolveStatusConflict(tableLetter, bookingStatus, statusObj);
         };
 
-        if (bookingStatus === 2) {
-            bookedBy = booking.bookedInfo.bookedName;
-            bookerPhoneNumber = booking.bookedInfo.bookedNumber;
-        } 
 
-        statusObj[booking.table] = { bookingStatus, bookingEnded, timeTillNextBooking, startBookDate, bookedBy, bookedNumber };
+        statusObj[booking.table] = { bookingStatus, bookingEnded, timeTillNextBooking, startBookDate };
 
     });
 

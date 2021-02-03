@@ -74,10 +74,22 @@ const model = {
             table: 's',
             chairCount: 6,
             bookedInfo: {
-                bookedName: 'Espen Askeladden',
+                bookedName: 'Martin Pettersen',
                 bookedNumber: '98126143',
-                bookedTime: '2021-02-16T17:30:00.000Z',
-                bookedTimeEnd: '2021-02-16T20:30:00.000Z',
+                bookedTime: '2021-02-30T14:30:00.000Z',
+                bookedTimeEnd: '2021-02-30T17:30:00.000Z',
+                bookedChild: true,
+                bookedGuestCount: 6,
+            }
+        },
+        {
+            table: 's',
+            chairCount: 6,
+            bookedInfo: {
+                bookedName: 'Håvard Gundersen',
+                bookedNumber: '98126143',
+                bookedTime: '2021-02-24T15:00:00.000Z',
+                bookedTimeEnd: '2021-02-24T18:00:00.000Z',
                 bookedChild: true,
                 bookedGuestCount: 6,
             }
@@ -119,5 +131,8 @@ const model = {
             }
         },
 
+    ],
+    expiredBookings: [
+        
     ]
 };

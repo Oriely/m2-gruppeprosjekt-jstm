@@ -10,8 +10,10 @@ function checkTableStatus() {
     bookings.forEach(booking => {
         let tempObj = {};
 
+        let bookedBy = "";
+        let bookerPhoneNumber = 0;
         let startBookDate = new Date(booking.bookedInfo.bookedTime);
-
+        let bookings = []
 
         let endBookDate = (booking.bookedInfo.bookedTimeEnd == "" ? getDayEndDate(startBookDate) : new Date(booking.bookedInfo.bookedTimeEnd));
 
@@ -30,15 +32,27 @@ function checkTableStatus() {
 
         if (tableLetter in statusObj) {
             bookingStatus = resolveStatusConflict(tableLetter, bookingStatus, statusObj);
+            bookings = statusObj[tableLetter].bookings
         };
 
-
-        statusObj[booking.table] = { bookingStatus, bookingEnded, timeTillNextBooking, startBookDate };
+        let bookedInfo = booking.bookedInfo;
+        bookings.push(bookedInfo);
+        
+        statusObj[booking.table] = { bookingStatus, bookingEnded, endBookDate, timeTillNextBooking, startBookDate, bookings };
 
     });
 
+    //Sort the bookings array so the order of the booking entries matches the dates with the
+    //bookings closest to the current date appears first in the array
+    for (const [key, value] of Object.entries(statusObj)) {
+
+        let unsortedBookings = statusObj[key].bookings;
+        let sortedBookings = unsortedBookings.sort((a, b) => new Date(a.bookedTime) - new Date(b.bookedTime) );
+        console.log(sortedBookings);
+    }
 
     model.status = statusObj;
+    console.log(model);
     updateView();
 }
 

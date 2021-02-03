@@ -13,7 +13,7 @@ function checkTableStatus() {
         let bookedBy = "";
         let bookerPhoneNumber = 0;
         let startBookDate = new Date(booking.bookedInfo.bookedTime);
-        
+        let bookings = []
 
         let endBookDate = (booking.bookedInfo.bookedTimeEnd == "" ? getDayEndDate(startBookDate) : new Date(booking.bookedInfo.bookedTimeEnd));
 
@@ -32,6 +32,7 @@ function checkTableStatus() {
 
         if (tableLetter in statusObj) {
             bookingStatus = resolveStatusConflict(tableLetter, bookingStatus, statusObj);
+            bookings = statusObj[tableLetter].bookings
         };
 
         if (bookingStatus === 2) {
@@ -39,7 +40,12 @@ function checkTableStatus() {
             bookerPhoneNumber = booking.bookedInfo.bookedNumber;
         } 
 
-        statusObj[booking.table] = { bookingStatus, bookingEnded, timeTillNextBooking, startBookDate, bookedBy, bookedNumber };
+        let bookedInfo = booking.bookedInfo;
+        bookings.push(bookedInfo);
+        
+
+
+        statusObj[booking.table] = { bookingStatus, bookingEnded, timeTillNextBooking, startBookDate, bookedBy, bookedNumber, bookings };
 
     });
 

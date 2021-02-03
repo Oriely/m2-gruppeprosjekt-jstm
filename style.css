@@ -10,6 +10,7 @@ body {
     font-family: 'Ubuntu', sans-serif;
     font-weight:200;
     color:white;
+    padding:10px;
 }
 
 #app {
@@ -23,12 +24,13 @@ nav ul {
     display:flex;
 }
 nav ul li {
-    margin:10px;
+    margin-right:10px;
 
 }
 
 nav ul li a {
     padding:5px;
+    background:rgba(55, 55, 55, 0.789);
 }
 .date {
     position:absolute;
@@ -37,7 +39,7 @@ nav ul li a {
     padding-right:10px;
     padding-top:10px;
     background: rgb(60, 60, 60);
-    padding:10px;
+    padding:5px;
     color:white;
 }
 

@@ -46,13 +46,14 @@ p
 
 ### plan for å dele opp kode: 
 - Model (x) [Done]
-- Update View(-Theodor) []
+- Update View(-Theodor) [Done]
 - View Create Booking(-Theodor) [Done]
 - View Check Bookings(-Jonas) []
 - Create Booking(-Theodor) [Done]
 - Change Page() []
 - Change booking(-Mikael) []
 - End Booking(-Theodor) [Done]
-- PlannedBookingsView(Update View?)
+- ViewEditBookingView(-Mikael) []
+- Bookings som er over tiden skal slettes(-Jonas) []
 - varsel om at bordet snart er booket, Gult bord? Kanskje ha en liste som kommer opp med informasjon om bordet gjennom dagen.
-- CSS(-Sigve)
+- CSS(-Sigve) []

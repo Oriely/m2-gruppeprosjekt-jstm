@@ -48,6 +48,7 @@ function viewCreateBooking() {
                     
                     <input type="datetime-local" oninput="model.inputs.inputTimeEnd = this.value" value="${model.inputs.inputTimeEnd}">
                 </div>
+                <div><button onclick="setTimeToCurrentTime()">Nåværende Tid</button></div>
                 <div class="createGuests">
                     <input type="range" min="1" max="${rangeCount || '4'}" oninput="model.inputs.inputNumberOfGuests = this.value" value="${model.inputs.inputNumberOfGuests}">
                     Antall gjester

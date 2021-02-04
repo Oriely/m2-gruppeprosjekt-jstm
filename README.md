@@ -56,6 +56,9 @@ p
 - ViewEditBookingView(-Mikael) []
 - FilterfromTimeAndDay inne i en if under en loop som tegner opp (-Mikael) []
 - Bookings som er over tiden skal slettes(-Jonas) []
-- Ha en knapp hvor man kan sette til nåværende tid() []
+- Ha en knapp hvor man kan sette til nåværende tid(-Theodor) [Done]
+- Lage en funksjon som legger til en booking 2 timer frem () []
+- Lage bookings som viser forskjellige stadier når vi viser oppgaven () []
+- Bytte til dato og egen tid bolker istedefor date-time som er utdatert (-Theodor) []
 - varsel om at bordet snart er booket, Gult bord? Kanskje ha en liste som kommer opp med informasjon om bordet gjennom dagen.
 - CSS(-Sigve) []

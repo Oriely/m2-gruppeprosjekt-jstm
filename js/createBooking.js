@@ -1,7 +1,7 @@
 function createBooking() {
     var bookingTimeEnd = '';
     if (model.inputs.inputTimeEnd != '') {
-        bookingTimeEnd = new Date(model.inputs.inputTimeEnd).toISOString()
+        bookingTimeEnd = model.inputs.inputTimeEnd
     } else if (model.inputs.inputTimeEnd == '') {
         bookingTimeEnd = '';
     }
@@ -15,7 +15,7 @@ function createBooking() {
             bookedInfo: {
                 bookedName: model.inputs.inputName,
                 bookedNumber: model.inputs.inputNumber,
-                bookedTime: new Date(model.inputs.inputTime).toISOString(),
+                bookedTime: model.inputs.inputTime,
                 bookedTimeEnd: bookingTimeEnd,
                 bookedGuestCount: model.inputs.inputNumberOfGuests,
                 bookedChild: model.inputs.inputChildChair,
@@ -30,7 +30,6 @@ function checkChairCount(index) {
         return 4;
     }
     else if (model.tables.fits6.includes(index)) {
-        return 6;
-        
+        return 6;  
     }
 }

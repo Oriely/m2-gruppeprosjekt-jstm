@@ -1,4 +1,4 @@
-updateView()
+updateView();
 
 function updateView() {
     if (model.app.currentPage == 'booktables'){viewCreateBooking()}

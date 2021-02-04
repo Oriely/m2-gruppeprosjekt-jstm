@@ -9,8 +9,6 @@ function viewCreateBooking() {
         rangeCount = 4;
     } else if (model.tables.fits6.includes(model.app.selectedTable)) {
         rangeCount = 6;
-    } else {
-        rangeCount;
     }
 
     let date = new Date();
@@ -22,55 +20,57 @@ function viewCreateBooking() {
 
     let html = '';
     html = `
+    <div class="page-outer">
+        <div class="page">
+           
+            <div class="input-outer">
+                <div class="inputs">
 
-    <div class="page">
+                                    <div class="">
+                                        <label>Navn:</label>
+                                        <input oninput="model.inputs.inputName = this.value" value="${model.inputs.inputName}">
+                                    </div>
 
-        <div class="date">I dag: ${date}</div>
+                                    <div class="input-number">
 
-        <div class="inputs">
-                <div class="createName">
-                    <label>Navn:</label>
-                    <input oninput="model.inputs.inputName = this.value" value="${model.inputs.inputName}">
-                </div>
-                <div class="createNumber">
-                    <label>Nummer:</label>
-                    <input oninput="model.inputs.inputNumber = this.value" value="${model.inputs.inputNumber}">
-                </div>
-                <div class="datelabel">
-                <label>Booket fra </label><label>til</label>
-                </div>
-                
-                <div class="createDateAndTime">
-                    
-                    <input type="datetime-local" oninput="model.inputs.inputTime = this.value" onchange="checkTableStatus()" value="${model.inputs.inputTime}">
-                    
-                    <input type="datetime-local" oninput="model.inputs.inputTimeEnd = this.value" value="${model.inputs.inputTimeEnd}">
-                </div>
-                <div><button onclick="setTimeToCurrentTime()">Nåværende Tid</button></div>
-                <div class="createGuests">
-                    <input type="range" min="1" max="${rangeCount || '4'}" oninput="model.inputs.inputNumberOfGuests = this.value" value="${model.inputs.inputNumberOfGuests}">
-                    Antall gjester
-                </div>
-                
-                <div class="createTableInfo">
-                </div>
-                
-                <div class="createChildChair">
-                    <label>Barnestol</label
-                    <input type="checkbox" ${childBool ? 'checked' : ''} onclick="checkChildChair()" >
+                                        <div><label>Nummer:</label></div>
+                                        <div><input oninput="model.inputs.inputNumber = this.value" value="${model.inputs.inputNumber}"></div>
+                                    </div>
 
-                </div>
-                
-                <div class="createBooking">
-                    <button onclick="createBooking()">Book</button>
-                </div>    
+                                    <div class="datelabel">
+                                        <label>Booket fra </label><label>til</label>
+                                    </div>
+                                    
+                                    <div>
+                                        <input type="datetime-local" oninput="model.inputs.inputTime = this.value" onchange="checkTableStatus()" value="${model.inputs.inputTime}">
+                                        <input type="datetime-local" oninput="model.inputs.inputTimeEnd = this.value" value="${model.inputs.inputTimeEnd}">
+                                    </div>
+
+                                    <div>
+                                        <button onclick="setTimeToCurrentTime()">Nåværende Tid</button>
+                                    </div>
+
+                                    <div>
+                                        <label>Antall gjester</label>
+                                        <input type="number" min="1" max="${rangeCount || '4'}" oninput="model.inputs.inputNumberOfGuests = this.value" value="${model.inputs.inputNumberOfGuests}">
+                                        <div class="maxTableGuests">
+                                            Max antall seter: ${rangeCount || '<i>Velg bord</i>'}
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <label>Barnestol</label
+                                        <input type="checkbox" ${childBool ? 'checked' : ''} onclick="checkChildChair()" >
+                                    </div>
+                                    
+                                    <div class="createBooking">
+                                        <button onclick="createBooking()">Book</button>
+                                    </div>
             </div>
-            <div class="tableInformation">
-                <div class="currentTable" id="check">Valgt Bord: ${model.app.selectedTable.toUpperCase()}</div>
-                <div class="maxTableGuests">Bordet har plass til: ${rangeCount || '<i>Velg bord</i>'}${rangeCount ? ' personer' : ''}</div>
             </div>
+
+
         </div>
-    </div>
 
         
 `
@@ -81,19 +81,27 @@ function viewCreateBooking() {
     tableHtml += '<div class="tables">';
     for (let i = 0; i < model.tables.allTables.length; i++) {
         if (i === 0) {
-            tableHtml += `   
-                            <div class="fourSeats">
+            tableHtml += `
+                        
+                        <div class="tables-outer">
+                        <div class="testing">
+                        <p>Fire seter</p>
+                        <div class="seats-wrapper">
                             <div class="col1">`
         }
 
-        if (i === 5) tableHtml += `  </div>
-                                
+        if (i === 5) tableHtml += `
+                            </div>        
                             <div class="col2">                      
                         `;
         if (i === 10) tableHtml += `
                             </div>
-                            </div>
-                            <div class="sixSeats">
+                        </div>
+                        </div>
+                        
+                        <div class="testing">
+                        <p>Seks seter</p>
+                        <div class="seats-wrapper">
                             <div class="col1">
                             `   ;
         if (i === 15) tableHtml += `
@@ -101,39 +109,51 @@ function viewCreateBooking() {
                             <div class="col2">
                              `
         if (i === 20) tableHtml += `
-                            </div>
-                            </div>
-                            </div>
-                            </div>
-                            </div>
-                            `
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                
+                            `;
 
 
 
         if (model.status[model.tables.allTables[i]] == undefined) {
             tableHtml += `
-                    <div class="box" onclick="selectTable('${model.tables.allTables[i]}')">${model.tables.allTables[i]}</div>
-        `
+                    <div class="box-outer ${model.app.selectedTable == model.tables.allTables[i] ? 'selectedTable' : ''}">
+                        <div class="box ${model.app.selectedTable == model.tables.allTables[i] ? 'selectedTable' : ''}" onclick="selectTable('${model.tables.allTables[i]}')">
+                            ${model.tables.allTables[i]}
+                        </div>
+                    </div>`;
         } else {
             if (model.status[model.tables.allTables[i]].bookingStatus == 1) {
-                
+                console.log('soon')
                 color = 'bookedSoon'
                 tableHtml += `
-                    <div class="box ${color}" onclick="selectTable('${model.tables.allTables[i]}')">${model.tables.allTables[i]}</div>
-                        `
+                    <div class="box-outer ${model.app.selectedTable == model.tables.allTables[i] ? 'selectedTable' : ''}">
+                        <div class="box ${color}  " onclick="selectTable('${model.tables.allTables[i]}')">
+                            ${model.tables.allTables[i]}
+                        </div>
+                    </div>`;
             }
             if (model.status[model.tables.allTables[i]].bookingStatus == 2) {
-                
+                console.log('soon')
                 color = 'booked'
                 tableHtml += `
-                    <div class="box ${color}" onclick="selectTable('${model.tables.allTables[i]}')">${model.tables.allTables[i]}</div>
-                        `
+                    <div class="box-outer ${model.app.selectedTable == model.tables.allTables[i] ? 'selectedTable' : ''}">
+                        <div class="box ${color} ${model.app.selectedTable == model.tables.allTables[i] ? 'selectedTable' : ''}" onclick="selectTable('${model.tables.allTables[i]}')">
+                            ${model.tables.allTables[i]}
+                        </div>
+                    </div>`;
             }
             if (model.status[model.tables.allTables[i]].bookingStatus == 0) {
                 
                 tableHtml += `
-            <div class="box" onclick="selectTable('${model.tables.allTables[i]}')">${model.tables.allTables[i]}</div>
-                        `
+                <div class="box-outer {model.app.selectedTable == model.tables.allTables[i] ? 'selectedTable' : ''}">
+                    <div class="box ${model.app.selectedTable == model.tables.allTables[i] ? 'selectedTable' : ''}"  onclick="selectTable('${model.tables.allTables[i]}')">
+                        ${model.tables.allTables[i]}
+                    `;
             }
         }
     }
@@ -194,7 +214,10 @@ function drawBookings(){
     let html = '';
     for (let i = 0; i < model.bookingTimes.length; i++) { 
         if (new Date(dateSelect).toLocaleDateString() == new Date(model.bookingTimes[i].bookedInfo.bookedTime).toLocaleDateString())   
-        html += `<li onclick="editBookingsSelect(value), updateView()" value="${i}">Bord: ${model.bookingTimes[i].table} Klokken: ${model.bookingTimes[i].bookedInfo.bookedTime.substring(11, 16)}</li>`
+        html += `
+            <li onclick="editBookingsSelect(value), updateView()" value="${i}">
+                Bord: ${model.bookingTimes[i].table} Klokken: ${model.bookingTimes[i].bookedInfo.bookedTime.substring(11, 16)}
+            </li>`;
     }
     document.getElementById('bookingsOverview').innerHTML = html;
 }
@@ -256,7 +279,7 @@ function bookingList() {
     let html = '';
 
     html += `
-    hmmm`;
+    `;
 
     document.getElementById('app').innerHTML = html;
 }

@@ -18,6 +18,17 @@ const model = {
         inputNumberOfGuests: '',
         inputChildChair: '',
     },
+    inputsEdit:{
+        editIndex: '',
+        editName: '',
+        editNumber: '',
+        editTime: '',
+        editTimeEnd: '',
+        editNumberOfGuests: '',
+        editChildChair: '',
+        editTable: '',
+        editChair: '',
+    },
     status: {},
     bookingTimes: [
 
@@ -27,7 +38,7 @@ const model = {
             bookedInfo: {
                 bookedName: 'Per Larsen',
                 bookedNumber: '98126143',
-                bookedTime: '2021-01-28T13:20:19.567Z',
+                bookedTime: '2021-02-04T13:20',
                 bookedTimeEnd: '',
                 bookedChild: false,
                 bookedGuestCount: 5,
@@ -38,9 +49,9 @@ const model = {
             table: 't',
             chairCount: 6,
             bookedInfo: {
-                bookedName: 'Per Larsen',
+                bookedName: 'Pål Larsen',
                 bookedNumber: '98126143',
-                bookedTime: '2021-02-27T10:07:19.567Z',
+                bookedTime: '2021-02-05T10:07',
                 bookedTimeEnd: '',
                 bookedChild: false,
                 bookedGuestCount: 5,
@@ -52,7 +63,7 @@ const model = {
             bookedInfo: {
                 bookedName: 'Stig Larsen',
                 bookedNumber: '96127639',
-                bookedTime: '2021-02-16T17:10:00.000Z',
+                bookedTime: '2021-02-06T17:10',
                 bookedTimeEnd: '',
                 bookedChild: true,
                 bookedGuestCount: 4,
@@ -64,8 +75,8 @@ const model = {
             bookedInfo: {
                 bookedName: 'Espen Askeladden',
                 bookedNumber: '98126143',
-                bookedTime: '2021-02-16T17:30:00.000Z',
-                bookedTimeEnd: '2021-02-16T20:30:00.000Z',
+                bookedTime: '2021-02-04T17:30',
+                bookedTimeEnd: '2021-02-04T20:30',
                 bookedChild: true,
                 bookedGuestCount: 6,
             }
@@ -76,8 +87,8 @@ const model = {
             bookedInfo: {
                 bookedName: 'Martin Pettersen',
                 bookedNumber: '98126143',
-                bookedTime: '2021-02-30T14:30:00.000Z',
-                bookedTimeEnd: '2021-02-30T17:30:00.000Z',
+                bookedTime: '2021-02-05T14:30',
+                bookedTimeEnd: '2021-02-05T17:30',
                 bookedChild: true,
                 bookedGuestCount: 6,
             }
@@ -88,8 +99,8 @@ const model = {
             bookedInfo: {
                 bookedName: 'Håvard Gundersen',
                 bookedNumber: '98126143',
-                bookedTime: '2021-02-24T15:00:00.000Z',
-                bookedTimeEnd: '2021-02-24T18:00:00.000Z',
+                bookedTime: '2021-02-06T15:00',
+                bookedTimeEnd: '2021-02-06T18:00',
                 bookedChild: true,
                 bookedGuestCount: 6,
             }
@@ -100,7 +111,7 @@ const model = {
             bookedInfo: {
                 bookedName: 'Marte Kåsa',
                 bookedNumber: '98126143',
-                bookedTime: '2021-02-15T16:00:00.000Z',
+                bookedTime: '2021-02-07T16:00',
                 bookedTimeEnd: '',
                 bookedChild: true,
                 bookedGuestCount: 5
@@ -112,8 +123,8 @@ const model = {
             bookedInfo: {
                 bookedName: 'Sondre Hem',
                 bookedNumber: '98126143',
-                bookedTime: '2021-02-16T17:30:00.000Z',
-                bookedTimeEnd: '2021-02-16T19:30:00.000Z',
+                bookedTime: '2021-02-04T17:30',
+                bookedTimeEnd: '2021-02-04T19:30',
                 bookedChild: true,
                 bookedGuestCount: 6,
             }
@@ -124,7 +135,7 @@ const model = {
             bookedInfo: {
                 bookedName: 'Karl',
                 bookedNumber: '37423865',
-                bookedTime: '2021-02-17T18:50:00.000Z',
+                bookedTime: '2021-02-05T18:50',
                 bookedTimeEnd: '',
                 bookedChild: true,
                 bookedGuestCount: 3,

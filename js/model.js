@@ -13,7 +13,7 @@ const model = {
     inputs: {
         inputName: '',
         inputNumber: '',
-        inputTime: '',
+        inputTime:  '',
         inputTimeEnd: '',
         inputNumberOfGuests: '',
         inputChildChair: '',
@@ -147,3 +147,15 @@ const model = {
         
     ]
 };
+
+const archive = [
+
+];
+
+let timeStartDate = '';
+let timeStartTime = '';
+
+let timeEndDate = '';
+let timeEndTime = '';
+
+let animationSatus = false;

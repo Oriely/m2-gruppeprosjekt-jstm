@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
 *, *::after, *::before {
     margin: 0;
     padding: 0;
@@ -11,6 +14,7 @@ body {
     padding:10px;
     background:#07020D;
     color:black;
+    perspective:1000px;
 }
 
 .wrapper {
@@ -21,14 +25,64 @@ body {
 }
 #app {
     width:1000px;
-    transition:all 1s ease;
+    transform-style: preserve-3d';
 }
 .page-outer {
     display:flex;
 }
-
+.logo p{
+    font-size:28px !important;
+    padding: 0
+}
 .inputs {
     font-size:20px;
+    display:flex;
+    flex-direction: column;
+    
+}
+
+.inputs * {
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+.inputs > div {
+    margin-top:10px;
+}
+
+.inputs input {
+    padding:5px;
+    width:100%;
+}
+
+.input-name div {
+    width:100%
+}
+
+.input-number > div{
+    width:100%;
+}
+.inputs > div {
+    display:flex;
+    justify-content: space-between;
+}
+
+.input > div label {width:100%; display:inline-blocK;}
+.add-booking {
+    align-self: flex-end;
+    justify-self: flex-end;
+    margin:auto 0;
+}
+.add-booking button {
+    padding:10px;
+    font-size:30px;
+    width:100%;
+}
+
+.date-label > div{
+ width:90%;
+}
+
+.date-label > div:first-of-type {
 }
 
 nav {
@@ -49,8 +103,13 @@ nav ul {
 
 nav ul li a {
     display:block;
-    background:#1d043c;
+    background:#3d0b7b;
     padding:10px;
+    transition: 0.2s ease;
+}
+
+nav ul li a:hover {
+    background:rgba(106, 89, 214, 0.974);
 }
 
 
@@ -59,7 +118,7 @@ nav ul li a {
     justify-content: center;
     padding:5px;
 
-}
+}   
 
 .seats-wrapper {
     display:flex;
@@ -76,9 +135,10 @@ nav ul li a {
     background:#5DB7DE;
 }
 
-.inputs > div {
-    display:flex;
-    justify-content: space-between;
+.page-archive {
+    width:100%;
+    padding:10px;
+    background:#5DB7DE;
 }
 
 .testing {
@@ -102,6 +162,8 @@ nav ul li a {
     height:50px;
     text-transform:uppercase;
     transition: ease 0.1s;
+    font-size:25px;
+    font-family: 'Open Sans', sans-serif !important;
 }
 .box-outer {
     padding:2px;
@@ -136,11 +198,29 @@ nav ul li a {
 
 }
 
+.booked-tables {
+    margin-top:10px;
+}
+
 .table-row {
     display:grid;
-    grid-template-columns: 50px 1fr 1fr 1fr;
+    grid-template-columns: 50px 1fr 1fr 1fr 1fr 1fr;
     transition:0.1s ease;
     padding:5px;
+
+}
+
+.table-row div {
+    display:flex;
+    align-items: center;
+}
+
+.table-row button {
+    padding:5px;
+}
+
+.table-row div:first-of-type {
+    text-transform: uppercase;
 }
 
 .table-row:hover {
@@ -149,12 +229,43 @@ nav ul li a {
 
 .table-labels {
     display:grid;
-    grid-template-columns: 50px 1fr 1fr 1fr;
+    grid-template-columns: 50px 1fr 1fr 1fr 1fr 1fr;
     font-weight: bold;
     background:#1d043c;
     color:white;
     padding:5px;
 }
+
+.animation {
+
+    animation: slideIn 1s forwards;
+}
+
+@keyframes slideInError {
+    0% {
+        transform: translateX(-500px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(-5000px);
+        opacity:0;
+        overflow-x:hidden;
+    }
+
+    100% {
+        transform: translateX(0);
+        overflow-x:hidden;
+        opacity:1;
+    }
+}
+
+
 .table-row:nth-child(odd) {
     background:rgba(255, 255, 255, 0.479);
 }

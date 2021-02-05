@@ -212,15 +212,28 @@ function viewCheckBookingsDate() {
 
 function drawBookings(){
     let html = '';
+    html += `
+        <div class="booked-tables">
+        <div class="table-labels">
+            <div>Bor</div>
+            <div>Booket fra</div>
+            <div>Booket til</div>
+            <div>Navn</div>
+        </div>
+    `;
     for (let i = 0; i < model.bookingTimes.length; i++) { 
-        if (new Date(dateSelect).toLocaleDateString() == new Date(model.bookingTimes[i].bookedInfo.bookedTime).toLocaleDateString())   
         html += `
-            <li onclick="editBookingsSelect(value), updateView()" value="${i}">
-                Bord: ${model.bookingTimes[i].table} Klokken: ${model.bookingTimes[i].bookedInfo.bookedTime.substring(11, 16)}
-            </li>`;
+        <div class="table-row" onclick="editBookingsSelect(${i}), updateView()">
+            <div>${model.bookingTimes[i].table}</div>
+            <div>${model.bookingTimes[i].bookedInfo.bookedTime}</div>
+            <div>${model.bookingTimes[i].bookedInfo.bookedTimeEnd}</div>
+            <div>${model.bookingTimes[i].bookedInfo.bookedName}</div>
+        </div>
+           `;
     }
+    html += '</div>'
     document.getElementById('bookingsOverview').innerHTML = html;
-}
+}         
 
 function editBookingsSelect(i){
     model.inputsEdit= (

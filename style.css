@@ -10,7 +10,7 @@ body {
     font-weight:200;
     padding:10px;
     background:#07020D;
-    color:#F1E9DB;
+    color:black;
 }
 
 .wrapper {
@@ -20,15 +20,20 @@ body {
     flex-direction: column;
 }
 #app {
+    width:1000px;
     transition:all 1s ease;
-    width:80%;
 }
 .page-outer {
     display:flex;
 }
 
+.inputs {
+    font-size:20px;
+}
+
 nav {
-    width:80%;
+    color:white;
+    width:1000px;
     display:flex;
     justify-content: space-between;
     
@@ -51,7 +56,6 @@ nav ul li a {
 
 .tables-outer{
     display:flex;
-    width:100%;
     justify-content: center;
     padding:5px;
 
@@ -63,7 +67,6 @@ nav ul li a {
 }
 
 .tables {
-    width:100%;
     background:#5db7de;
 }
 
@@ -119,11 +122,11 @@ nav ul li a {
 }
 
 .booked {
-    background-color: red;
+    background-color: red !important;
 }
 
 .bookedSoon {
-    background-color: yellow;
+    background-color: yellow !important; 
 }
 
 .selectedTable {
@@ -131,4 +134,30 @@ nav ul li a {
     border-radius:0 5px 5px 5px;
     
 
+}
+
+.table-row {
+    display:grid;
+    grid-template-columns: 50px 1fr 1fr 1fr;
+    transition:0.1s ease;
+    padding:5px;
+}
+
+.table-row:hover {
+    background:rgba(95, 95, 95, 0.22)!important;
+}
+
+.table-labels {
+    display:grid;
+    grid-template-columns: 50px 1fr 1fr 1fr;
+    font-weight: bold;
+    background:#1d043c;
+    color:white;
+    padding:5px;
+}
+.table-row:nth-child(odd) {
+    background:rgba(255, 255, 255, 0.479);
+}
+.table-row:nth-child(even) {
+    background:rgba(255, 255, 255, 0.248);
 }

@@ -47,11 +47,9 @@ function checkTableStatus() {
 
         let unsortedBookings = statusObj[key].bookings;
         let sortedBookings = unsortedBookings.sort((a, b) => new Date(a.bookedTime) - new Date(b.bookedTime) );
-        console.log(sortedBookings);
     }
 
     model.status = statusObj;
-    console.log(model);
     updateView();
 }
 

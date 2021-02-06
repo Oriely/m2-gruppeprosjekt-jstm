@@ -4,7 +4,8 @@ let rangeCount;
 let checkedChildChair = false;
 
 function viewCreateBooking() {
-
+    let error = '';
+    let rangeCount;
     if (model.tables.fits4.includes(model.app.selectedTable)) {
         rangeCount = 4;
     } else if (model.tables.fits6.includes(model.app.selectedTable)) {
@@ -18,73 +19,61 @@ function viewCreateBooking() {
     var date2 = date.substring(11, 16);
     date = `${date1}  ${date2}`;
 
+    
     let html = '';
     html = `
     <div class="page-outer">
-        <div class="page">
-            <div class="input-outer">
-
-                <div class="inputs  ">
-
-                                    <div class="input-name">
-
-                                        <div>
-                                            <label>Navn:</label>
-                                        </div>
-                                        <div>
-                                        <input oninput="model.inputs.inputName = this.value" value="${model.inputs.inputName}">
-                                        </div>
-                                        </div>
-
-                                    <div class="input-number ">
-
-                                        <div><label>Mobil Nummer:</label></div>
-                                        <div><input oninput="model.inputs.inputNumber = this.value" value="${model.inputs.inputNumber}"></div>
-                                    </div>
-
-                                    <div class="date-label">
-                                        <div>
-                                        <label>Booket fra </label>
-                                        </div>
-                                        <div>
-                                        <label>til</label>
-                                        </div>
-                                    </div>
-                                    
-                                    <div>
-                                        <div>
-                                        <input type="datetime-local" oninput="model.inputs.inputTime = this.value" onchange="checkTableStatus()" value="${model.inputs.inputTime}">
-                                        </div>
-                                        <div>
-                                        <input type="datetime-local" oninput="model.inputs.inputTimeEnd = this.value" value="${model.inputs.inputTimeEnd}">
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <button onclick="setTimeToCurrentTime()">Nåværende Tid</button>
-                                    </div>
-
-                                    <div>
-                                        <div >
-                                        <label>Antall gjester</label>
-                                        </div>
-                                        <div>
-                                        <input type="number" min="1" max="${rangeCount || '4'}" oninput="model.inputs.inputNumberOfGuests = this.value" value="${model.inputs.inputNumberOfGuests}">
-                                        </div>
-                                        <div class="maxTableGuests">
-                                            Max antall seter: ${rangeCount || '<i>Velg bord</i>'}
-                                        </div>
-                                    </div>
-                                    
-                                    <div>
-                                        <label>Barnestol</label>
-                                        <input type="checkbox" ${childBool ? 'checked' : ''} onclick="checkChildChair()" >
-                                    </div>
-                                    
-                                    <div class="add-booking">
-                                        <button class="" onclick="createBooking()">Legg til booking</button>
-                                    </div>
-            </div>
+        <div class="page  ${(animationSatus == false ? 'animation2' : '')}">
+                <div class="inputs ">
+                    <div class="input-name">
+                        <div>
+                            <label>Navn:</label>
+                            <input oninput="model.inputs.inputName = this.value" value="${model.inputs.inputName}">
+                        </div>
+                        
+                    </div>
+                    <div class="input-number">
+                        <div>
+                            <label>Mobil Nummer:</label>
+                            <input oninput="model.inputs.inputNumber = this.value" value="${model.inputs.inputNumber}">
+                        </div>
+                       
+                    </div>
+                    <div class="input-date">
+                        <div>
+                        <label>Reservert fra </label>
+                        <input type="datetime-local" oninput="model.inputs.inputTime = this.value" onchange="checkTableStatus()" value="${model.inputs.inputTime}">
+                        <button onclick="setTimeToCurrentTime()">Nåværende Tid</button>
+                        </div>
+                        <div>
+                        <label>til</label>
+                        <input type="datetime-local" oninput="model.inputs.inputTimeEnd = this.value" value="${model.inputs.inputTimeEnd}">
+                        </div>
+                        
+                    </div>
+                    
+                    <div>
+                       
+                    </div>
+                    <div class="input-guest">
+                        <div class="input-guest-label">
+                            <label>Antall gjester ${(rangeCount ? rangeCount + ' Max' : '<i>Velg bord</i>') }</label><label></label>
+                        </div>
+                        <div>
+                            <input type="number" min="1" max="${rangeCount || '4'}" oninput="model.inputs.inputNumberOfGuests = this.value" value="${model.inputs.inputNumberOfGuests}">
+                            
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label>Barnestol</label>
+                        <input type="checkbox" ${childBool ? 'checked' : ''} onclick="checkChildChair()" >
+                    </div>
+                    <div class="errors">
+                    </div>
+                    <div class="add-booking">
+                        <button class="" onclick="createBooking()">Reserver</button>
+                    </div>
             </div>
 
 
@@ -96,11 +85,11 @@ function viewCreateBooking() {
 
     var tableHtml = '';
     var color = '';
-    tableHtml += '<div class="tables">';
+    tableHtml += `<div class="tables ${(animationSatus == false ? 'animation2' : '')}">`;
     for (let i = 0; i < model.tables.allTables.length; i++) {
         if (i === 0) {
             tableHtml += `
-                <div class="tables-outer">
+                <div class="tables-outer ${(animationSatus == false ? 'animation3' : '')}">
                 <div class="testing">
                 <p>Fire seter</p>
                 <div class="seats-wrapper">
@@ -157,7 +146,7 @@ function viewCreateBooking() {
     
     html += tableHtml;
     document.getElementById('app').innerHTML = html;
-
+    stopAnimations();
 }
 
 function bookingStatusCheck(i) {
@@ -184,7 +173,7 @@ function viewCheckBookingsDate() {
 
     let html = '';
     html = `
-    <div class="page">
+    <div class="page  ${(animationSatus == false ? 'animation2' : '')}">
             <div class="chosenTable  ">
                 <div class="inputs">
 
@@ -249,48 +238,44 @@ function viewCheckBookingsDate() {
                     </div>
             </div>
             
-            <div>Dato: <input type="datetime-local" id="editBookingsTimeTable" onchange="dateSelect = this.value, updateView()" value="${dateSelect}"></div>
-            <div id="bookingsOverview"></div>
+                    <div id="bookingsOverview">
+                    `;
+                    html += `
+                    <div class="booked-tables-outer ${(animationSatus == false ? 'animation' : '')}">
+                    <div class="table-labels">
+                    <div>Bord</div>
+                    <div>Navn</div>
+                    <div>Mobil Nummer</div>
+                    <div>Booket fra</div>
+                    <div>Booket til</div>
+                    
+                
+                </div>
+                        <div class="booked-tables ">
+                
+                    `;
+                    for (let i = 0; i < model.bookingTimes.length; i++) { 
+                        html += `
+                        <div class="table-row  " >
+                            <div onclick="editBookingsSelect(${i}), updateView()">${model.bookingTimes[i].table}</div>
+                            <div onclick="editBookingsSelect(${i}), updateView()">${model.bookingTimes[i].bookedInfo.bookedName}</div>
+                            <div onclick="editBookingsSelect(${i}), updateView()"><a href="tel:${model.bookingTimes[i].bookedInfo.bookedNumber}">${model.bookingTimes[i].bookedInfo.bookedNumber}</a></div>
+                            <div onclick="editBookingsSelect(${i}), updateView()">${model.bookingTimes[i].bookedInfo.bookedTime}</div>
+                            <div onclick="editBookingsSelect(${i}), updateView()">${model.bookingTimes[i].bookedInfo.bookedTimeEnd}</div>
+                            <div><button onclick="editBookingsSelect(${i}), updateView()">Velg</button><button onclick="endBooking(${i})">Slett booking</button></div>
+                            
+                            
+                        </div>
+                        `;
+                    }
+            html += `</div></div>
+            </div>
         </div>
     </div>
     `;
     document.getElementById('app').innerHTML = html;
-    document.getElementById("editBookingsTimeTable").value = dateSelect;
-    drawBookings();
-
+    stopAnimations();
 }
-
-function drawBookings(){
-    let html = '';
-    html += `
-        <div class="booked-tables">
-        <div class="table-labels">
-            <div>Bord</div>
-            <div>Navn</div>
-            <div>Mobil Nummer</div>
-            <div>Booket fra</div>
-            <div>Booket til</div>
-            
-           
-        </div>
-    `;
-    for (let i = 0; i < model.bookingTimes.length; i++) { 
-        html += `
-        <div class="table-row  ${(animationSatus == false ? 'animation' : '')}" onclick="editBookingsSelect(${i}), updateView(),     stopAnimations();">
-            <div>${model.bookingTimes[i].table}</div>
-            <div>${model.bookingTimes[i].bookedInfo.bookedName}</div>
-            <div>${model.bookingTimes[i].bookedInfo.bookedNumber}</div>
-            <div>${model.bookingTimes[i].bookedInfo.bookedTime}</div>
-            <div>${model.bookingTimes[i].bookedInfo.bookedTimeEnd}</div>
-            <div><button onclick="endBooking(${i})">Slett booking</button></div>
-            
-            
-        </div>
-           `;
-    }
-    html += '</div>'
-    document.getElementById('bookingsOverview').innerHTML = html;
-}         
 
 function editBookingsSelect(i){
     model.inputsEdit= (
@@ -350,7 +335,7 @@ function archiveBookingList() {
 
 
     html += `
-    <div class="page-archive  ">
+    <div class="page-archive  ${(animationSatus == false ? 'animation2' : '')}">
     <div class="booked-tables">
     <div class="table-labels">
         <div>Bord</div>
@@ -388,4 +373,5 @@ function archiveBookingList() {
     `;
 
     document.getElementById('app').innerHTML = html;
+    stopAnimations();
 }

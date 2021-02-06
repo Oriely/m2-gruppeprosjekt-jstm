@@ -1,26 +1,30 @@
 function createBooking() {
-    var bookingTimeEnd = '';
-    if (model.inputs.inputTimeEnd != '') {
-        bookingTimeEnd = model.inputs.inputTimeEnd
-    } else if (model.inputs.inputTimeEnd == '') {
-        bookingTimeEnd = '';
+    errors = [];
+    if (model.app.selectedTable) {
+
+
+    if (!model.inputs.inputTime) {errorHandler('Du må velge et tidspunkt.', 'time')}
+    if (!model.inputs.inputNumber) {errorHandler('Du skrive inn et nummer.', 'number')}
+    if (!model.inputs.inputNumberOfGuest) {errorHandler('Du må velge hvor antall gjester.', 'guest')}
+    if (!model.inputs.inputName) {errorHandler('Du må skrive inn et navn.', 'name')}
+    } else {
+        errorHandler('Du må velge et bord.', 'selecttable')
     }
-    if (model.app.selectedTable == '') {
-        alert('Du må velge bord!')
+    
+    if(model.inputs.inputTime && model.inputs.inputNumber && model.inputs.inputNumberOfGuest && model.inputs.inputName) {
+        model.bookingTimes.push({
+                table: model.app.selectedTable,
+                chairCount: checkChairCount(model.app.selectedTable),
+                bookedInfo: {
+                    bookedName: model.inputs.inputName,
+                    bookedNumber: model.inputs.inputNumber,
+                    bookedTime: model.inputs.inputTime,
+                    bookedTimeEnd: model.inputs.inputTimeEnd,
+                    bookedGuestCount: model.inputs.inputNumberOfGuests,
+                    bookedChild: model.inputs.inputChildChair,
+                }
+        });
     }
-    model.bookingTimes.push(
-        {
-            table: model.app.selectedTable,
-            chairCount: checkChairCount(model.app.selectedTable),
-            bookedInfo: {
-                bookedName: model.inputs.inputName,
-                bookedNumber: model.inputs.inputNumber,
-                bookedTime: model.inputs.inputTime,
-                bookedTimeEnd: bookingTimeEnd,
-                bookedGuestCount: model.inputs.inputNumberOfGuests,
-                bookedChild: model.inputs.inputChildChair,
-            }
-        })
         checkTableStatus();
         updateView();
 };

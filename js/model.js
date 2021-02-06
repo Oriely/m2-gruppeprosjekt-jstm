@@ -152,10 +152,5 @@ const archive = [
 
 ];
 
-let timeStartDate = '';
-let timeStartTime = '';
-
-let timeEndDate = '';
-let timeEndTime = '';
-
+let errors = [];
 let animationSatus = false;

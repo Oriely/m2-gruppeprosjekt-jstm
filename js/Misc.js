@@ -24,12 +24,22 @@ function removeFromArchive(bookingIndex) {
 
 function changeScreen(p) {
     model.app.currentPage = p;
+    animationSatus = false;
     updateView();
 }   
 
 function stopAnimations() {
-    animationSatus = true; 
-    setTimeout(function(){
+    animationSatus = true;
         animationStatus = false;
-    }, 5000);
+}
+
+function errorHandler(err, input){
+    errors.push({
+        error: err,
+        input: input
+    });
+}
+
+function showError(input) {
+    
 }

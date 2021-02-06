@@ -23,7 +23,7 @@ function viewCreateBooking() {
     let html = '';
     html = `
     <div class="page-outer">
-        <div class="page  ${(animationSatus == false ? 'animation2' : '')}">
+        <div class="${(animationSatus == false ? 'animation2' : '')}">
                 <div class="inputs ">
                     <div class="input-name">
                         <div>

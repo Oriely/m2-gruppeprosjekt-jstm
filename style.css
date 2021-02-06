@@ -66,6 +66,11 @@ nav a:active {
     display: flex;
 }
 .page {
+    max-height:100vh;
+    overflow-y:scroll;
+}
+
+.inputs {
     
 }
 
@@ -207,6 +212,7 @@ nav a:active {
     display: flex;
     align-items: center;
     min-width:0;
+    width:100%;
 }
 
 .table-row button {

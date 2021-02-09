@@ -17,6 +17,7 @@ const model = {
         inputTimeEnd: '',
         inputNumberOfGuests: '',
         inputChildChair: '',
+        inputMessage: '',
     },
     inputsEdit:{
         editIndex: '',

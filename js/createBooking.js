@@ -19,6 +19,7 @@ function createBooking() {
                 bookedTimeEnd: bookingTimeEnd,
                 bookedGuestCount: model.inputs.inputNumberOfGuests,
                 bookedChild: model.inputs.inputChildChair,
+                bookedMessage: model.inputs.inputMessage,
             }
         })
         checkTableStatus();

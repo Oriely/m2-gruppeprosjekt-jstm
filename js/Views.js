@@ -374,4 +374,95 @@ function archiveBookingList() {
 
     document.getElementById('app').innerHTML = html;
     stopAnimations();
+
+}
+
+function editTablesView() {
+    let tableHtml='';
+    for (let i = 0; i < model.tables.allTables.length; i++) {
+        if (i === 0) {
+            tableHtml += `
+                <div class="tables-outer ${(animationSatus == false ? 'animation3' : '')}">
+                <div class="testing">
+                <p>Fire seter</p>
+                <div class="seats-wrapper">
+                    <div class="col1">
+                `;
+        }
+
+        if (i === 5) {
+            tableHtml += `
+                </div>        
+                <div class="col2">                      
+            `;
+        }
+        if (i === 10) { 
+            tableHtml += `
+                </div>
+                </div>
+                </div>
+                
+                <div class="testing">
+                <p>Seks seter</p>
+                <div class="seats-wrapper">
+                <div class="col1">
+            `;
+        }
+        if (i === 15) {
+            tableHtml += `
+                </div>
+                <div class="col2">
+            `;
+        }
+        if (i === 20) {
+            tableHtml += `
+                </div></div></div></div></div>
+            `;
+        }
+        if (model.status[model.tables.allTables[i]] == undefined) {
+            tableHtml += `
+            <div class="box-outer ${model.app.selectedTable == model.tables.allTables[i] ? 'selectedTable' : ''}">
+                <div class="box" onclick="selectTable('${model.tables.allTables[i]}')">
+                    ${model.tables.allTables[i]}
+                </div>
+            </div>`;
+        } else {
+            tableHtml += `
+            <div class="box-outer ${model.app.selectedTable == model.tables.allTables[i] ? 'selectedTable' : ''}">
+                <div class="box" onclick="selectTable('${model.tables.allTables[i]}')">
+                    ${model.tables.allTables[i]}
+                </div>
+            </div>
+            `;
+        }
+    }
+    
+
+    document.getElementById('app').innerHTML = tableHtml;
+}
+
+function statisticsVeiw() {
+    let html = '';
+
+    html += `
+    <div class="page-statistics">
+
+    `;
+
+    // for() {
+
+    // }
+
+    html += `</div>`;
+    document.getElementById('app').innerHTML = html;
+}
+
+statsFixData();
+
+function statsFixData() {
+    for(const test in model.bookingTimes) {
+
+        console.log(model.bookingTimes[test].bookedInfo.bookedTime);
+
+    }
 }

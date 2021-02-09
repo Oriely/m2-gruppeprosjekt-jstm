@@ -42,7 +42,7 @@ function createBooking() {
         });
         checkTableStatus();
         updateView();
-};
+}
 
 function checkChairCount(index) {
     if (model.tables.fits4.includes(index)) {

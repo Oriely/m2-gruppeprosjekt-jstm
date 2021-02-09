@@ -18,6 +18,7 @@ function updateView() {
     if (model.app.currentPage == 'listbookings') {bookingList()}
     if (model.app.currentPage == 'manage') { viewCheckBookingsDate() }
     if (model.app.currentPage == 'archive') { archiveBookingList() }
+    if (model.app.currentPage == 'edittables') { editTablesView() }
     if (!model.app.currentPage) {viewCreateBooking()}
     
 }

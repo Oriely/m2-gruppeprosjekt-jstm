@@ -24,15 +24,14 @@ function checkTableStatus() {
 
 
         let bookingEnded = checkBookingEnded(currentTime, endBookDate);
-        let bookingStatus = determineBookingStatus(timeTillNextBooking, bookingEnded)
-        console.log(bookingStatus)
+        let bookingStatus = determineBookingStatus(timeTillNextBooking, bookingEnded);
         // fungerer hit
 
         // tempObj["timeLeft"] = checkHoursLeftBeforeBooking(startBookDate, currentTime);
 
         if (tableLetter in statusObj) {
             bookingStatus = resolveStatusConflict(tableLetter, bookingStatus, statusObj);
-            bookings = statusObj[tableLetter].bookings
+            bookings = statusObj[tableLetter].bookings;
         };
 
         let bookedInfo = booking.bookedInfo;
@@ -48,11 +47,9 @@ function checkTableStatus() {
 
         let unsortedBookings = statusObj[key].bookings;
         let sortedBookings = unsortedBookings.sort((a, b) => new Date(a.bookedTime) - new Date(b.bookedTime) );
-        console.log(sortedBookings);
     }
 
     model.status = statusObj;
-    console.log(model);
     updateView();
 }
 

@@ -24,8 +24,7 @@ function checkTableStatus() {
 
 
         let bookingEnded = checkBookingEnded(currentTime, endBookDate);
-        let bookingStatus = determineBookingStatus(timeTillNextBooking, bookingEnded)
-        console.log(bookingStatus)
+        let bookingStatus = determineBookingStatus(timeTillNextBooking, bookingEnded);
         // fungerer hit
 
         // tempObj["timeLeft"] = checkHoursLeftBeforeBooking(startBookDate, currentTime);

@@ -25,6 +25,22 @@ function createBooking() {
                 }
         });
     }
+
+    model.bookingTimes.push(
+        {
+            table: model.app.selectedTable,
+            chairCount: checkChairCount(model.app.selectedTable),
+            bookedInfo: {
+                bookedName: model.inputs.inputName,
+                bookedNumber: model.inputs.inputNumber,
+                bookedTime: model.inputs.inputTime,
+                bookedTimeEnd: bookingTimeEnd,
+                bookedGuestCount: model.inputs.inputNumberOfGuests,
+                bookedChild: model.inputs.inputChildChair,
+                bookedMessage: model.inputs.inputMessage,
+            }
+        })
+
         checkTableStatus();
         updateView();
 };

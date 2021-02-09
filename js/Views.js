@@ -19,7 +19,7 @@ function viewCreateBooking() {
     var date2 = date.substring(11, 16);
     date = `${date1}  ${date2}`;
 
-    
+
     let html = '';
     html = `
     <div class="page-outer">
@@ -57,7 +57,7 @@ function viewCreateBooking() {
                     </div>
                     <div class="input-guest">
                         <div class="input-guest-label">
-                            <label>Antall gjester ${(rangeCount ? rangeCount + ' Max' : '<i>Velg bord</i>') }</label><label></label>
+                            <label>Antall gjester ${(rangeCount ? rangeCount + ' Max' : '<i>Velg bord</i>')}</label><label></label>
                         </div>
                         <div>
                             <input type="number" min="1" max="${rangeCount || '4'}" oninput="model.inputs.inputNumberOfGuests = this.value" value="${model.inputs.inputNumberOfGuests}">
@@ -103,7 +103,7 @@ function viewCreateBooking() {
                 <div class="col2">                      
             `;
         }
-        if (i === 10) { 
+        if (i === 10) {
             tableHtml += `
                 </div>
                 </div>
@@ -143,7 +143,7 @@ function viewCreateBooking() {
             `;
         }
     }
-    
+
     html += tableHtml;
     document.getElementById('app').innerHTML = html;
     stopAnimations();
@@ -158,10 +158,10 @@ function bookingStatusCheck(i) {
 function checkChildChair() {
     childBool = childBool ? false : true;
     model.inputs.inputChildChair = childBool;
-} 
+}
 
 let dateSelect = new Date();
-dateSelect = dateSelect.toISOString().substr(0,16)
+dateSelect = dateSelect.toISOString().substr(0, 16)
 
 function viewCheckBookingsDate() {
     let date = new Date();
@@ -240,7 +240,7 @@ function viewCheckBookingsDate() {
             
                     <div id="bookingsOverview">
                     `;
-                    html += `
+    html += `
                     <div class="booked-tables-outer ${(animationSatus == false ? 'animation' : '')}">
                     <div class="table-labels">
                     <div>Bord</div>
@@ -254,8 +254,8 @@ function viewCheckBookingsDate() {
                         <div class="booked-tables ">
                 
                     `;
-                    for (let i = 0; i < model.bookingTimes.length; i++) { 
-                        html += `
+    for (let i = 0; i < model.bookingTimes.length; i++) {
+        html += `
                         <div class="table-row  " >
                             <div onclick="editBookingsSelect(${i}), updateView()">${model.bookingTimes[i].table}</div>
                             <div onclick="editBookingsSelect(${i}), updateView()">${model.bookingTimes[i].bookedInfo.bookedName}</div>
@@ -267,8 +267,8 @@ function viewCheckBookingsDate() {
                             
                         </div>
                         `;
-                    }
-            html += `</div></div>
+    }
+    html += `</div></div>
             </div>
         </div>
     </div>
@@ -277,10 +277,10 @@ function viewCheckBookingsDate() {
     stopAnimations();
 }
 
-function editBookingsSelect(i){
-    model.inputsEdit= (
+function editBookingsSelect(i) {
+    model.inputsEdit = (
         {
-            editIndex: i,  
+            editIndex: i,
             editName: model.bookingTimes[i].bookedInfo.bookedName,
             editNumber: model.bookingTimes[i].bookedInfo.bookedNumber,
             editTime: model.bookingTimes[i].bookedInfo.bookedTime,
@@ -293,10 +293,10 @@ function editBookingsSelect(i){
     );
 }
 
-function editBookingsReset(){
-    model.inputsEdit= (
+function editBookingsReset() {
+    model.inputsEdit = (
         {
-            editIndex: '',  
+            editIndex: '',
             editName: '',
             editNumber: '',
             editTime: '',
@@ -308,11 +308,11 @@ function editBookingsReset(){
         }
     );
     dateSelect = new Date();
-    dateSelect = dateSelect.toISOString().substr(0,16)
+    dateSelect = dateSelect.toISOString().substr(0, 16)
 }
 
-function editBookingsSave(){
-    model.bookingTimes[model.inputsEdit.editIndex]= (
+function editBookingsSave() {
+    model.bookingTimes[model.inputsEdit.editIndex] = (
         {
             table: model.inputsEdit.editTable,
             chairCount: model.inputsEdit.editChair,
@@ -347,7 +347,7 @@ function archiveBookingList() {
        
     </div>
     `;
-    if(archive.length != 0) {
+    if (archive.length != 0) {
         let count = 0;
         archive.forEach(item => {
             html += `
@@ -378,68 +378,40 @@ function archiveBookingList() {
 }
 
 function editTablesView() {
-    let tableHtml='';
+    let tableHtml = '';
     for (let i = 0; i < model.tables.allTables.length; i++) {
-        if (i === 0) {
-            tableHtml += `
-                <div class="tables-outer ${(animationSatus == false ? 'animation3' : '')}">
-                <div class="testing">
-                <p>Fire seter</p>
-                <div class="seats-wrapper">
-                    <div class="col1">
-                `;
-        }
-
-        if (i === 5) {
-            tableHtml += `
-                </div>        
-                <div class="col2">                      
-            `;
-        }
-        if (i === 10) { 
-            tableHtml += `
-                </div>
-                </div>
-                </div>
-                
-                <div class="testing">
-                <p>Seks seter</p>
-                <div class="seats-wrapper">
-                <div class="col1">
-            `;
-        }
-        if (i === 15) {
-            tableHtml += `
-                </div>
-                <div class="col2">
-            `;
-        }
-        if (i === 20) {
-            tableHtml += `
-                </div></div></div></div></div>
-            `;
-        }
-        if (model.status[model.tables.allTables[i]] == undefined) {
-            tableHtml += `
-            <div class="box-outer ${model.app.selectedTable == model.tables.allTables[i] ? 'selectedTable' : ''}">
-                <div class="box" onclick="selectTable('${model.tables.allTables[i]}')">
-                    ${model.tables.allTables[i]}
-                </div>
-            </div>`;
-        } else {
-            tableHtml += `
-            <div class="box-outer ${model.app.selectedTable == model.tables.allTables[i] ? 'selectedTable' : ''}">
-                <div class="box" onclick="selectTable('${model.tables.allTables[i]}')">
+        tableHtml += `
+        <div class="box-outer1 ${model.selectedTable.selectedTableForEdit == model.tables.allTables[i] ? 'selectedTable' : ''}">
+                <div class="box" onclick="selectTableForEdit('${model.tables.allTables[i]}')">
                     ${model.tables.allTables[i]}
                 </div>
             </div>
-            `;
-        }
+        
+        `;
     }
+    html = `
+    <hr>
+    <div>${model.selectedTable.selectedTableForEdit ? `Bord ${model.selectedTable.selectedTableForEdit.toUpperCase()}` : ''}</div>
+    <div>${model.selectedTable.selectedTableFits ? `Bordet har plass til ${model.selectedTable.selectedTableFits}` : ''}</div>
+    
+    <div>${model.selectedTable.selectedTableForEdit ? `
+    <div></div>
+    <input type="range" min="1" max="10" oninput="model.selectedTable.selectedTableGuests = this.value; document.getElementById('slider').innerHTML = this.value" value="model.selctedTable.selectedTableFits"></input>
+    <div>Endre bordet til:
+        <div id="slider">${model.selectedTable.selectedTableFits}</div>
+        Personer
+    </div>`
+     : ''}</div>
+    <button onclick="deleteTable(model.app.selectedTableForEdit)">Slette Bord</button>
+    <button onclick="changeTableInformation(model.app.selectedTableForEdit)">Endre Bord</button>
+    `;
     
 
     document.getElementById('app').innerHTML = tableHtml;
+    document.getElementById('app').innerHTML += html;
 }
+
+
 
 function statisticsVeiw() {
     let html = '';
@@ -460,7 +432,7 @@ function statisticsVeiw() {
 statsFixData();
 
 function statsFixData() {
-    for(const test in model.bookingTimes) {
+    for (const test in model.bookingTimes) {
 
         console.log(model.bookingTimes[test].bookedInfo.bookedTime);
 

@@ -3,7 +3,13 @@ const model = {
         selectedTable: '',
         selectedDate: '',
         currentPage: '',
+        
 
+    },
+    selectedTable: {
+        selectedTableForEdit: '',
+        selectedTableFits: '',
+        selectedTableGuests: '',
     },
     tables: {
         fits4: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'],

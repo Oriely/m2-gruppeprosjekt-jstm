@@ -126,6 +126,16 @@ nav a:active {
 
 }
 
+.box-outer1:nth-child(6) {
+    clear: left;
+}
+.box-outer1:nth-child(11) {
+    clear: left;
+}
+.box-outer1:nth-child(16) {
+    clear: left;
+}
+
 .seats-wrapper {
     display: flex;
     flex-direction: row;
@@ -142,6 +152,7 @@ nav a:active {
 }
 
 .box {
+    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -158,6 +169,13 @@ nav a:active {
 .box-outer {
     padding: 2px;
     margin: 5px;
+
+}
+.box-outer1 {
+    padding: 2px;
+    margin: 5px;
+    float: left;
+
 }
 
 .tables {

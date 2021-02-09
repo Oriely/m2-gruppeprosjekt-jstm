@@ -64,5 +64,5 @@ p
 - Kunne velge flere en ett bord, legge til tillegsbeskjed. funksjon som tar inn 2 bord og lager en custom bord bestilling som inneholder 2 bord.(Kanskje 2 bestillinger?)
 - legge til en generell beskjed. () []
 - en grafisk visning som viser graf velge mellom uke måned eller år og sammenligne resultater. () []
-- kunne legge til eller fjerne bord. Kanskje ha ett bord med åtte plasser. () []
+- kunne legge til eller fjerne bord. Kanskje ha ett bord med åtte plasser. (-Theodor) []
 - Trenger sigves versjon, må legge til en input hvor man legger til Ekstra beskjed eller melding ang. bordet.

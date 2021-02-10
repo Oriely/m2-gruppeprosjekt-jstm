@@ -440,26 +440,39 @@ function editTablesView() {
 
     document.getElementById('app').innerHTML = tableHtml;
 }
-
-function statisticsVeiw() {
-
-
+function changeDateValue(value) {
+    model.inputStatsDate = value
+    updateView();
+}
+function statisticsView() {
     statsFixData();
-    
-    console.log(model.stats)
+    testing();
     let html = '';
     
-    
+    const svgWidth = 600;
+    const statHeight = 600;
+    const barWidth = (svgWidth / model.stats.length);
+
+    const barColors = ['#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e']
     html += `
-    <input type="datetime-local" oninput="model.inputStatsDate = this.value" value="${model.inputStatsDate}">
+    <input type="date" oninput="changeDateValue(this.value)" value="${model.inputStatsDate}">
     
-    <div class="statistic">
+    <div class="statistic" style="height: ${statHeight}px;width:${svgWidth}px">
     `;
-    console.log(123123);
     for(const hm in model.stats){
-       
-        console.log(hm)
-        html += `<div class="stat-bar" style="height:${model.stats[hm]}0px"></div>`;
+        
+        html += `<div class="stat-bar" style="${ model.stats[hm] == 0 ? 'height:4%; background: rgb(210, 210, 210) !important; color:black;' : `height:${testing(hm) + '0%'}`}; width:${barWidth}px; background-color:${barColors[hm]} ;">
+                    <div style="">${model.stats[hm]}</div>
+                </div>
+                
+                `;
+    }
+    html += `</div>`;
+    html += `<div class="labels">`;
+    for(const hm in model.stats) {
+        html += `
+        <div class="stat-label" style="width:${barWidth}px">${monthName(hm)}</div>
+        `;
     }
     html += `</div>`;
     document.getElementById('app').innerHTML = html;
@@ -471,11 +484,10 @@ function statsFixData() {
     const bookings = archive;
     const stats = new Array(12).fill(0);
     const selectedDate = (!model.inputStatsDate ? new Date() : model.inputStatsDate);
-
+    if (model.stats)
     bookings.forEach(item => {
         const time = item.bookedInfo.bookedTime
-        if(findYear(time) === findYear(selectedDate)){
-            
+        if (findYear(time) === findYear(selectedDate)) {
             if(findMonth(time) === 0) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
             if(findMonth(time) === 1) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
             if(findMonth(time) === 3) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
@@ -494,19 +506,43 @@ function statsFixData() {
     model.stats = stats;
 }
 
+function testing(a) {
+    const stats = model.stats;
+    var timesIndex;
+
+    var highestValue = Math.max.apply(Math, model.stats);
+    if (highestValue < 10) {timesIndex = 10 / highestValue}
+    if (highestValue > 10) {timesIndex = highestValue / 10}
+
+    var calculatedArray = new Array(12).fill(0);
+    for (let i = 0; i < model.stats.length; i++) {
+        if (highestValue < 10) {
+            calculatedArray[i] = Math.round(model.stats[i] * timesIndex);
+
+        }
+        else {
+            calculatedArray[i] = Math.round(model.stats[i] / timesIndex);
+
+        }
+        
+        
+    }
+    return calculatedArray[a];
+}
+
 function monthName(month) {
-    if(month === 0) return 'Januar';
-    if(month === 0) return 'Februar';
-    if(month === 0) return 'Mars';
-    if(month === 0) return 'April';
-    if(month === 0) return 'Mai';
-    if(month === 0) return 'Juni';
-    if(month === 0) return 'Juli';
-    if(month === 0) return 'August';
-    if(month === 0) return 'September';
-    if(month === 0) return 'Oktober';
-    if(month === 0) return 'November';
-    if(month === 0) return 'Desember';
+    if(month == 0) return 'Januar';
+    if(month == 1) return 'Februar';
+    if(month == 2) return 'Mars';
+    if(month == 3) return 'April';
+    if(month == 4) return 'Mai';
+    if(month == 5) return 'Juni';
+    if(month == 6) return 'Juli';
+    if(month == 7) return 'August';
+    if(month == 8) return 'September';
+    if(month == 9) return 'Oktober';
+    if(month == 10) return 'November';
+    if(month == 11) return 'Desember';
 }
 
 function findMonth(datestring) {

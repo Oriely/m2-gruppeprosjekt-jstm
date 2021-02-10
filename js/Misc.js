@@ -6,21 +6,20 @@ function selectTable(index) {
 function selectTableForEdit(table) {
     console.log(table)
     model.selectedTable.selectedTableForEdit = table;
+    var selectedTableGuests = model.selectedTable.selectedTableGuests;
     if (model.tables.fits4.includes(table)) { model.selectedTable.selectedTableFits = 4 }
     if (model.tables.fits6.includes(table)) { model.selectedTable.selectedTableFits = 6 }
     editTablesView();
 }
 
 function deleteTable() {
-
+    var selectedTableGuests = model.selectedTable.selectedTableGuests;
     var selectedTable = model.selectedTable.selectedTableForEdit;
-    if (model.tables.fits4.includes(selectedTable)) {
-        model.tables.fits4.splice(model.tables.fits4.indexOf(selectedTable), 1)
-        model.tables.allTables.splice(model.tables.allTables.indexOf(selectedTable), 1)
-    }
-    if (model.tables.fits6.includes(selectedTable)) {
-        model.tables.fits6.splice(model.tables.fits6.indexOf(selectedTable), 1)
-        model.tables.allTables.splice(model.tables.allTables.indexOf(selectedTable), 1)
+
+    for (let tableList in model.tables) {
+        if (model.tables[tableList].includes(selectedTable)) {
+            model.tables[tableList].splice(model.tables[tableList].indexOf(selectedTable), 1);
+        }
     }
     model.app.selectedTableForEdit = '';
     editTablesView()
@@ -30,13 +29,8 @@ function changeTableInformation() {
     var selectedTable = model.selectedTable.selectedTableForEdit;
     var selectedTableGuests = model.selectedTable.selectedTableGuests;
     deleteTable(selectedTable)
-    if (selectedTableGuests == 4) {
-        model.tables.fits4.push(selectedTable)
-    }
-    if (selectedTableGuests == 6) {
-        model.tables.fits6.push(selectedTable)
-    }
-    if (selectedTableGuests != 4 || selectedTableGuests != 6) {
+
+    if (selectedTableGuests) {
         var Table = `fits${selectedTableGuests}`;
         if (model.tables[Table] == undefined) {
             model.tables[Table] = []

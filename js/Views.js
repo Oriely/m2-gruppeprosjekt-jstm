@@ -51,6 +51,8 @@ function viewCreateBooking() {
                         </div>
                         <div>
                         <label>til</label>
+                        <input type="time" onchange="model.inputTime.toInputTime = this.value" value="${model.inputTime.toInputTime}"></input>
+                        <input type="date" oninput="model.inputTime.toInputDate = this.value" value="${model.inputTime.toInputDate}"></input>
                         <input type="datetime-local" oninput="model.inputs.inputTimeEnd = this.value" value="${model.inputs.inputTimeEnd}">
                         </div>
                         
@@ -139,14 +141,14 @@ function viewCreateBooking() {
         }
         if (model.status[model.tables.allTables[i]] == undefined) {
             tableHtml += `
-            <div class="box-outer ${model.app.selectedTable == model.tables.allTables[i] ? 'selectedTable' : ''}">
+            <div class="box-outer ${model.app.selectedTable.includes(model.tables.allTables[i]) ? 'selectedTable' : ''}">
                 <div class="box" onclick="selectTable('${model.tables.allTables[i]}')">
                     ${model.tables.allTables[i]}
                 </div>
             </div>`;
         } else {
             tableHtml += `
-            <div class="box-outer ${model.app.selectedTable == model.tables.allTables[i] ? 'selectedTable' : ''}">
+            <div class="box-outer ${model.app.selectedTable.includes(model.tables.allTables[i]) ? 'selectedTable' : ''}">
                 <div class="box ${bookingStatusCheck(i)}" onclick="selectTable('${model.tables.allTables[i]}')">
                     ${model.tables.allTables[i]}
                 </div>

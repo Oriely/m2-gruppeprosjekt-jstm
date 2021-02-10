@@ -2,7 +2,7 @@ function selectTable(index) {
     if (model.app.selectMultipleTables) {
         model.app.selectedTable.push(index)
     } else {
-        model.app.selectedTable = index;
+        model.app.selectedTable = [index];
     }
     
     viewCreateBooking();

@@ -68,4 +68,7 @@ p
 
 - Kanskje endre fra bokstaver til en id eller ett tall (mby) []
 
-- Endre fra date-time local til 2inputs med en time og en day. Kan merge igjen før push og før jonas sin funksjon () []
+- Endre fra date-time local til 2inputs med en time og en day. Kan merge igjen før push og før jonas sin funksjon (-Theodor) [Done]
+
+- Det å velge flere bord skal bare ha en av hver bokstav!! () []
+

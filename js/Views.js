@@ -371,7 +371,7 @@ function archiveBookingList() {
     html += `
     </div>
     `;
-
+    
     document.getElementById('app').innerHTML = html;
     stopAnimations();
 
@@ -442,27 +442,82 @@ function editTablesView() {
 }
 
 function statisticsVeiw() {
+
+
+    statsFixData();
+    
+    console.log(model.stats)
     let html = '';
-
+    
+    
     html += `
-    <div class="page-statistics">
-
+    <input type="datetime-local" oninput="model.inputStatsDate = this.value" value="${model.inputStatsDate}">
+    
+    <div class="statistic">
     `;
-
-    // for() {
-
-    // }
-
+    console.log(123123);
+    for(const hm in model.stats){
+       
+        console.log(hm)
+        html += `<div class="stat-bar" style="height:${model.stats[hm]}0px"></div>`;
+    }
     html += `</div>`;
     document.getElementById('app').innerHTML = html;
 }
 
-statsFixData();
+
 
 function statsFixData() {
-    for(const test in model.bookingTimes) {
+    const bookings = archive;
+    const stats = new Array(12).fill(0);
+    const selectedDate = (!model.inputStatsDate ? new Date() : model.inputStatsDate);
 
-        console.log(model.bookingTimes[test].bookedInfo.bookedTime);
+    bookings.forEach(item => {
+        const time = item.bookedInfo.bookedTime
+        if(findYear(time) === findYear(selectedDate)){
+            
+            if(findMonth(time) === 0) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+            if(findMonth(time) === 1) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+            if(findMonth(time) === 3) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+            if(findMonth(time) === 4) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+            if(findMonth(time) === 5) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+            if(findMonth(time) === 6) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+            if(findMonth(time) === 7) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+            if(findMonth(time) === 8) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+            if(findMonth(time) === 9) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+            if(findMonth(time) === 10) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+            if(findMonth(time) === 11) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+        }
 
-    }
+    })
+    
+    model.stats = stats;
+}
+
+function monthName(month) {
+    if(month === 0) return 'Januar';
+    if(month === 0) return 'Februar';
+    if(month === 0) return 'Mars';
+    if(month === 0) return 'April';
+    if(month === 0) return 'Mai';
+    if(month === 0) return 'Juni';
+    if(month === 0) return 'Juli';
+    if(month === 0) return 'August';
+    if(month === 0) return 'September';
+    if(month === 0) return 'Oktober';
+    if(month === 0) return 'November';
+    if(month === 0) return 'Desember';
+}
+
+function findMonth(datestring) {
+    const date = new Date(datestring);
+    return date.getMonth();
+}
+function findYear(datestring) {
+    const date = new Date(datestring);
+    return date.getFullYear();
+}
+function findDay(datestring) {
+    const date = new Date(datestring);
+    return date.getDay();
 }

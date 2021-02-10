@@ -1,5 +1,10 @@
 function selectTable(index) {
-    model.app.selectedTable = index;
+    if (model.app.selectMultipleTables) {
+        model.app.selectedTable.push(index)
+    } else {
+        model.app.selectedTable = index;
+    }
+    
     viewCreateBooking();
 }
 
@@ -68,6 +73,10 @@ function changeScreen(p) {
     animationSatus = false;
     updateView();
 }
+
+// function createInputTime(value) {
+//     console.log(value)
+// }
 
 function stopAnimations() {
     animationSatus = true;

@@ -62,8 +62,10 @@ p
 - varsel om at bordet snart er booket, Gult bord? Kanskje ha en liste som kommer opp med informasjon om bordet gjennom dagen.
 - CSS(-Sigve) []
 - Kunne velge flere en ett bord. funksjon som tar inn 2 bord og lager en custom bord bestilling som inneholder 2 bord.(Kanskje 2 bestillinger?) []
-- legge til en generell beskjed. (-Sigve) []
+- legge til en generell beskjed. (-Theodor) [Done]
 - en grafisk visning som viser graf velge mellom uke måned eller år og sammenligne resultater. () []
 - kunne legge til eller fjerne bord. Kanskje ha ett bord med åtte plasser. (-Theodor) [Done]
 
 - Kanskje endre fra bokstaver til en id eller ett tall (mby) []
+
+- Endre fra date-time local til 2inputs med en time og en day. Kan merge igjen før push og før jonas sin funksjon () []

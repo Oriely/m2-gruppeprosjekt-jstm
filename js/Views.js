@@ -1,6 +1,7 @@
 let tableOverview = '';
 let childBool = false;
 let rangeCount;
+let multipleTableBool = false;
 let checkedChildChair = false;
 
 function viewCreateBooking() {
@@ -42,6 +43,9 @@ function viewCreateBooking() {
                     <div class="input-date">
                         <div>
                         <label>Reservert fra </label>
+                        <input type="time" onchange="model.inputTime.fromInputTime = this.value" value="${model.inputTime.fromInputTime}"></input>
+                        <input type="date" oninput="model.inputTime.fromInputDate = this.value" value="${model.inputTime.fromInputDate}"></input>
+                        <button></button>
                         <input type="datetime-local" oninput="model.inputs.inputTime = this.value" onchange="checkTableStatus()" value="${model.inputs.inputTime}">
                         <button onclick="setTimeToCurrentTime()">Nåværende Tid</button>
                         </div>
@@ -64,10 +68,17 @@ function viewCreateBooking() {
                             
                         </div>
                     </div>
-                    
+                    <div>
+                        <label>TillegsBeskjed</label>
+                        <input type="form" oninput="model.inputs.inputMessage = this.value"></input>
+                    </div>
                     <div>
                         <label>Barnestol</label>
                         <input type="checkbox" ${childBool ? 'checked' : ''} onclick="checkChildChair()" >
+                    </div>
+                    <div>
+                        <label>Velge flere bord</label>
+                        <input type="checkbox" ${multipleTableBool ? 'checked' : ''} onclick="checkMultipleTables()">
                     </div>
                     <div class="errors">
                     </div>
@@ -158,6 +169,12 @@ function bookingStatusCheck(i) {
 function checkChildChair() {
     childBool = childBool ? false : true;
     model.inputs.inputChildChair = childBool;
+}
+
+function checkMultipleTables() {
+    multipleTableBool = multipleTableBool ? false : true;
+    
+    model.app.selectMultipleTables = multipleTableBool;
 }
 
 let dateSelect = new Date();

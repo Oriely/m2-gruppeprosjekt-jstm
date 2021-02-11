@@ -1,10 +1,16 @@
 function selectTable(index) {
+    if (index == undefined) return;
     if (model.app.selectMultipleTables) {
-        model.app.selectedTable.push(index)
+        if (model.app.selectedTable.includes(index)) {
+            return;
+        } else {
+            model.app.selectedTable.push(index)
+        }
+
     } else {
         model.app.selectedTable = [index];
     }
-    
+
     viewCreateBooking();
 }
 
@@ -45,7 +51,7 @@ function changeTableInformation() {
             model.tables[Table].push(selectedTable)
         }
     }
-        model.tables.allTables.push(selectedTable)
+    model.tables.allTables.push(selectedTable)
     editTablesView()
 }
 

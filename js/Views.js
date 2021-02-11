@@ -9,7 +9,7 @@ function viewCreateBooking() {
     let rangeCount;
     for (let tableCategory in model.tables) {
         console.log(123)
-        if (model.tables[tableCategory].includes(model.app.selectedTable[0])){
+        if (model.tables[tableCategory].includes(model.app.selectedTable[0])) {
             if (tableCategory != 'allTables') {
                 var fitsX = tableCategory;
                 rangeCount = (fitsX.substring(5, 4));
@@ -106,68 +106,66 @@ function viewCreateBooking() {
     var tableHtml = '';
     var color = '';
     tableHtml += `<div class="tables ${(animationSatus == false ? 'animation2' : '')}">`;
-    for (let i = 0; i < model.tables.allTables.length; i++) {
-        if (i === 0) {
-            tableHtml += `
-                <div class="tables-outer ${(animationSatus == false ? 'animation3' : '')}">
-                <div class="testing">
-                <p>Fire seter</p>
-                <div class="seats-wrapper">
-                    <div class="col1">
-                `;
-        }
+    for (let tableList in model.tables) {
+        if (tableList != 'allTables') {
+            for (let i = 0; i < model.tables[tableList].length; i++) {
+                if (i === 0) {
+                    tableHtml += `
+                        <div class="tables-outer ${(animationSatus == false ? 'animation3' : '')}">
+                        <div class="testing">
+                        <p>${tableList}</p>
+                        <div class="seats-wrapper">
+                            <div class="col1">
+                        `;
+                }
 
-        if (i === 5) {
-            tableHtml += `
-                </div>        
-                <div class="col2">                      
-            `;
-        }
-        if (i === 10) {
-            tableHtml += `
-                </div>
-                </div>
-                </div>
-                
-                <div class="testing">
-                <p>Seks seter</p>
-                <div class="seats-wrapper">
-                <div class="col1">
-            `;
-        }
-        if (i === 15) {
-            tableHtml += `
-                </div>
-                <div class="col2">
-            `;
-        }
-        if (i === 20) {
-            tableHtml += `
-                </div></div></div></div></div>
-            `;
-        }
+                if (i === 5) {
+                    tableHtml += `
+                        </div>        
+                        <div class="col2">                      
+                    `;
+                }
+                if (i > model.tables[tableList].length) {
+                    tableHtml += `
+                        </div>
+                        </div>
+                        </div>
+                        
+                        <div class="testing">
+                        <p>Seks seter</p>
+                        <div class="seats-wrapper">
+                        <div class="col1">
+                        </div>
+                        <div class="col2">
+                        </div></div></div></div></div>
+                    `;
+                }
 
 
-        var allTables = model.tables.allTables;
+                var allTables = model.tables.allTables;
 
-        
-        if (model.status[model.tables.allTables[i]] == undefined) {
-            tableHtml += `
-            <div class="box-outer ${model.app.selectedTable.includes(allTables[i]) ? 'selectedTable' : ''}">
-                <div class="box" onclick="selectTable('${allTables[i]}')">
-                    ${allTables[i]}
-                </div>
-            </div>`;
-        } else {
-            tableHtml += `
-            <div class="box-outer ${model.app.selectedTable.includes(allTables[i]) ? 'selectedTable' : ''}">
-                <div class="box ${bookingStatusCheck(i)}" onclick="selectTable('${allTables[i]}')">
-                    ${allTables[i]}
-                </div>
-            </div>
-            `;
+
+                if (model.status[model.tables[tableList][i]] == undefined) {
+                    tableHtml += `
+                    <div class="box-outer ${model.app.selectedTable.includes(allTables[i]) ? 'selectedTable' : ''}">
+                        <div class="box" onclick="selectTable('${model.tables[tableList][i]}')">
+                            ${model.tables[tableList][i]}
+                        </div>
+                    </div>`;
+                } else {
+                    tableHtml += `
+                    <div class="box-outer ${model.app.selectedTable.includes(allTables[i]) ? 'selectedTable' : ''}">
+                        <div class="box ${bookingStatusCheck(i)}" onclick="selectTable('${model.tables[tableList][i]}')">
+                            ${model.tables[tableList][i]}
+                        </div>
+                    </div>
+                    `;
+                }
+            }
         }
     }
+
+
 
     html += tableHtml;
     document.getElementById('app').innerHTML = html;
@@ -189,7 +187,7 @@ function checkChildChair() {
 
 function checkMultipleTables() {
     multipleTableBool = multipleTableBool ? false : true;
-    
+
     model.app.selectMultipleTables = multipleTableBool;
 
 }
@@ -414,21 +412,21 @@ function archiveBookingList() {
 
     statsFixData();
     testing();
-    
+
     const svgWidth = 600;
     const statHeight = 600;
     const barWidth = (svgWidth / model.stats.length);
 
-    const barColors = ['#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e']
+    const barColors = ['#1d043c', '#2e075e', '#1d043c', '#2e075e', '#1d043c', '#2e075e', '#1d043c', '#2e075e', '#1d043c', '#2e075e', '#1d043c', '#2e075e']
     html += `
     <div>
     <input type="date" oninput="changeDateValue(this.value)" value="${model.inputStatsDate}">
     
     <div class="statistic" style="height: ${statHeight}px;width:${svgWidth}px">
     `;
-    for(const hm in model.stats){
-        
-        html += `<div class="stat-bar" style="${ model.stats[hm] == 0 ? 'height:4%; background: rgb(210, 210, 210) !important; color:black;' : `height:${testing(hm) + '%'}`}; width:${barWidth}px; background-color:${barColors[hm]} ;">
+    for (const hm in model.stats) {
+
+        html += `<div class="stat-bar" style="${model.stats[hm] == 0 ? 'height:4%; background: rgb(210, 210, 210) !important; color:black;' : `height:${testing(hm) + '%'}`}; width:${barWidth}px; background-color:${barColors[hm]} ;">
                     <div style="">${model.stats[hm]}</div>
                 </div>
                 
@@ -436,13 +434,13 @@ function archiveBookingList() {
     }
     html += `</div>`;
     html += `<div class="labels">`;
-    for(const hm in model.stats) {
+    for (const hm in model.stats) {
         html += `
         <div class="stat-label" style="width:${barWidth}px">${monthName(hm)}</div>
         `;
     }
     html += `</div></div>`;
-    
+
     document.getElementById('app').innerHTML = html;
     stopAnimations();
 
@@ -473,25 +471,25 @@ function editTablesView() {
         <div id="slider">${selectedTable.selectedTableFits}</div>
         Personer
     </div>`
-     : ''}</div>
+            : ''}</div>
     <button onclick="deleteTable(model.app.selectedTableForEdit)">Slette Bord</button>
     <button onclick="changeTableInformation(model.app.selectedTableForEdit)">Endre Bord</button>
     `;
-    
+
 
     document.getElementById('app').innerHTML = tableHtml;
     document.getElementById('app').innerHTML += html;
 }
 
-function changeDateValue(e ,value) {
+function changeDateValue(e, value) {
     model.inputStatsDate = value;
     if (e.keyCode == 13) {
         updateScreen();
         console.log("Enter key is pressed");
     }
 
-   
-    
+
+
 }
 
 function statisticsView() {
@@ -499,20 +497,20 @@ function statisticsView() {
     testing();
 
     let html = '';
-    
+
     const svgWidth = 600;
     const statHeight = 600;
     const barWidth = (svgWidth / model.stats.length);
 
-    const barColors = ['#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e']
+    const barColors = ['#1d043c', '#2e075e', '#1d043c', '#2e075e', '#1d043c', '#2e075e', '#1d043c', '#2e075e', '#1d043c', '#2e075e', '#1d043c', '#2e075e']
     html += `
     <input type="number" oninput="changeDateValue(event, this.value)" value="${(model.inputStatsDate === '' ? new Date().getFullYear() : model.inputStatsDate)}">
     
     <div class="statistic" style="height: ${statHeight}px;width:${svgWidth}px">
     `;
-    for(const hm in model.stats){
-        
-        html += `<div class="stat-bar" style="${ model.stats[hm] == 0 ? 'height:4%; background: rgb(210, 210, 210) !important; color:black;' : `height:${testing(hm) + '%'}`}; width:${barWidth}px; background-color:${barColors[hm]} ;">
+    for (const hm in model.stats) {
+
+        html += `<div class="stat-bar" style="${model.stats[hm] == 0 ? 'height:4%; background: rgb(210, 210, 210) !important; color:black;' : `height:${testing(hm) + '%'}`}; width:${barWidth}px; background-color:${barColors[hm]} ;">
                     <div style="">${model.stats[hm]}</div>
                 </div>
                 
@@ -520,7 +518,7 @@ function statisticsView() {
     }
     html += `</div>`;
     html += `<div class="labels">`;
-    for(const hm in model.stats) {
+    for (const hm in model.stats) {
         html += `
         <div class="stat-label" style="width:${barWidth}px">${monthName(hm)}</div>
         `;
@@ -540,22 +538,22 @@ function statsFixData() {
         bookings.forEach(item => {
             const time = item.bookedInfo.bookedTime
             if (findYear(time) === findYear(selectedDate)) {
-                if(findMonth(time) === 0) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
-                if(findMonth(time) === 1) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
-                if(findMonth(time) === 3) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
-                if(findMonth(time) === 4) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
-                if(findMonth(time) === 5) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
-                if(findMonth(time) === 6) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
-                if(findMonth(time) === 7) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
-                if(findMonth(time) === 8) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
-                if(findMonth(time) === 9) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
-                if(findMonth(time) === 10) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
-                if(findMonth(time) === 11) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+                if (findMonth(time) === 0) { stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+                if (findMonth(time) === 1) { stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+                if (findMonth(time) === 3) { stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+                if (findMonth(time) === 4) { stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+                if (findMonth(time) === 5) { stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+                if (findMonth(time) === 6) { stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+                if (findMonth(time) === 7) { stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+                if (findMonth(time) === 8) { stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+                if (findMonth(time) === 9) { stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+                if (findMonth(time) === 10) { stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+                if (findMonth(time) === 11) { stats[findMonth(time)] = stats[findMonth(time)] + 1; }
             }
 
         });
     }
-    
+
     model.stats = stats;
 }
 
@@ -567,13 +565,13 @@ function testing(a) {
 
 
         var highestValue = Math.max.apply(Math, stats);
-        if (highestValue < 10) {timesIndex = 100 / highestValue};
-        if (highestValue > 10) {timesIndex = highestValue / 100}
+        if (highestValue < 10) { timesIndex = 100 / highestValue };
+        if (highestValue > 10) { timesIndex = highestValue / 100 }
 
         var calculatedArray = new Array(12).fill(0);
         for (let i = 0; i < stats.length; i++) {
             if (highestValue < 10) {
-                
+
                 calculatedArray[i] = Math.floor(stats[i] * timesIndex);
 
             }
@@ -581,29 +579,29 @@ function testing(a) {
                 calculatedArray[i] = Math.floor(stats[i] / timesIndex);
 
             }
-            
-            
+
+
         }
     }
     console.log(stats);
     console.log(calculatedArray);
-    
+
     return calculatedArray[a];
 }
 
 function monthName(month) {
-    if(month == 0) return 'Januar';
-    if(month == 1) return 'Februar';
-    if(month == 2) return 'Mars';
-    if(month == 3) return 'April';
-    if(month == 4) return 'Mai';
-    if(month == 5) return 'Juni';
-    if(month == 6) return 'Juli';
-    if(month == 7) return 'August';
-    if(month == 8) return 'September';
-    if(month == 9) return 'Oktober';
-    if(month == 10) return 'November';
-    if(month == 11) return 'Desember';
+    if (month == 0) return 'Januar';
+    if (month == 1) return 'Februar';
+    if (month == 2) return 'Mars';
+    if (month == 3) return 'April';
+    if (month == 4) return 'Mai';
+    if (month == 5) return 'Juni';
+    if (month == 6) return 'Juli';
+    if (month == 7) return 'August';
+    if (month == 8) return 'September';
+    if (month == 9) return 'Oktober';
+    if (month == 10) return 'November';
+    if (month == 11) return 'Desember';
 }
 
 function findMonth(datestring) {

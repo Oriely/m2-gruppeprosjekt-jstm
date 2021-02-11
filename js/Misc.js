@@ -38,12 +38,15 @@ function deleteTable() {
 function changeTableInformation() {
     var selectedTable = model.selectedTable.selectedTableForEdit;
     var selectedTableGuests = model.selectedTable.selectedTableGuests;
-    var tables = model.table;
+    var tables = model.tables;
     deleteTable(selectedTable)
 
     if (selectedTableGuests) {
         var Table = `fits${selectedTableGuests}`;
+        console.log(Table)
+        console.log(tables)
         if (tables[Table] == undefined) {
+            console.log('Undefined')
             tables[Table] = []
             tables[Table].push(selectedTable)
         } else {

@@ -390,7 +390,7 @@ function archiveBookingList() {
     html += `
     </div>
     `;
-
+    
     document.getElementById('app').innerHTML = html;
     stopAnimations();
 
@@ -430,30 +430,134 @@ function editTablesView() {
     document.getElementById('app').innerHTML += html;
 }
 
+function changeDateValue(value) {
+    model.inputStatsDate = value
+    updateView();
+}
+function statisticsView() {
+    statsFixData();
+    testing();
+
+
 
 
 function statisticsVeiw() {
+
     let html = '';
+    
+    const svgWidth = 600;
+    const statHeight = 600;
+    const barWidth = (svgWidth / model.stats.length);
 
+    const barColors = ['#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e']
     html += `
-    <div class="page-statistics">
-
+    <input type="date" oninput="changeDateValue(this.value)" value="${model.inputStatsDate}">
+    
+    <div class="statistic" style="height: ${statHeight}px;width:${svgWidth}px">
     `;
-
-    // for() {
-
-    // }
-
+    for(const hm in model.stats){
+        
+        html += `<div class="stat-bar" style="${ model.stats[hm] == 0 ? 'height:4%; background: rgb(210, 210, 210) !important; color:black;' : `height:${testing(hm) + '%'}`}; width:${barWidth}px; background-color:${barColors[hm]} ;">
+                    <div style="">${model.stats[hm]}</div>
+                </div>
+                
+                `;
+    }
+    html += `</div>`;
+    html += `<div class="labels">`;
+    for(const hm in model.stats) {
+        html += `
+        <div class="stat-label" style="width:${barWidth}px">${monthName(hm)}</div>
+        `;
+    }
     html += `</div>`;
     document.getElementById('app').innerHTML = html;
 }
 
-statsFixData();
+
 
 function statsFixData() {
+
+    const bookings = archive;
+    const stats = new Array(12).fill(0);
+    const selectedDate = (!model.inputStatsDate ? new Date() : model.inputStatsDate);
+    if (model.stats)
+    bookings.forEach(item => {
+        const time = item.bookedInfo.bookedTime
+        if (findYear(time) === findYear(selectedDate)) {
+            if(findMonth(time) === 0) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+            if(findMonth(time) === 1) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+            if(findMonth(time) === 3) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+            if(findMonth(time) === 4) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+            if(findMonth(time) === 5) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+            if(findMonth(time) === 6) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+            if(findMonth(time) === 7) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+            if(findMonth(time) === 8) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+            if(findMonth(time) === 9) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+            if(findMonth(time) === 10) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+            if(findMonth(time) === 11) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+        }
+
+    })
+    
+    model.stats = stats;
+}
+
+function testing(a) {
+    const stats = model.stats;
+    var timesIndex;
+
     for (const test in model.bookingTimes) {
 
-        console.log(model.bookingTimes[test].bookedInfo.bookedTime);
 
+    var highestValue = Math.max.apply(Math, model.stats);
+    if (highestValue < 10) {timesIndex = 100 / highestValue}
+    if (highestValue > 10) {timesIndex = highestValue / 100}
+
+    var calculatedArray = new Array(12).fill(0);
+    for (let i = 0; i < model.stats.length; i++) {
+        if (highestValue < 10) {
+        
+            calculatedArray[i] = model.stats[i] * timesIndex;
+
+        }
+        else {
+            calculatedArray[i] = model.stats[i] / timesIndex;
+
+        }
+        
+        
     }
+    console.log(model.stats);
+    console.log(calculatedArray);
+
+    return calculatedArray[a];
+}
+
+function monthName(month) {
+    if(month == 0) return 'Januar';
+    if(month == 1) return 'Februar';
+    if(month == 2) return 'Mars';
+    if(month == 3) return 'April';
+    if(month == 4) return 'Mai';
+    if(month == 5) return 'Juni';
+    if(month == 6) return 'Juli';
+    if(month == 7) return 'August';
+    if(month == 8) return 'September';
+    if(month == 9) return 'Oktober';
+    if(month == 10) return 'November';
+    if(month == 11) return 'Desember';
+}
+
+function findMonth(datestring) {
+    const date = new Date(datestring);
+    return date.getMonth();
+}
+function findYear(datestring) {
+    const date = new Date(datestring);
+    return date.getFullYear();
+}
+function findDay(datestring) {
+    const date = new Date(datestring);
+    return date.getDay();
 }

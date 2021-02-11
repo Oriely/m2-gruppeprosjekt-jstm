@@ -266,7 +266,7 @@ nav a:active {
     display: grid;
     grid-template-columns: 50px 1fr 1fr 1fr 1fr 1fr;
     font-weight: bold;
-    background: #1d043c;
+    background: #41107c;
     color: white;
     padding: 5px;
 }
@@ -342,3 +342,35 @@ nav a:active {
 }
 
 @media only screen and (max-width : 320px) {}
+
+.statistic {
+display:flex;
+color:white;
+align-items:flex-end;
+}
+
+.stat-bar {
+    margin:1px;
+    padding:2px;
+    font-weight:bold;
+    font-size:10px;
+    transition:0.1s ease;
+}
+
+.stat-bar:hover {
+    font-size:20px;
+    opacity:0.8;
+}
+.stat-label {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    display:flex; 
+    align-items:center; 
+    padding-top:10px;
+    transform:rotateZ(-20deg);
+}
+
+.labels {
+    display:flex;
+
+}

@@ -70,5 +70,7 @@ p
 
 - Endre fra date-time local til 2inputs med en time og en day. Kan merge igjen før push og før jonas sin funksjon (-Theodor) [Done]
 
-- !!Det å velge flere bord skal bare ha en av hver bokstav!! () []
+- !!Det å velge flere bord skal bare ha en av hver bokstav!! () [Done]
+
+-Chaircount må lages om så den er dynamisk iforhold til model.tables.fitsX () []
 

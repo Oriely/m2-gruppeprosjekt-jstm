@@ -340,12 +340,12 @@ align-items:flex-end;
 }
 
 .stat-bar:hover {
-    font-size:15px;
+    font-size:20px;
     opacity:0.8;
 }
 .stat-label {
     writing-mode: vertical-rl;
-text-orientation: mixed;
+    text-orientation: mixed;
     display:flex; 
     align-items:center; 
     padding-top:10px;

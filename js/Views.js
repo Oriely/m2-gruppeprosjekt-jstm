@@ -461,7 +461,7 @@ function statisticsView() {
     `;
     for(const hm in model.stats){
         
-        html += `<div class="stat-bar" style="${ model.stats[hm] == 0 ? 'height:4%; background: rgb(210, 210, 210) !important; color:black;' : `height:${testing(hm) + '0%'}`}; width:${barWidth}px; background-color:${barColors[hm]} ;">
+        html += `<div class="stat-bar" style="${ model.stats[hm] == 0 ? 'height:4%; background: rgb(210, 210, 210) !important; color:black;' : `height:${testing(hm) + '%'}`}; width:${barWidth}px; background-color:${barColors[hm]} ;">
                     <div style="">${model.stats[hm]}</div>
                 </div>
                 
@@ -511,22 +511,26 @@ function testing(a) {
     var timesIndex;
 
     var highestValue = Math.max.apply(Math, model.stats);
-    if (highestValue < 10) {timesIndex = 10 / highestValue}
-    if (highestValue > 10) {timesIndex = highestValue / 10}
+    if (highestValue < 10) {timesIndex = 100 / highestValue}
+    if (highestValue > 10) {timesIndex = highestValue / 100}
 
     var calculatedArray = new Array(12).fill(0);
     for (let i = 0; i < model.stats.length; i++) {
         if (highestValue < 10) {
-            calculatedArray[i] = Math.round(model.stats[i] * timesIndex);
+        
+            calculatedArray[i] = model.stats[i] * timesIndex;
 
         }
         else {
-            calculatedArray[i] = Math.round(model.stats[i] / timesIndex);
+            calculatedArray[i] = model.stats[i] / timesIndex;
 
         }
         
         
     }
+    console.log(model.stats);
+    console.log(calculatedArray);
+
     return calculatedArray[a];
 }
 

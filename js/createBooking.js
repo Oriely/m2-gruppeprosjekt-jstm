@@ -25,7 +25,6 @@ function createBooking() {
             }
         }
         if(model.inputs.inputTime && model.inputs.inputNumber && model.inputs.inputNumberOfGuests && model.inputs.inputName) {
-            console.log(123)
             model.bookingTimes.push({
                     table: model.app.selectedTable[table],
                     chairCount: checkChairCount(model.app.selectedTable[table]),

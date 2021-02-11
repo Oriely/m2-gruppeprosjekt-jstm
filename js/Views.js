@@ -8,7 +8,6 @@ function viewCreateBooking() {
     let error = '';
     let rangeCount;
     for (let tableCategory in model.tables) {
-        console.log(123)
         if (model.tables[tableCategory].includes(model.app.selectedTable[0])) {
             if (tableCategory != 'allTables') {
                 var fitsX = tableCategory;
@@ -101,73 +100,21 @@ function viewCreateBooking() {
 
         
 `
+    html += `<div class="tables ${(animationSatus == false ? 'animation2' : '')}">`;
 
-
-    var tableHtml = '';
-    var color = '';
-    tableHtml += `<div class="tables ${(animationSatus == false ? 'animation2' : '')}">`;
     for (let tableList in model.tables) {
-        if (tableList != 'allTables') {
-            for (let i = 0; i < model.tables[tableList].length; i++) {
-                if (i === 0) {
-                    tableHtml += `
-                        <div class="tables-outer ${(animationSatus == false ? 'animation3' : '')}">
-                        <div class="testing">
-                        <p>${tableList}</p>
-                        <div class="seats-wrapper">
-                            <div class="col1">
-                        `;
-                }
-
-                if (i === 5) {
-                    tableHtml += `
-                        </div>        
-                        <div class="col2">                      
-                    `;
-                }
-                if (i > model.tables[tableList].length) {
-                    tableHtml += `
-                        </div>
-                        </div>
-                        </div>
-                        
-                        <div class="testing">
-                        <p>Seks seter</p>
-                        <div class="seats-wrapper">
-                        <div class="col1">
-                        </div>
-                        <div class="col2">
-                        </div></div></div></div></div>
-                    `;
-                }
-
-
-                var allTables = model.tables.allTables;
-
-
-                if (model.status[model.tables[tableList][i]] == undefined) {
-                    tableHtml += `
-                    <div class="box-outer ${model.app.selectedTable.includes(allTables[i]) ? 'selectedTable' : ''}">
-                        <div class="box" onclick="selectTable('${model.tables[tableList][i]}')">
-                            ${model.tables[tableList][i]}
-                        </div>
-                    </div>`;
-                } else {
-                    tableHtml += `
-                    <div class="box-outer ${model.app.selectedTable.includes(allTables[i]) ? 'selectedTable' : ''}">
-                        <div class="box ${bookingStatusCheck(i)}" onclick="selectTable('${model.tables[tableList][i]}')">
-                            ${model.tables[tableList][i]}
-                        </div>
-                    </div>
-                    `;
-                }
-            }
+        for (let i = 0; i < model.tables[tableList].length; i++) {
+            const table = model.tables[tableList][i];
+            html += `
+            <div class="box-outer ${model.app.selectedTable.includes(table) ? 'selectedTable' : ''}">
+                <div class="box" onclick="selectTable('${table}')">
+                    ${table}
+                </div>
+            </div>
+            `;
         }
     }
 
-
-
-    html += tableHtml;
     document.getElementById('app').innerHTML = html;
     stopAnimations();
 }
@@ -449,7 +396,7 @@ function archiveBookingList() {
 function editTablesView() {
     var selectedTable = model.selectedTable;
     let tableHtml = '';
-    for (let i = 0; i < model.tables.allTables.length; i++) {
+    for (let i = 0; i < 1; i++) {
         tableHtml += `
         <div class="box-outer1 ${selectedTable.selectedTableForEdit == model.tables.allTables[i] ? 'selectedTable' : ''}">
                 <div class="box" onclick="selectTableForEdit('${model.tables.allTables[i]}')">
@@ -583,8 +530,7 @@ function testing(a) {
 
         }
     }
-    console.log(stats);
-    console.log(calculatedArray);
+    
 
     return calculatedArray[a];
 }

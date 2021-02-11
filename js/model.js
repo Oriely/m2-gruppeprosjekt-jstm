@@ -2,8 +2,7 @@ const model = {
     app: {
         selectedTable: [],
         selectedDate: '',
-        currentPage: '',
-        selectMultipleTables: false
+        currentPage: ''
         
 
     },
@@ -15,7 +14,6 @@ const model = {
     tables: {
         fits4: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'],
         fits6: ['k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't'],
-        allTables: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't']
     },
     inputStatsDate: '',
     inputTime : {

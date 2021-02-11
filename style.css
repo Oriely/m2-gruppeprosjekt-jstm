@@ -27,39 +27,35 @@ input {
 body {
     background-color: rgb(210, 210, 210);
     color: black;
-    max-height: 100vh;
 }
 
 
 .wrapper {
-    display: flex;
+}
+
+.app-wrapper {
+    margin-left:300px;
+    padding:10px;
 }
 .nav-wrapper {
-    width:30%;
+    width:10%;
+    position: fixed;
+    top: 0;
 }
 nav {
     display:flex;
     flex-direction:column;
-    width:90%;
     color:white;
+
 }
 
-nav a {
+nav div {
     background:#1d043c;
-    width:90%;
-    transition:0.3s ease;
-    padding:10px 0 10px 10px;
 }
 
-nav a:hover {
-    background:#1d043cb1;
-    width:100%;
-}
-
-nav a:active {
-    background:#1d043c7d;
-    width:90%;
-    transition:0.08s;
+.sticky {
+    position: fixed;
+    top: 0;
 }
 
 .page-outer {
@@ -271,6 +267,7 @@ nav a:active {
     background: #41107c;
     color: white;
     padding: 5px;
+
 }
 
 .errors {
@@ -286,7 +283,7 @@ nav a:active {
     animation: slideIn 0.3s forwards;
 }
 
-.animation2 {
+.animate-fade-in {
     animation: fadeIn 1s forwards;
 }
 

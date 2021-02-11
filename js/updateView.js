@@ -39,3 +39,4 @@ function myFunction() {
 
 const logo = document.querySelector('.logo');
 const logot = document.querySelector('.logo-box');
+checkTableStatus()

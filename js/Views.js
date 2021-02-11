@@ -3,8 +3,9 @@ let childBool = false;
 let rangeCount;
 let multipleTableBool = false;
 let checkedChildChair = false;
-
+  
 function viewCreateBooking() {
+
     let error = '';
     let rangeCount;
     for (let tableCategory in model.tables) {
@@ -115,6 +116,7 @@ function viewCreateBooking() {
     document.getElementById('app').innerHTML = html;
     stopAnimations();
 }
+
 
 function bookingStatusCheck(i) {
     var allTables = model.tables.allTables;
@@ -573,3 +575,4 @@ function findDay(datestring) {
     const date = new Date(datestring);
     return date.getDay();
 }
+

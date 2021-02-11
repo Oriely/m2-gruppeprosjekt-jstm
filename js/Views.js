@@ -69,10 +69,10 @@ function viewCreateBooking() {
                     </div>
                     <div class="input-guest">
                         <div class="input-guest-label">
-                            <label>Antall gjester ${(rangeCount ? rangeCount + ' Max' : '<i>Velg bord</i>')}</label><label></label>
+                            <label>Antall gjester ${(rangeCount ? rangeCount*model.app.selectedTable.length + ' Max' : '<i>Velg bord</i>')}</label><label></label>
                         </div>
                         <div>
-                            <input type="number" min="1" max="${rangeCount}" oninput="model.inputs.inputNumberOfGuests = this.value" value="${model.inputs.inputNumberOfGuests}">
+                            <input type="number" min="1" max="${rangeCount*model.app.selectedTable.length}" oninput="model.inputs.inputNumberOfGuests = this.value" value="${model.inputs.inputNumberOfGuests}">
                             
                         </div>
                     </div>
@@ -84,10 +84,7 @@ function viewCreateBooking() {
                         <label>Barnestol</label>
                         <input type="checkbox" ${childBool ? 'checked' : ''} onclick="checkChildChair()" >
                     </div>
-                    <div>
-                        <label>Velge flere bord</label>
-                        <input type="checkbox" ${multipleTableBool ? 'checked' : ''} onclick="checkMultipleTables()">
-                    </div>
+                    
                     <div class="errors">
                     </div>
                     <div class="add-booking">

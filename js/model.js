@@ -1,9 +1,16 @@
 const model = {
     app: {
-        selectedTable: '',
+        selectedTable: [],
         selectedDate: '',
         currentPage: '',
+        selectMultipleTables: false,
+        
 
+    },
+    selectedTable: {
+        selectedTableForEdit: '',
+        selectedTableFits: '',
+        selectedTableGuests: '',
     },
     tables: {
         fits4: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'],
@@ -11,7 +18,15 @@ const model = {
         allTables: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't']
     },
 
+
     inputStatsDate: '',
+
+    inputTime : {
+        fromInputTime: '',
+        fromInputDate: '',
+        toInputTime: '',
+        toInputDate: '',
+
     inputs: {
         inputName: '',
         inputNumber: '',
@@ -38,6 +53,7 @@ const model = {
         {
             table: 'a',
             chairCount: 4,
+            extraTable: '',
             bookedInfo: {
                 bookedName: 'Per Larsen',
                 bookedNumber: '98126143',
@@ -51,6 +67,7 @@ const model = {
         {
             table: 't',
             chairCount: 6,
+            extraTable: '',
             bookedInfo: {
                 bookedName: 'Pål Larsen',
                 bookedNumber: '98126143',
@@ -63,6 +80,7 @@ const model = {
         {
             table: 'g',
             chairCount: 4,
+            extraTable: '',
             bookedInfo: {
                 bookedName: 'Stig Larsen',
                 bookedNumber: '96127639',
@@ -75,6 +93,7 @@ const model = {
         {
             table: 's',
             chairCount: 6,
+            extraTable: '',
             bookedInfo: {
                 bookedName: 'Espen Askeladden',
                 bookedNumber: '98126143',
@@ -87,6 +106,7 @@ const model = {
         {
             table: 's',
             chairCount: 6,
+            extraTable: '',
             bookedInfo: {
                 bookedName: 'Martin Pettersen',
                 bookedNumber: '98126143',
@@ -99,6 +119,7 @@ const model = {
         {
             table: 's',
             chairCount: 6,
+            extraTable: '',
             bookedInfo: {
                 bookedName: 'Håvard Gundersen',
                 bookedNumber: '98126143',
@@ -111,6 +132,7 @@ const model = {
         {
             table: 'r',
             chairCount: 6,
+            extraTable: '',
             bookedInfo: {
                 bookedName: 'Marte Kåsa',
                 bookedNumber: '98126143',
@@ -123,6 +145,7 @@ const model = {
         {
             table: 'q',
             chairCount: 6,
+            extraTable: '',
             bookedInfo: {
                 bookedName: 'Sondre Hem',
                 bookedNumber: '98126143',
@@ -135,6 +158,7 @@ const model = {
         {
             table: 'j',
             chairCount: 4,
+            extraTable: '',
             bookedInfo: {
                 bookedName: 'Karl',
                 bookedNumber: '37423865',

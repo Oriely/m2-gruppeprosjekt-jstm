@@ -61,8 +61,14 @@ p
 - Bytte til dato og egen tid bolker istedefor date-time som er utdatert () []
 - varsel om at bordet snart er booket, Gult bord? Kanskje ha en liste som kommer opp med informasjon om bordet gjennom dagen.
 - CSS(-Sigve) []
-- Kunne velge flere en ett bord, legge til tillegsbeskjed. funksjon som tar inn 2 bord og lager en custom bord bestilling som inneholder 2 bord.(Kanskje 2 bestillinger?)
-- legge til en generell beskjed. () []
+- Kunne velge flere en ett bord. funksjon som tar inn 2 bord og lager en custom bord bestilling som inneholder 2 bord.(Kanskje 2 bestillinger?) []
+- legge til en generell beskjed. (-Theodor) [Done]
 - en grafisk visning som viser graf velge mellom uke måned eller år og sammenligne resultater. () []
-- kunne legge til eller fjerne bord. Kanskje ha ett bord med åtte plasser. (-Theodor) []
-- Trenger sigves versjon, må legge til en input hvor man legger til Ekstra beskjed eller melding ang. bordet.
+- kunne legge til eller fjerne bord. Kanskje ha ett bord med åtte plasser. (-Theodor) [Done]
+
+- Kanskje endre fra bokstaver til en id eller ett tall (mby) []
+
+- Endre fra date-time local til 2inputs med en time og en day. Kan merge igjen før push og før jonas sin funksjon (-Theodor) [Done]
+
+- !!Det å velge flere bord skal bare ha en av hver bokstav!! () []
+

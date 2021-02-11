@@ -69,10 +69,10 @@ function viewCreateBooking() {
                     </div>
                     <div class="input-guest">
                         <div class="input-guest-label">
-                            <label>Antall gjester ${(rangeCount ? rangeCount*model.app.selectedTable.length + ' Max' : '<i>Velg bord</i>')}</label><label></label>
+                            <label>Antall gjester ${(addUpTotGuests() ? addUpTotGuests() + ' Max' : '<i>Velg bord</i>')}</label><label></label>
                         </div>
                         <div>
-                            <input type="number" min="1" max="${rangeCount*model.app.selectedTable.length}" oninput="model.inputs.inputNumberOfGuests = this.value" value="${model.inputs.inputNumberOfGuests}">
+                            <input type="number" min="1" max="${addUpTotGuests()}" oninput="model.inputs.inputNumberOfGuests = this.value" value="${model.inputs.inputNumberOfGuests}">
                             
                         </div>
                     </div>
@@ -123,6 +123,20 @@ function bookingStatusCheck(i) {
     if (model.status[allTables[i]].bookingStatus == 2) return 'booked';
 }
 
+function addUpTotGuests() {
+    var guestCount = 0;
+    for (let tableList in model.tables) {
+        console.log(tableList)
+        for (let i = 0; i < model.app.selectedTable.length; i++) {
+            if (model.tables[tableList].includes(model.app.selectedTable[i])) {
+                console.log(tableList.substring(4, 5))
+                guestCount += parseInt(tableList.substring(4, 5))
+            }
+        }
+        
+    }
+    return guestCount;
+}
 
 function checkChildChair() {
     childBool = childBool ? false : true;

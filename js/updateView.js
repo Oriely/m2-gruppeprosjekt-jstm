@@ -36,3 +36,6 @@ function myFunction() {
     navbar.classList.remove("sticky");
   }
 } 
+
+const logo = document.querySelector('.logo');
+const logot = document.querySelector('.logo-box');

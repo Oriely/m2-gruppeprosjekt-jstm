@@ -1,20 +1,30 @@
 function selectTable(index) {
-    if (model.app.selectMultipleTables) {
-        if (model.app.selectedTable.includes(index)) {
-            return;
-        } else {
-            model.app.selectedTable.push(index)
-        }
+
+    const tables = model.app.selectedTable;
+    if (tables.includes(index)) {
+        const tIndex = tables.indexOf(index);
+        model.app.selectedTable.splice(tIndex, 1);
 
     } else {
-        model.app.selectedTable = [index];
+        model.app.selectedTable.push(index)
+
     }
+
+    // if (model.app.selectMultipleTables) {
+    //     if (model.app.selectedTable.includes(index)) {
+    //         model.app.selectedTable.indexOf()
+    //     } else {
+    //         model.app.selectedTable.push(index)
+    //     }
+
+    // } else {
+    //     model.app.selectedTable = [index];
+    // }
 
     viewCreateBooking();
 }
 
 function selectTableForEdit(table) {
-    console.log(table)
     model.selectedTable.selectedTableForEdit = table;
     var tables = model.tables;
     var selectedTable = model.selectedTable;
@@ -54,7 +64,6 @@ function changeTableInformation() {
             tables[Table].push(selectedTable)
         }
     }
-    tables.allTables.push(selectedTable)
     editTablesView()
 }
 
@@ -98,4 +107,15 @@ function errorHandler(err, input) {
 
 function showError(input) {
 
+}
+
+function tableCount() {
+    const count = 0;
+    for (const tables in model.tables) {
+        count += tables.length;
+
+
+    }
+    console.log(count);
+    return count;
 }

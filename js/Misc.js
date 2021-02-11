@@ -1,5 +1,4 @@
 function selectTable(index) {
-    if (index == undefined) return;
     if (model.app.selectMultipleTables) {
         if (model.app.selectedTable.includes(index)) {
             return;
@@ -17,19 +16,19 @@ function selectTable(index) {
 function selectTableForEdit(table) {
     console.log(table)
     model.selectedTable.selectedTableForEdit = table;
-    var selectedTableGuests = model.selectedTable.selectedTableGuests;
-    if (model.tables.fits4.includes(table)) { model.selectedTable.selectedTableFits = 4 }
-    if (model.tables.fits6.includes(table)) { model.selectedTable.selectedTableFits = 6 }
+    var tables = model.tables;
+    var selectedTable = model.selectedTable;
+    if (tables.fits4.includes(table)) { selectedTable.selectedTableFits = 4 }
+    if (tables.fits6.includes(table)) { selectedTable.selectedTableFits = 6 }
     editTablesView();
 }
 
 function deleteTable() {
-    var selectedTableGuests = model.selectedTable.selectedTableGuests;
     var selectedTable = model.selectedTable.selectedTableForEdit;
-
+    var tables = model.tables;
     for (let tableList in model.tables) {
-        if (model.tables[tableList].includes(selectedTable)) {
-            model.tables[tableList].splice(model.tables[tableList].indexOf(selectedTable), 1);
+        if (tables[tableList].includes(selectedTable)) {
+            tables[tableList].splice(tables[tableList].indexOf(selectedTable), 1);
         }
     }
     model.app.selectedTableForEdit = '';
@@ -39,19 +38,20 @@ function deleteTable() {
 function changeTableInformation() {
     var selectedTable = model.selectedTable.selectedTableForEdit;
     var selectedTableGuests = model.selectedTable.selectedTableGuests;
+    var tables = model.table;
     deleteTable(selectedTable)
 
     if (selectedTableGuests) {
         var Table = `fits${selectedTableGuests}`;
-        if (model.tables[Table] == undefined) {
-            model.tables[Table] = []
-            model.tables[Table].push(selectedTable)
+        if (tables[Table] == undefined) {
+            tables[Table] = []
+            tables[Table].push(selectedTable)
         } else {
 
-            model.tables[Table].push(selectedTable)
+            tables[Table].push(selectedTable)
         }
     }
-    model.tables.allTables.push(selectedTable)
+    tables.allTables.push(selectedTable)
     editTablesView()
 }
 
@@ -80,9 +80,6 @@ function changeScreen(p) {
     updateView();
 }
 
-// function createInputTime(value) {
-//     console.log(value)
-// }
 
 function stopAnimations() {
     animationSatus = true;
@@ -97,4 +94,5 @@ function errorHandler(err, input) {
 }
 
 function showError(input) {
+
 }

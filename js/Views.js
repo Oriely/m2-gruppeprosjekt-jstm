@@ -45,15 +45,12 @@ function viewCreateBooking() {
                         <label>Reservert fra </label>
                         <input type="time" onchange="model.inputTime.fromInputTime = this.value" value="${model.inputTime.fromInputTime}"></input>
                         <input type="date" oninput="model.inputTime.fromInputDate = this.value" value="${model.inputTime.fromInputDate}"></input>
-                        <button></button>
-                        <input type="datetime-local" oninput="model.inputs.inputTime = this.value" onchange="checkTableStatus()" value="${model.inputs.inputTime}">
                         <button onclick="setTimeToCurrentTime()">Nåværende Tid</button>
                         </div>
                         <div>
                         <label>til</label>
                         <input type="time" onchange="model.inputTime.toInputTime = this.value" value="${model.inputTime.toInputTime}"></input>
                         <input type="date" oninput="model.inputTime.toInputDate = this.value" value="${model.inputTime.toInputDate}"></input>
-                        <input type="datetime-local" oninput="model.inputs.inputTimeEnd = this.value" value="${model.inputs.inputTimeEnd}">
                         </div>
                         
                     </div>
@@ -390,6 +387,37 @@ function archiveBookingList() {
     html += `
     </div>
     `;
+
+    statsFixData();
+    testing();
+    
+    const svgWidth = 600;
+    const statHeight = 600;
+    const barWidth = (svgWidth / model.stats.length);
+
+    const barColors = ['#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e']
+    html += `
+    <div>
+    <input type="date" oninput="changeDateValue(this.value)" value="${model.inputStatsDate}">
+    
+    <div class="statistic" style="height: ${statHeight}px;width:${svgWidth}px">
+    `;
+    for(const hm in model.stats){
+        
+        html += `<div class="stat-bar" style="${ model.stats[hm] == 0 ? 'height:4%; background: rgb(210, 210, 210) !important; color:black;' : `height:${testing(hm) + '%'}`}; width:${barWidth}px; background-color:${barColors[hm]} ;">
+                    <div style="">${model.stats[hm]}</div>
+                </div>
+                
+                `;
+    }
+    html += `</div>`;
+    html += `<div class="labels">`;
+    for(const hm in model.stats) {
+        html += `
+        <div class="stat-label" style="width:${barWidth}px">${monthName(hm)}</div>
+        `;
+    }
+    html += `</div></div>`;
     
     document.getElementById('app').innerHTML = html;
     stopAnimations();
@@ -430,18 +458,20 @@ function editTablesView() {
     document.getElementById('app').innerHTML += html;
 }
 
-function changeDateValue(value) {
-    model.inputStatsDate = value
-    updateView();
+function changeDateValue(e ,value) {
+    model.inputStatsDate = value;
+    if (e.keyCode == 13) {
+        updateScreen();
+        console.log("Enter key is pressed");
+    }
+
+   
+    
 }
+
 function statisticsView() {
     statsFixData();
     testing();
-
-
-
-
-function statisticsVeiw() {
 
     let html = '';
     
@@ -451,7 +481,7 @@ function statisticsVeiw() {
 
     const barColors = ['#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e']
     html += `
-    <input type="date" oninput="changeDateValue(this.value)" value="${model.inputStatsDate}">
+    <input type="number" oninput="changeDateValue(event, this.value)" value="${(model.inputStatsDate === '' ? new Date().getFullYear() : model.inputStatsDate)}">
     
     <div class="statistic" style="height: ${statHeight}px;width:${svgWidth}px">
     `;
@@ -481,24 +511,25 @@ function statsFixData() {
     const bookings = archive;
     const stats = new Array(12).fill(0);
     const selectedDate = (!model.inputStatsDate ? new Date() : model.inputStatsDate);
-    if (model.stats)
-    bookings.forEach(item => {
-        const time = item.bookedInfo.bookedTime
-        if (findYear(time) === findYear(selectedDate)) {
-            if(findMonth(time) === 0) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
-            if(findMonth(time) === 1) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
-            if(findMonth(time) === 3) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
-            if(findMonth(time) === 4) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
-            if(findMonth(time) === 5) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
-            if(findMonth(time) === 6) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
-            if(findMonth(time) === 7) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
-            if(findMonth(time) === 8) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
-            if(findMonth(time) === 9) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
-            if(findMonth(time) === 10) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
-            if(findMonth(time) === 11) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
-        }
+    if (model.stats) {
+        bookings.forEach(item => {
+            const time = item.bookedInfo.bookedTime
+            if (findYear(time) === findYear(selectedDate)) {
+                if(findMonth(time) === 0) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+                if(findMonth(time) === 1) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+                if(findMonth(time) === 3) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+                if(findMonth(time) === 4) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+                if(findMonth(time) === 5) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+                if(findMonth(time) === 6) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+                if(findMonth(time) === 7) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+                if(findMonth(time) === 8) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+                if(findMonth(time) === 9) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+                if(findMonth(time) === 10) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+                if(findMonth(time) === 11) {stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+            }
 
-    })
+        });
+    }
     
     model.stats = stats;
 }
@@ -510,25 +541,26 @@ function testing(a) {
     for (const test in model.bookingTimes) {
 
 
-    var highestValue = Math.max.apply(Math, model.stats);
-    if (highestValue < 10) {timesIndex = 100 / highestValue}
-    if (highestValue > 10) {timesIndex = highestValue / 100}
+        var highestValue = Math.max.apply(Math, stats);
+        if (highestValue < 10) {timesIndex = 100 / highestValue};
+        if (highestValue > 10) {timesIndex = highestValue / 100}
 
-    var calculatedArray = new Array(12).fill(0);
-    for (let i = 0; i < model.stats.length; i++) {
-        if (highestValue < 10) {
-        
-            calculatedArray[i] = model.stats[i] * timesIndex;
+        var calculatedArray = new Array(12).fill(0);
+        for (let i = 0; i < stats.length; i++) {
+            if (highestValue < 10) {
+            
+                calculatedArray[i] = stats[i] * timesIndex;
 
+            }
+            else {
+                calculatedArray[i] = stats[i] / timesIndex;
+
+            }
+            
+            
         }
-        else {
-            calculatedArray[i] = model.stats[i] / timesIndex;
-
-        }
-        
-        
     }
-    console.log(model.stats);
+    console.log(stats);
     console.log(calculatedArray);
 
     return calculatedArray[a];

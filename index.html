@@ -10,9 +10,17 @@
         <link rel="icon" type="image/png" href="favicon/logo_size_invert.jpg"/>
     </head>
     <body>
-        
         <div class="wrapper">
-
+            <div class="nav-wrapper">
+                <div class="logo"><p>eat</p><p>it</p></div>
+                <nav>
+                    <div onclick="changeScreen('booktables')">Book Tables</div>
+                    <div onclick="changeScreen('managebookings')">Manage bookings</div>
+                    <div onclick="changeScreen('archive')">Arkiv</div>
+                    <div onclick="changeScreen('edittables')">Edit tables</div>
+                    <div onclick="changeScreen('stats')">stats</div>
+                </nav>
+            </div>
             <div class="app-wrapper">
                 
                 <div id="app"></div>
@@ -24,14 +32,5 @@
         <script src="js/Misc.js"></script>
         <script src="js/updateView.js"></script>
         <script src="js/createBooking.js"></script>
-
-            <nav>
-                <div onclick="changeScreen('booktables')">Book Tables</div>
-                <div onclick="changeScreen('managebookings')">Manage bookings</div>
-                <div onclick="changeScreen('archive')">Arkiv</div>
-                <div onclick="changeScreen('edittables')">Edit tables</div>
-                <div onclick="changeScreen('stats')">stats</div>
-            </nav>
-
     </body>
 </html>

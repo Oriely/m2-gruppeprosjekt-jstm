@@ -34,7 +34,7 @@ function viewCreateBooking() {
     let html = '';
     html = `
     <div class="page-outer">
-        <div class="${(animationSatus == false ? 'animate-fade-in' : '')}">
+        <div class="${(animationSatus == false ? 'animation2' : '')}">
                 <div class="inputs ">
                     <div class="input-name">
                         <div>
@@ -105,7 +105,7 @@ function viewCreateBooking() {
 
     var tableHtml = '';
     var color = '';
-    tableHtml += `<div class="tables ${(animationSatus == false ? 'animate-fade-in' : '')}">`;
+    tableHtml += `<div class="tables ${(animationSatus == false ? 'animation2' : '')}">`;
     for (let i = 0; i < model.tables.allTables.length; i++) {
         if (i === 0) {
             tableHtml += `
@@ -210,7 +210,7 @@ function viewCheckBookingsDate() {
 
     let html = '';
     html = `
-    <div class="page  ${(animationSatus == false ? 'animate-fade-in' : '')}">
+    <div class="page  ${(animationSatus == false ? 'animation2' : '')}">
             <div class="chosenTable  ">
                 <div class="inputs">
 
@@ -375,7 +375,7 @@ function archiveBookingList() {
 
 
     html += `
-    <div class="page-archive  ${(animationSatus == false ? 'animate-fade-in' : '')}">
+    <div class="page-archive  ${(animationSatus == false ? 'animation2' : '')}">
     <div class="booked-tables">
     <div class="table-labels">
         <div>Bord</div>
@@ -451,8 +451,6 @@ function archiveBookingList() {
 function editTablesView() {
     var selectedTable = model.selectedTable;
     let tableHtml = '';
-
-    tableHtml += `<div class="animate-fade-in">`;
     for (let i = 0; i < model.tables.allTables.length; i++) {
         tableHtml += `
         <div class="box-outer1 ${selectedTable.selectedTableForEdit == model.tables.allTables[i] ? 'selectedTable' : ''}">
@@ -478,7 +476,6 @@ function editTablesView() {
      : ''}</div>
     <button onclick="deleteTable(model.app.selectedTableForEdit)">Slette Bord</button>
     <button onclick="changeTableInformation(model.app.selectedTableForEdit)">Endre Bord</button>
-    </div>
     `;
     
 
@@ -509,7 +506,6 @@ function statisticsView() {
 
     const barColors = ['#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e','#1d043c','#2e075e']
     html += `
-    <div class="animate-fade-in">
     <input type="number" oninput="changeDateValue(event, this.value)" value="${(model.inputStatsDate === '' ? new Date().getFullYear() : model.inputStatsDate)}">
     
     <div class="statistic" style="height: ${statHeight}px;width:${svgWidth}px">
@@ -529,7 +525,7 @@ function statisticsView() {
         <div class="stat-label" style="width:${barWidth}px">${monthName(hm)}</div>
         `;
     }
-    html += `</div></div>`;
+    html += `</div>`;
     document.getElementById('app').innerHTML = html;
 }
 
@@ -577,12 +573,12 @@ function testing(a) {
         var calculatedArray = new Array(12).fill(0);
         for (let i = 0; i < stats.length; i++) {
             if (highestValue < 10) {
-            
-                calculatedArray[i] = stats[i] * timesIndex;
+                
+                calculatedArray[i] = Math.floor(stats[i] * timesIndex);
 
             }
             else {
-                calculatedArray[i] = stats[i] / timesIndex;
+                calculatedArray[i] = Math.floor(stats[i] / timesIndex);
 
             }
             
@@ -591,7 +587,7 @@ function testing(a) {
     }
     console.log(stats);
     console.log(calculatedArray);
-
+    
     return calculatedArray[a];
 }
 

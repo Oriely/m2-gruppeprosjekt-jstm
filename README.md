@@ -72,5 +72,6 @@ p
 
 - !!Det å velge flere bord skal bare ha en av hver bokstav!! () [Done]
 
--Chaircount må lages om så den er dynamisk iforhold til model.tables.fitsX () []
+- Chaircount må lages om så den er dynamisk iforhold til model.tables.fitsX () [Done]
 
+- Viewet av Create bookings må tegnes opp dynamisk i forhold til Hvor mange seter bordet har. () []

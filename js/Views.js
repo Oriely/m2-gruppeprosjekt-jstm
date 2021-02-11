@@ -177,6 +177,7 @@ function checkMultipleTables() {
     multipleTableBool = multipleTableBool ? false : true;
     
     model.app.selectMultipleTables = multipleTableBool;
+
 }
 
 let dateSelect = new Date();

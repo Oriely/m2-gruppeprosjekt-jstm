@@ -65,7 +65,7 @@ p
 
 - FilterfromTimeAndDay inne i en if under en loop som tegner opp (-Mikael) [Done]
 
-- Bookings som er over tiden skal slettes(-Jonas) []
+- Bookings som er over tiden skal slettes, eller arkiveres. (-Jonas) []
 
 - Ha en knapp hvor man kan sette til nåværende tid(-Theodor) [Done]
 
@@ -94,3 +94,8 @@ p
 - Chaircount må lages om så den er dynamisk iforhold til model.tables.fitsX (-Theodor) [Done]
 
 - Viewet av Create bookings må tegnes opp dynamisk i forhold til Hvor mange seter bordet har. () []
+
+
+- selectTable for edit må gjøres dynamisk! () []
+
+- Extra tables, kunne slette alle på engang og avslutte alle på en gang

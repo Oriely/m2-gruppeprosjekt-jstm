@@ -155,7 +155,7 @@ function viewCreateBooking() {
                 } else {
                     tableHtml += `
                     <div class="box-outer ${model.app.selectedTable.includes(allTables[i]) ? 'selectedTable' : ''}">
-                        <div class="box ${bookingStatusCheck(i)}" onclick="selectTable('${model.tables[tableList][i]}')">
+                        <div class="box ${bookingStatusCheck(i)}" onclick="selectTable('${allTables[i]}')">
                             ${model.tables[tableList][i]}
                         </div>
                     </div>

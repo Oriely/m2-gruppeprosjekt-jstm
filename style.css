@@ -27,6 +27,7 @@ input {
 body {
     background-color: rgb(210, 210, 210);
     color: black;
+    perspective: 1000px;
 }
 
 
@@ -75,7 +76,7 @@ nav div:active {
     display: flex;
 }
 .page {
-    overflow-y:scroll;
+
 }
 
 .inputs {
@@ -90,6 +91,8 @@ nav div:active {
     width:90%;
 }
 
+.logo-box {
+}
 .logo p {
     font-family: 'Comfortaa', cursive;
     font-size: 80px !important;
@@ -100,12 +103,11 @@ nav div:active {
     user-select:none;
 }
 
-.logo p:last-of-type:hover {
+.logo {
     padding-left:10px;
 }
 
 .add-booking {
-
     margin: auto 0;
 }
 

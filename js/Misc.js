@@ -25,105 +25,131 @@ function selectTable(index) {
 }
 
 function selectTableForEdit(table) {
-    model.selectedTable.selectedTableForEdit = table;
-    var tables = model.tables;
-    var selectedTable = model.selectedTable;
-    for (let tableList in model.tables) {
-        if (tables[tableList].includes(table)) {
-            selectedTable.selectedTableFits = parseInt(tableList.substring(4))
+    if (model.selectedTable.selectedTableForEdit == table) {
+        model.selectedTable.selectedTableForEdit = '';
+    } else {
+        model.selectedTable.selectedTableForEdit = table;
+        var tables = model.tables;
+        var selectedTable = model.selectedTable;
+        for (let tableList in model.tables) {
+            if (tables[tableList].includes(table)) {
+                selectedTable.selectedTableFits = parseInt(tableList.substring(4))
+            }
         }
     }
+
+
     editTablesView();
 }
 
-function deleteTable() {
-    var selectedTable = model.selectedTable.selectedTableForEdit;
-    var tables = model.tables;
-    for (let tableList in model.tables) {
-        if (tables[tableList].includes(selectedTable)) {
-            tables[tableList].splice(tables[tableList].indexOf(selectedTable), 1);
+function createNewTable() {
+    var tableGuests = model.selectedTable.selectedTableGuests;
+    var tableLetter = model.selectedTable.selectedTableLetter;
+    var fitsX = `fits${tableGuests}`
+    var tempList = [];
+    if (tableGuests && tableLetter) {
+        for (let tableList in model.tables) {
+            tempList.push(tableList)
+            if (tableList == fitsX) {
+                model.tables[fitsX].push(tableLetter)
+            }
+            if (!tempList.includes(fitsX)) {
+                model.tables[fitsX] = [];
+                model.tables[fitsX].push(tableLetter)
+                alert('Lagd ett nytt bord')
+            }
         }
-        if (tables[tableList].length == 0) {
-            delete tables[tableList];
+        updateView()
+    }
+}
+    function deleteTable() {
+        var selectedTable = model.selectedTable.selectedTableForEdit;
+        var tables = model.tables;
+        for (let tableList in model.tables) {
+            if (tables[tableList].includes(selectedTable)) {
+                tables[tableList].splice(tables[tableList].indexOf(selectedTable), 1);
+            }
+            if (tables[tableList].length == 0) {
+                delete tables[tableList];
+            }
         }
+        model.app.selectedTableForEdit = '';
+        editTablesView()
     }
-    model.app.selectedTableForEdit = '';
-    editTablesView()
-}
 
-function changeTableInformation() {
-    if (model.selectedTable.selectedTableGuests == '') {
-        alert('Du må velge ny verdi for antall gjester')
-        return
-    }
-    var selectedTable = model.selectedTable.selectedTableForEdit;
-    var selectedTableGuests = model.selectedTable.selectedTableGuests;
-    var tables = model.tables;
-    deleteTable(selectedTable)
-
-    if (selectedTableGuests) {
-        var Table = `fits${selectedTableGuests}`;
-        if (tables[Table] == undefined) {
-            tables[Table] = []
-            tables[Table].push(selectedTable)
-        } else {
-
-            tables[Table].push(selectedTable)
+    function changeTableInformation() {
+        if (model.selectedTable.selectedTableGuests == '') {
+            alert('Du må velge ny verdi for antall gjester')
+            return
         }
+        var selectedTable = model.selectedTable.selectedTableForEdit;
+        var selectedTableGuests = model.selectedTable.selectedTableGuests;
+        var tables = model.tables;
+        deleteTable(selectedTable)
+
+        if (selectedTableGuests) {
+            var Table = `fits${selectedTableGuests}`;
+            if (tables[Table] == undefined) {
+                tables[Table] = []
+                tables[Table].push(selectedTable)
+            } else {
+
+                tables[Table].push(selectedTable)
+            }
+        }
+
+        editTablesView()
     }
 
-    editTablesView()
-}
+
+    function endBooking(bookingIndex) {
+        const data = model.bookingTimes[bookingIndex];
+        if (model.bookingTimes.length == bookingIndex) { model.bookingTimes.pop() }
+        if (bookingIndex == 0) { model.bookingTimes.shift() }
+        model.bookingTimes.splice(bookingIndex, bookingIndex);
+
+        archive.push(data);
+        updateView();
+    }
+
+    function removeFromArchive(bookingIndex) {
+        if (archive.length == bookingIndex) { archive.pop(); }
+        if (bookingIndex == 0) { archive.shift(); }
+        if (bookingIndex != 0 || archive.length != bookingIndex) { archive.splice(bookingIndex, 1); }
+
+        updateView();
+    }
+
+    function changeScreen(p) {
+        model.app.currentPage = p;
+        animationSatus = false;
+        updateView();
+    }
 
 
-function endBooking(bookingIndex) {
-    const data = model.bookingTimes[bookingIndex];
-    if (model.bookingTimes.length == bookingIndex) { model.bookingTimes.pop() }
-    if (bookingIndex == 0) { model.bookingTimes.shift() }
-    model.bookingTimes.splice(bookingIndex, bookingIndex);
+    function stopAnimations() {
+        animationSatus = true;
+        animationStatus = false;
+    }
 
-    archive.push(data);
-    updateView();
-}
+    function errorHandler(err, input) {
+        errors.push({
+            error: err,
+            input: input
+        });
+    }
 
-function removeFromArchive(bookingIndex) {
-    if (archive.length == bookingIndex) { archive.pop(); }
-    if (bookingIndex == 0) { archive.shift(); }
-    if (bookingIndex != 0 || archive.length != bookingIndex) { archive.splice(bookingIndex, 1); }
-
-    updateView();
-}
-
-function changeScreen(p) {
-    model.app.currentPage = p;
-    animationSatus = false;
-    updateView();
-}
-
-
-function stopAnimations() {
-    animationSatus = true;
-    animationStatus = false;
-}
-
-function errorHandler(err, input) {
-    errors.push({
-        error: err,
-        input: input
-    });
-}
-
-function showError(input) {
-
-}
-
-function tableCount() {
-    const count = 0;
-    for (const tables in model.tables) {
-        count += tables.length;
-
+    function showError(input) {
 
     }
-    console.log(count);
-    return count;
-}
+
+    function tableCount() {
+        const count = 0;
+        for (const tables in model.tables) {
+            count += tables.length;
+
+
+        }
+        console.log(count);
+        return count;
+    }

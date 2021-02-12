@@ -3,7 +3,7 @@ let childBool = false;
 let rangeCount;
 let multipleTableBool = false;
 let checkedChildChair = false;
-  
+
 function viewCreateBooking() {
 
     let error = '';
@@ -103,12 +103,12 @@ function viewCreateBooking() {
     for (let tableList in model.tables) {
         const tableFitsX = tableList.match(/(\d+)/);
 
-        html+= `<div class="table-category-wrapper">`;
-        html+= `<div class="table-category-label">Plass til ${tableFitsX[0]}</div>`;
-        html+= `<div class="col">`;
+        html += `<div class="table-category-wrapper">`;
+        html += `<div class="table-category-label">Plass til ${tableFitsX[0]}</div>`;
+        html += `<div class="col">`;
 
         for (let i = 0; i < model.tables[tableList].length; i++) {
-            
+
             const table = model.tables[tableList][i];
 
             html += `
@@ -118,7 +118,7 @@ function viewCreateBooking() {
                 </div>
             </div>
             `;
-           
+
         }
         html += `</div>`;
         html += `</div>`;
@@ -146,7 +146,7 @@ function addUpTotGuests() {
                 guestCount += parseInt(tableList.substring(4, 5))
             }
         }
-        
+
     }
     return guestCount;
 }
@@ -427,12 +427,12 @@ function editTablesView() {
     for (let tableList in model.tables) {
         const tableFitsX = tableList.match(/(\d+)/);
 
-        html+= `<div class="table-category-wrapper">`;
-        html+= `<div class="table-category-label">Plass til ${tableFitsX[0]}</div>`;
-        html+= `<div class="col">`;
+        html += `<div class="table-category-wrapper">`;
+        html += `<div class="table-category-label">Plass til ${tableFitsX[0]}</div>`;
+        html += `<div class="col">`;
 
         for (let i = 0; i < model.tables[tableList].length; i++) {
-            
+
             const table = model.tables[tableList][i];
 
             html += `
@@ -442,7 +442,7 @@ function editTablesView() {
                 </div>
             </div>
             `;
-           
+
         }
         html += `</div>`;
         html += `</div>`;
@@ -465,6 +465,16 @@ function editTablesView() {
             : ''}</div>
     <button onclick="deleteTable(model.app.selectedTableForEdit)">Slette Bord</button>
     <button onclick="changeTableInformation(model.app.selectedTableForEdit)">Endre Bord</button>
+    <div>
+        ${selectedTable.selectedTableForEdit ? '' : `
+        <input type="range" min="1" max="10" oninput="model.selectedTable.selectedTableGuests = this.value; document.getElementById('sliderInput').innerHTML = this.value"></input>
+        
+        <input oninput="model.selectedTable.selectedTableLetter = this.value"></input>
+        <button onclick="createNewTable()">Lag nytt bord</button>
+        <div id="sliderInput"></div>
+        `}
+        
+    </div>
     `;
 
     document.getElementById('app').innerHTML = html;
@@ -572,7 +582,7 @@ function testing(a) {
 
         }
     }
-    
+
 
     return calculatedArray[a];
 }

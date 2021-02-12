@@ -94,3 +94,6 @@ p
 - Chaircount må lages om så den er dynamisk iforhold til model.tables.fitsX (-Theodor) [Done]
 
 - Viewet av Create bookings må tegnes opp dynamisk i forhold til Hvor mange seter bordet har. () []
+
+
+- Edittableview trenger å tegne opp loopene på nytt! med å bruke tablelist -> tables inni i lista

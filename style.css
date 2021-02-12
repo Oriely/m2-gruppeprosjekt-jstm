@@ -237,8 +237,21 @@ nav div:active {
 
 }
 
+.box-category-wrapper {
+    display:grid;
+    grid-template-columns: 1fr;
+}
 
+.table-category-label {
+    font-weight:bold;
+    padding-left:5px;
+}
 
+.col {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+}
 /* CUSTOM TABLE WITH GRID */
 .table-archive {
 }

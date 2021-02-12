@@ -101,8 +101,10 @@ function viewCreateBooking() {
     html += `<div class="tables ${(animationSatus == false ? 'animation2' : '')}">`;
 
     for (let tableList in model.tables) {
-        html+= `<div class="box-category-wrapper">`;
-        html+= `<div>${tableList}</div>`;
+        const tableFitsX = tableList.match(/(\d+)/);
+
+        html+= `<div class="table-category-wrapper">`;
+        html+= `<div class="table-category-label">Plass til ${tableFitsX[0]}</div>`;
         html+= `<div class="col">`;
 
         for (let i = 0; i < model.tables[tableList].length; i++) {

@@ -99,4 +99,4 @@ p
 
 - Kunne lage bord på editTableView! (-Theodor) [Done]
 
-- Kunne sortere lister etter hva de heter av tall () []
+- Kunne sortere lister etter hva de heter av tall (-Sigve) [Done]

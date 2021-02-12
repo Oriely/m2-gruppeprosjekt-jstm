@@ -40,13 +40,19 @@ function deleteTable() {
         if (tables[tableList].includes(selectedTable)) {
             tables[tableList].splice(tables[tableList].indexOf(selectedTable), 1);
         }
+        if (tables[tableList].length == 0){
+            delete tables[tableList];
+        }
     }
     model.app.selectedTableForEdit = '';
     editTablesView()
 }
 
 function changeTableInformation() {
-    if (model.selectedTable.selectedTableGuests == '') {return}
+    if (model.selectedTable.selectedTableGuests == '') {
+        alert('Du må velge ny verdi for antall gjester')
+        return
+    }
     var selectedTable = model.selectedTable.selectedTableForEdit;
     var selectedTableGuests = model.selectedTable.selectedTableGuests;
     var tables = model.tables;
@@ -54,10 +60,7 @@ function changeTableInformation() {
 
     if (selectedTableGuests) {
         var Table = `fits${selectedTableGuests}`;
-        console.log(Table)
-        console.log(tables)
         if (tables[Table] == undefined) {
-            console.log('Undefined')
             tables[Table] = []
             tables[Table].push(selectedTable)
         } else {
@@ -65,6 +68,7 @@ function changeTableInformation() {
             tables[Table].push(selectedTable)
         }
     }
+    
     editTablesView()
 }
 

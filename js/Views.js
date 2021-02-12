@@ -420,16 +420,19 @@ function archiveBookingList() {
 function editTablesView() {
     var selectedTable = model.selectedTable;
     let tableHtml = '';
-    for (let i = 0; i < 1; i++) {
-        tableHtml += `
-        <div class="box-outer1 ${selectedTable.selectedTableForEdit == model.tables.allTables[i] ? 'selectedTable' : ''}">
-                <div class="box" onclick="selectTableForEdit('${model.tables.allTables[i]}')">
-                    ${model.tables.allTables[i]}
+    for (let tableList in model.tables) {
+        for (let i = 0; i < model.tables[tableList].length; i++) {
+            tableHtml += `
+            <div class="box-outer1 ${selectedTable.selectedTableForEdit == model.tables[tableList][i] ? 'selectedTable' : ''}">
+                    <div class="box" onclick="selectTableForEdit('${model.tables[tableList][i]}')">
+                        ${model.tables[tableList][i]}
+                    </div>
                 </div>
-            </div>
-        
-        `;
+            
+            `;
+        }
     }
+    
     html = `
     <hr>
     <div>${selectedTable.selectedTableForEdit ? `Bord ${selectedTable.selectedTableForEdit.toUpperCase()}` : ''}</div>

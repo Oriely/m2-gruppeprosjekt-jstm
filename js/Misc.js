@@ -46,6 +46,7 @@ function deleteTable() {
 }
 
 function changeTableInformation() {
+    if (model.selectedTable.selectedTableGuests == '') {return}
     var selectedTable = model.selectedTable.selectedTableForEdit;
     var selectedTableGuests = model.selectedTable.selectedTableGuests;
     var tables = model.tables;

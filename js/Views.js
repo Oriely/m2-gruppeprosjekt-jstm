@@ -465,7 +465,6 @@ function editTablesView() {
             : ''}</div>
     <button onclick="deleteTable(model.app.selectedTableForEdit)">Slette Bord</button>
     <button onclick="changeTableInformation(model.app.selectedTableForEdit)">Endre Bord</button>
-    </div>
     `;
 
     document.getElementById('app').innerHTML = html;

@@ -21,7 +21,6 @@ function createBooking() {
         for (let i = 0; i < model.app.selectedTable.length; i++) {
             if (model.app.selectedTable[i] != model.app.selectedTable[table]) {
                 extraTable.push(model.app.selectedTable[i]);
-                console.log(extraTable)
             }
         }
         if(model.inputs.inputTime && model.inputs.inputNumber && model.inputs.inputNumberOfGuests && model.inputs.inputName) {
@@ -64,24 +63,18 @@ function createBooking() {
 }
 
 function checkChairCount(index) {
-
     for (let tableCategory in model.tables) {
         if (model.tables[tableCategory].includes(index)) {
             if (tableCategory != 'allTables') {
-                
+
                 var fitsX = tableCategory;
                 return parseInt(fitsX.substring(5, 4));
             }
             
         }
     }
-    // if (model.tables.fits4.includes(index)) {
-    //     return 4;
-    // }
-    // else if (model.tables.fits6.includes(index)) {
-    //     return 6;  
-    // }
 }
+
 
 
 function setTimeToCurrentTime() {

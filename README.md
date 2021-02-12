@@ -96,3 +96,5 @@ p
 - Viewet av Create bookings må tegnes opp dynamisk i forhold til Hvor mange seter bordet har. () []
 
 - Edittableview trenger å tegne opp loopene på nytt! med å bruke tablelist -> tables inni i lista
+
+- Kunne lage bord på editTableView! () []

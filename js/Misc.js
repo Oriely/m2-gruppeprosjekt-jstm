@@ -28,8 +28,11 @@ function selectTableForEdit(table) {
     model.selectedTable.selectedTableForEdit = table;
     var tables = model.tables;
     var selectedTable = model.selectedTable;
-    if (tables.fits4.includes(table)) { selectedTable.selectedTableFits = 4 }
-    if (tables.fits6.includes(table)) { selectedTable.selectedTableFits = 6 }
+    for (let tableList in model.tables) {
+        if (tables[tableList].includes(table)) {
+            selectedTable.selectedTableFits = parseInt(tableList.substring(4))
+        }
+    }
     editTablesView();
 }
 
@@ -40,7 +43,7 @@ function deleteTable() {
         if (tables[tableList].includes(selectedTable)) {
             tables[tableList].splice(tables[tableList].indexOf(selectedTable), 1);
         }
-        if (tables[tableList].length == 0){
+        if (tables[tableList].length == 0) {
             delete tables[tableList];
         }
     }
@@ -68,7 +71,7 @@ function changeTableInformation() {
             tables[Table].push(selectedTable)
         }
     }
-    
+
     editTablesView()
 }
 
@@ -87,7 +90,7 @@ function removeFromArchive(bookingIndex) {
     if (archive.length == bookingIndex) { archive.pop(); }
     if (bookingIndex == 0) { archive.shift(); }
     if (bookingIndex != 0 || archive.length != bookingIndex) { archive.splice(bookingIndex, 1); }
-    
+
     updateView();
 }
 

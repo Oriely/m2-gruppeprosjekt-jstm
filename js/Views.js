@@ -101,8 +101,14 @@ function viewCreateBooking() {
     html += `<div class="tables ${(animationSatus == false ? 'animation2' : '')}">`;
 
     for (let tableList in model.tables) {
+        html+= `<div class="box-category-wrapper">`;
+        html+= `<div>${tableList}</div>`;
+        html+= `<div class="col">`;
+
         for (let i = 0; i < model.tables[tableList].length; i++) {
+            
             const table = model.tables[tableList][i];
+
             html += `
             <div class="box-outer ${model.app.selectedTable.includes(table) ? 'selectedTable' : ''}">
                 <div class="box" onclick="selectTable('${table}')">
@@ -110,7 +116,10 @@ function viewCreateBooking() {
                 </div>
             </div>
             `;
+           
         }
+        html += `</div>`;
+        html += `</div>`;
     }
 
     document.getElementById('app').innerHTML = html;

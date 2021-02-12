@@ -418,23 +418,40 @@ function archiveBookingList() {
 }
 
 function editTablesView() {
+    let html = '';
     var selectedTable = model.selectedTable;
-    let tableHtml = '';
+
+
+    html += `<div class="tables ${(animationSatus == false ? 'animation2' : '')}">`;
+
     for (let tableList in model.tables) {
+        const tableFitsX = tableList.match(/(\d+)/);
+
+        html+= `<div class="table-category-wrapper">`;
+        html+= `<div class="table-category-label">Plass til ${tableFitsX[0]}</div>`;
+        html+= `<div class="col">`;
+
         for (let i = 0; i < model.tables[tableList].length; i++) {
-            tableHtml += `
-            <div class="box-outer1 ${selectedTable.selectedTableForEdit == model.tables[tableList][i] ? 'selectedTable' : ''}">
-                    <div class="box" onclick="selectTableForEdit('${model.tables[tableList][i]}')">
-                        ${model.tables[tableList][i]}
-                    </div>
-                </div>
             
+            const table = model.tables[tableList][i];
+
+            html += `
+            <div class="box-outer ${selectedTable.selectedTableForEdit == table ? 'selectedTable' : ''}">
+                <div class="box" onclick="selectTableForEdit('${model.tables[tableList][i]}')">
+                    ${table}
+                </div>
+            </div>
             `;
+           
         }
+        html += `</div>`;
+        html += `</div>`;
     }
-    
-    html = `
+
+
+    html += `
     <hr>
+    <div>
     <div>${selectedTable.selectedTableForEdit ? `Bord ${selectedTable.selectedTableForEdit.toUpperCase()}` : ''}</div>
     <div>${selectedTable.selectedTableFits ? `Bordet har plass til ${selectedTable.selectedTableFits}` : ''}</div>
     
@@ -448,11 +465,10 @@ function editTablesView() {
             : ''}</div>
     <button onclick="deleteTable(model.app.selectedTableForEdit)">Slette Bord</button>
     <button onclick="changeTableInformation(model.app.selectedTableForEdit)">Endre Bord</button>
+    </div>
     `;
 
-
-    document.getElementById('app').innerHTML = tableHtml;
-    document.getElementById('app').innerHTML += html;
+    document.getElementById('app').innerHTML = html;
 }
 
 function changeDateValue(e, value) {

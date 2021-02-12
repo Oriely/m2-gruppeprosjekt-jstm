@@ -79,10 +79,10 @@ function endBooking(bookingIndex) {
 }
 
 function removeFromArchive(bookingIndex) {
-    if (archive.length == bookingIndex) { archive.pop(); return; }
-    if (bookingIndex == 0) { archive.shift(); return; }
-    archive.splice(bookingIndex, bookingIndex);
-
+    if (archive.length == bookingIndex) { archive.pop(); }
+    if (bookingIndex == 0) { archive.shift(); }
+    if (bookingIndex != 0 || archive.length != bookingIndex) { archive.splice(bookingIndex, 1); }
+    
     updateView();
 }
 

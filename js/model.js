@@ -112,15 +112,6 @@ function randomDate(start, end) {
 let count = 0;
 
 const num = 8;
-const randomNameGenerator = num => {
-   let res = '';
-        for(let i = 0; i < num; i++){
-            const random = Math.floor(Math.random() * 27);
-            res += String.fromCharCode(97 + random);
-        };
-   return res;
-};
-
 async function randomData() {
     const randomName = await faker.name.findName();
     const randomD =  randomDate(new Date(2020, 0, 0), new Date());
@@ -169,13 +160,13 @@ async function randomData2() {
 
 while (count < 3000) {
     randomData();
-    count++
+    count++;
 }
 let count2 = 0; 
 
 while(count2 < 50) {
     randomData2();
-    count2++
+    count2++;
 } 
 
 function randomChair() {

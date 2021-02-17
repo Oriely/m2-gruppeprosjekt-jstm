@@ -1,4 +1,4 @@
-const model = {
+const  model = {
     app: {
         selectedTable: [],
         selectedDate: '',
@@ -12,9 +12,22 @@ const model = {
         selectedTableGuests: '',
     },
     tables: {
-        fits4: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'],
+        fits4: ['a', 'b', 'c', 'd' ],
+        fits1: ['u', 'v','e', 'f', 'g', 'h', 'i', 'j'],
+        fits10: ['w', 'x'],
+
         fits6: ['k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't'],
     },
+    archiveOnPage: 1,
+    archiveInputs: {
+        searchBy:'name',
+        onPage: 1,
+        searchInput: '',
+    },
+
+    statisticMode: 'year',
+    inputStatsYear: '',
+    inputStatsMonth: null,
     inputStatsDate: '',
     inputTime : {
         fromInputTime: '',
@@ -57,848 +70,130 @@ const model = {
                 bookedChild: false,
                 bookedGuestCount: 5,
             }
-        },
-
-        {
-            table: 't',
-            chairCount: 6,
-            extraTable: '',
-            bookedInfo: {
-                bookedName: 'Pål Larsen',
-                bookedNumber: '98126143',
-                bookedTime: '2021-02-05T10:07',
-                bookedTimeEnd: '',
-                bookedChild: false,
-                bookedGuestCount: 5,
-            }
-        },
-        {
-            table: 'g',
-            chairCount: 4,
-            extraTable: '',
-            bookedInfo: {
-                bookedName: 'Stig Larsen',
-                bookedNumber: '96127639',
-                bookedTime: '2021-02-06T17:10',
-                bookedTimeEnd: '',
-                bookedChild: true,
-                bookedGuestCount: 4,
-            }
-        },
-        {
-            table: 's',
-            chairCount: 6,
-            extraTable: '',
-            bookedInfo: {
-                bookedName: 'Espen Askeladden',
-                bookedNumber: '98126143',
-                bookedTime: '2021-02-04T17:30',
-                bookedTimeEnd: '2021-02-04T20:30',
-                bookedChild: true,
-                bookedGuestCount: 6,
-            }
-        },
-        {
-            table: 's',
-            chairCount: 6,
-            extraTable: '',
-            bookedInfo: {
-                bookedName: 'Martin Pettersen',
-                bookedNumber: '98126143',
-                bookedTime: '2021-02-05T14:30',
-                bookedTimeEnd: '2021-02-05T17:30',
-                bookedChild: true,
-                bookedGuestCount: 6,
-            }
-        },
-        {
-            table: 's',
-            chairCount: 6,
-            extraTable: '',
-            bookedInfo: {
-                bookedName: 'Håvard Gundersen',
-                bookedNumber: '98126143',
-                bookedTime: '2021-02-06T15:00',
-                bookedTimeEnd: '2021-02-06T18:00',
-                bookedChild: true,
-                bookedGuestCount: 6,
-            }
-        },
-        {
-            table: 'r',
-            chairCount: 6,
-            extraTable: '',
-            bookedInfo: {
-                bookedName: 'Marte Kåsa',
-                bookedNumber: '98126143',
-                bookedTime: '2021-02-07T16:00',
-                bookedTimeEnd: '',
-                bookedChild: true,
-                bookedGuestCount: 5
-            }
-        },
-        {
-            table: 'q',
-            chairCount: 6,
-            extraTable: '',
-            bookedInfo: {
-                bookedName: 'Sondre Hem',
-                bookedNumber: '98126143',
-                bookedTime: '2021-02-04T17:30',
-                bookedTimeEnd: '2021-02-04T19:30',
-                bookedChild: true,
-                bookedGuestCount: 6,
-            }
-        },
-        {
-            table: 'j',
-            chairCount: 4,
-            extraTable: '',
-            bookedInfo: {
-                bookedName: 'Karl',
-                bookedNumber: '37423865',
-                bookedTime: '2021-02-05T18:50',
-                bookedTimeEnd: '',
-                bookedChild: true,
-                bookedGuestCount: 3,
-            }
-        },
-
+        }
     ],
     expiredBookings: [
         
     ],
-    stats: []
+    stats: [],
+    statsYear: [],
+    statsMonth: [],
+    searchResultCount: 0,
 };
 
-const archive = [
-
+let archive = [
     {
         table: 'a',
         chairCount: 4,
+        extraTable: '',
         bookedInfo: {
             bookedName: 'Per Larsen',
             bookedNumber: '98126143',
-            bookedTime: '2021-05-04T13:20',
+            bookedTime: '2021-02-01T13:20',
             bookedTimeEnd: '',
             bookedChild: false,
             bookedGuestCount: 5,
         }
-    },
-
-    {
-        table: 't',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Pål Larsen',
-            bookedNumber: '98126143',
-            bookedTime: '2021-02-05T10:07',
-            bookedTimeEnd: '',
-            bookedChild: false,
-            bookedGuestCount: 5,
-        }
-    },
-    {
-        table: 'g',
-        chairCount: 4,
-        bookedInfo: {
-            bookedName: 'Stig Larsen',
-            bookedNumber: '96127639',
-            bookedTime: '2021-04-06T17:10',
-            bookedTimeEnd: '',
-            bookedChild: true,
-            bookedGuestCount: 4,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-04-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Martin Pettersen',
-            bookedNumber: '98126143',
-            bookedTime: '2021-02-05T14:30',
-            bookedTimeEnd: '2021-02-05T17:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Håvard Gundersen',
-            bookedNumber: '98126143',
-            bookedTime: '2021-02-06T15:00',
-            bookedTimeEnd: '2021-02-06T18:00',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 'r',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Marte Kåsa',
-            bookedNumber: '98126143',
-            bookedTime: '2021-12-07T16:00',
-            bookedTimeEnd: '',
-            bookedChild: true,
-            bookedGuestCount: 5
-        }
-    },
-    {
-        table: 'q',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Sondre Hem',
-            bookedNumber: '98126143',
-            bookedTime: '2021-11-04T17:30',
-            bookedTimeEnd: '2021-02-04T19:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 'j',
-        chairCount: 4,
-        bookedInfo: {
-            bookedName: 'Karl',
-            bookedNumber: '37423865',
-            bookedTime: '2021-10-04T18:50',
-            bookedTimeEnd: '',
-            bookedChild: true,
-            bookedGuestCount: 3,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-09-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-08-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-07-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-05-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-05-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-05-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 'a',
-        chairCount: 4,
-        bookedInfo: {
-            bookedName: 'Per Larsen',
-            bookedNumber: '98126143',
-            bookedTime: '2021-05-04T13:20',
-            bookedTimeEnd: '',
-            bookedChild: false,
-            bookedGuestCount: 5,
-        }
-    },
-
-    {
-        table: 't',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Pål Larsen',
-            bookedNumber: '98126143',
-            bookedTime: '2021-02-05T10:07',
-            bookedTimeEnd: '',
-            bookedChild: false,
-            bookedGuestCount: 5,
-        }
-    },
-    {
-        table: 'g',
-        chairCount: 4,
-        bookedInfo: {
-            bookedName: 'Stig Larsen',
-            bookedNumber: '96127639',
-            bookedTime: '2021-04-06T17:10',
-            bookedTimeEnd: '',
-            bookedChild: true,
-            bookedGuestCount: 4,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-04-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Martin Pettersen',
-            bookedNumber: '98126143',
-            bookedTime: '2021-02-05T14:30',
-            bookedTimeEnd: '2021-02-05T17:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Håvard Gundersen',
-            bookedNumber: '98126143',
-            bookedTime: '2021-02-06T15:00',
-            bookedTimeEnd: '2021-02-06T18:00',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 'r',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Marte Kåsa',
-            bookedNumber: '98126143',
-            bookedTime: '2021-12-07T16:00',
-            bookedTimeEnd: '',
-            bookedChild: true,
-            bookedGuestCount: 5
-        }
-    },
-    {
-        table: 'q',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Sondre Hem',
-            bookedNumber: '98126143',
-            bookedTime: '2021-11-04T17:30',
-            bookedTimeEnd: '2021-02-04T19:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 'j',
-        chairCount: 4,
-        bookedInfo: {
-            bookedName: 'Karl',
-            bookedNumber: '37423865',
-            bookedTime: '2021-10-04T18:50',
-            bookedTimeEnd: '',
-            bookedChild: true,
-            bookedGuestCount: 3,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-09-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-08-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-07-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-05-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-05-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-05-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    
-    {
-        table: 'a',
-        chairCount: 4,
-        bookedInfo: {
-            bookedName: 'Per Larsen',
-            bookedNumber: '98126143',
-            bookedTime: '2021-05-04T13:20',
-            bookedTimeEnd: '',
-            bookedChild: false,
-            bookedGuestCount: 5,
-        }
-    },
-
-    {
-        table: 't',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Pål Larsen',
-            bookedNumber: '98126143',
-            bookedTime: '2021-02-05T10:07',
-            bookedTimeEnd: '',
-            bookedChild: false,
-            bookedGuestCount: 5,
-        }
-    },
-    {
-        table: 'g',
-        chairCount: 4,
-        bookedInfo: {
-            bookedName: 'Stig Larsen',
-            bookedNumber: '96127639',
-            bookedTime: '2021-04-06T17:10',
-            bookedTimeEnd: '',
-            bookedChild: true,
-            bookedGuestCount: 4,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-04-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Martin Pettersen',
-            bookedNumber: '98126143',
-            bookedTime: '2021-02-05T14:30',
-            bookedTimeEnd: '2021-02-05T17:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Håvard Gundersen',
-            bookedNumber: '98126143',
-            bookedTime: '2021-02-06T15:00',
-            bookedTimeEnd: '2021-02-06T18:00',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 'r',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Marte Kåsa',
-            bookedNumber: '98126143',
-            bookedTime: '2021-12-07T16:00',
-            bookedTimeEnd: '',
-            bookedChild: true,
-            bookedGuestCount: 5
-        }
-    },
-    {
-        table: 'q',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Sondre Hem',
-            bookedNumber: '98126143',
-            bookedTime: '2021-11-04T17:30',
-            bookedTimeEnd: '2021-02-04T19:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 'j',
-        chairCount: 4,
-        bookedInfo: {
-            bookedName: 'Karl',
-            bookedNumber: '37423865',
-            bookedTime: '2021-10-04T18:50',
-            bookedTimeEnd: '',
-            bookedChild: true,
-            bookedGuestCount: 3,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-09-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-08-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-07-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-05-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-05-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-05-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 'a',
-        chairCount: 4,
-        bookedInfo: {
-            bookedName: 'Per Larsen',
-            bookedNumber: '98126143',
-            bookedTime: '2021-05-04T13:20',
-            bookedTimeEnd: '',
-            bookedChild: false,
-            bookedGuestCount: 5,
-        }
-    },
-
-    {
-        table: 't',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Pål Larsen',
-            bookedNumber: '98126143',
-            bookedTime: '2021-02-05T10:07',
-            bookedTimeEnd: '',
-            bookedChild: false,
-            bookedGuestCount: 5,
-        }
-    },
-    {
-        table: 'g',
-        chairCount: 4,
-        bookedInfo: {
-            bookedName: 'Stig Larsen',
-            bookedNumber: '96127639',
-            bookedTime: '2021-04-06T17:10',
-            bookedTimeEnd: '',
-            bookedChild: true,
-            bookedGuestCount: 4,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-04-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Martin Pettersen',
-            bookedNumber: '98126143',
-            bookedTime: '2021-02-05T14:30',
-            bookedTimeEnd: '2021-02-05T17:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Håvard Gundersen',
-            bookedNumber: '98126143',
-            bookedTime: '2021-02-06T15:00',
-            bookedTimeEnd: '2021-02-06T18:00',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 'r',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Marte Kåsa',
-            bookedNumber: '98126143',
-            bookedTime: '2021-12-07T16:00',
-            bookedTimeEnd: '',
-            bookedChild: true,
-            bookedGuestCount: 5
-        }
-    },
-    {
-        table: 'q',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Sondre Hem',
-            bookedNumber: '98126143',
-            bookedTime: '2021-11-04T17:30',
-            bookedTimeEnd: '2021-02-04T19:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 'j',
-        chairCount: 4,
-        bookedInfo: {
-            bookedName: 'Karl',
-            bookedNumber: '37423865',
-            bookedTime: '2021-10-04T18:50',
-            bookedTimeEnd: '',
-            bookedChild: true,
-            bookedGuestCount: 3,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-09-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-08-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-07-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-05-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-05-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
-    {
-        table: 's',
-        chairCount: 6,
-        bookedInfo: {
-            bookedName: 'Espen Askeladden',
-            bookedNumber: '98126143',
-            bookedTime: '2021-05-04T17:30',
-            bookedTimeEnd: '2021-02-04T20:30',
-            bookedChild: true,
-            bookedGuestCount: 6,
-        }
-    },
+    }
 ];
+
+let searchResult = [];
 
 let errors = [];
 let animationSatus = false;
+
+let rows = 10;
+
+function randomDate(start, end) {
+    let date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+    let dateString =  date.toISOString().substring(0, 16);
+
+    return dateString;
+}
+
+let count = 0;
+
+const num = 8;
+const randomNameGenerator = num => {
+   let res = '';
+        for(let i = 0; i < num; i++){
+            const random = Math.floor(Math.random() * 27);
+            res += String.fromCharCode(97 + random);
+        };
+   return res;
+};
+
+async function randomData() {
+    const randomName = await faker.name.findName();
+    const randomD =  randomDate(new Date(2020, 0, 0), new Date());
+    const randomNumber = getRandomInt(90000000, 99999999);
+
+    archive.push({
+        table: randomChair(),
+        chairCount: 4,
+        extraTable: '', 
+        bookedInfo: {
+            bookedName: randomName,
+            bookedNumber: randomNumber,
+            bookedTime: randomD,
+            bookedTimeEnd: '',
+            bookedChild: false,
+            bookedGuestCount: 5,
+        }
+    })
+    
+
+}
+
+async function randomData2() {
+    const randomName = await faker.name.findName();
+    const randomD =  randomDate(new Date(2021, 0, 0), new Date(2021, 4, 0));
+    const randomNumber = getRandomInt(90000000, 99999999);
+
+    model.bookingTimes.push({
+        table: randomChair(),
+        chairCount: 4,
+        extraTable: '', 
+        bookedInfo: {
+            bookedName: randomName,
+            bookedNumber: randomNumber,
+            bookedTime: randomD,
+            bookedTimeEnd: '',
+            bookedChild: false,
+            bookedGuestCount: 4,
+            bookedMessage: ''
+        }
+    })
+    
+
+}
+
+while (count < 10000) {
+    randomData();
+    count++
+}
+let count2 = 0; 
+
+while(count2 < 400) {
+    randomData2();
+    count2++
+} 
+
+function randomChair() {
+    let letters = 'abcdefghjklmonpqrstuvw';
+    return letters.charAt(Math.floor(Math.random() * 21) + 1)
+}
+
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
+// window.addEventListener('mousemove', function (e) {
+//     yAxis = (window.innerHeight - e.clientY);
+//     xAxis = (window.innerWidth - e.clientX);
+
+//     document.getElementById('app').style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+// });

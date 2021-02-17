@@ -14,14 +14,12 @@ sortObj(model.tables);
 
 
 function updateView() {
-    if (model.app.currentPage == 'booktables'){viewCreateBooking()}
-    if (model.app.currentPage == 'listbookings') {bookingList()}
-    if (model.app.currentPage == 'managebookings') { viewCheckBookingsDate() }
-    if (model.app.currentPage == 'archive') { archiveBookingList() }
+    if (model.app.currentPage == 'booktables'){ createBookingsView()}
+    if (model.app.currentPage == 'managebookings') { manageBookingsView() }
+    if (model.app.currentPage == 'archive') { archiveView() }
     if (model.app.currentPage == 'edittables') { editTablesView() }
     if (model.app.currentPage == 'stats') { statisticsView() }
-    if (!model.app.currentPage) {viewCreateBooking()}
-    
+    if (!model.app.currentPage) { createBookingsView() }
 }
 
 

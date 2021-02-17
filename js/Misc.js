@@ -92,7 +92,7 @@ function changeTableInformation() {
 
 function removeFromArchive(bookingIndex) { 
     console.log(3   )
-    if(searchResult.length > 0 ) {
+    if(searchResult.length >= 1 ) {
       console.log(33)
         for(let x = 0; x < model.bookingTimes.length; x++){
             if(
@@ -122,47 +122,41 @@ function removeFromArchive(bookingIndex) {
     updateView();
 }
 
-    function endBooking(bookingIndex) {
-        const data = model.bookingTimes[bookingIndex];
-        if (model.bookingTimes.length == bookingIndex) { model.bookingTimes.pop() }
-        if (bookingIndex == 0) { model.bookingTimes.shift() }
-        model.bookingTimes.splice(bookingIndex, bookingIndex);
+function endBooking(bookingIndex) {
+    const data = model.bookingTimes[bookingIndex];
+    if (model.bookingTimes.length == bookingIndex) { model.bookingTimes.pop() }
+    if (bookingIndex == 0) { model.bookingTimes.shift() }
+    model.bookingTimes.splice(bookingIndex, bookingIndex);
+    archive.push(data);
+    updateView();
+}
+
+function removeFromArchive(bookingIndex) {
+    if (archive.length == bookingIndex) { archive.pop(); }
+    if (bookingIndex == 0) { archive.shift(); }
+    if (bookingIndex != 0 || archive.length != bookingIndex) { archive.splice(bookingIndex, 1); }
+
+    updateView();
+}
+
+function changeScreen(p) {
+    model.app.currentPage = p;
+    animationSatus = false;
+    updateView();
+}
 
 
-        archive.push(data);
-        updateView();
-    }
+function stopAnimations() {
+    animationSatus = true;
+    animationStatus = false;
+}
 
-    function removeFromArchive(bookingIndex) {
-        if (archive.length == bookingIndex) { archive.pop(); }
-        if (bookingIndex == 0) { archive.shift(); }
-        if (bookingIndex != 0 || archive.length != bookingIndex) { archive.splice(bookingIndex, 1); }
-
-        updateView();
-    }
-
-    function changeScreen(p) {
-        model.app.currentPage = p;
-        animationSatus = false;
-        updateView();
-    }
-
-
-    function stopAnimations() {
-        animationSatus = true;
-        animationStatus = false;
-    }
-
-    function errorHandler(err, input) {
-        errors.push({
-            error: err,
-            input: input
-        });
-    }
-
-    function showError(input) {
-
-    }
+function errorHandler(err, input) {
+    errors.push({
+        error: err,
+        input: input
+    });
+}
 
 
 function sortObj(obj) {
@@ -179,23 +173,24 @@ function sortObj(obj) {
 }
 
 function daysInMonth(year, month) {
-    return new Date(year, month, 0).getDate();
+    // gets year and month and returns the days in the month selected
+    return new Date(year, month + 1, 0).getDate();
 }
 
 function search(event) {
     event.preventDefault();
 
-    let input = model.archiveInputs.searchInput;
-    let searchBy = model.archiveInputs.searchBy;
+    let input = model.archiveInputs.searchInput.toString().toLowerCase();
+    let searchBy = model.archiveInputs.searchBy.toString();
 
     var code = event.keyCode;
     if(input == '') {resetSearchQuery()}
     if(input) {
 
-        if(code == 13) { //Enter keycode
+        if(code == 13) {
             const _archive = archive;
             
-            let inputTest = input.toLowerCase();
+            let inputTest = input.toString();
             searchResult = [];
         
             for(let i = 0; i < _archive.length; i++) {
@@ -219,14 +214,22 @@ function search(event) {
                 if(searchBy == 'number') {
                     if (number.includes(inputTest)) {
                         searchResult.push(_archive[i]);
-                        
+                        if(number == inputTest) {
+                            searchResult = [];
+                            searchResult.push(_archive[i]);
+                        }
                     }  else {
                         console.log('did not find anythingeee')
                     }
                 }
 
                 if(searchBy == 'date') {
-                    if (date.includes(inputTest)) { searchResult.push(_archive[i]);
+                    if (date.includes(inputTest)) { 
+                        searchResult.push(_archive[i]);
+                        if(date == inputTest) {
+                            searchResult = [];
+                            searchResult.push(_archive[i]);
+                        }
                     } else {  console.log('did not find anythingffff') }
                 }
 
@@ -247,12 +250,102 @@ function resetSearchQuery() {
 }
 
 
-    function tableCount() {
-        const count = 0;
-        for (const tables in model.tables) {
-            count += tables.length;
-        }
-        console.log(count);
-        return count;
+
+function htmlentities(string) {
+    return string.replace(/<\/?("[^"]*"|'[^']*'|[^>])*(>|$)/g, "");
+} 
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+
+function getStatsFromYear() {
+    const bookings = archive;
+    const stats = new Array(12).fill(0);
+    const selectedDate = (!model.inputStatsDate ? new Date() : model.inputStatsDate);
+
+    if (model.stats) {
+        bookings.forEach(item => {
+            const time = item.bookedInfo.bookedTime;
+            if (findYear(time) === findYear(selectedDate)) {
+                let count = 0;
+                while(count < 12) {
+                    if (findMonth(time) === count) { stats[findMonth(time)] = stats[findMonth(time)] + 1; }
+                    count++
+                }
+            }
+        });
+        model.stats = stats;
+    }
+}
+
+function getBarHeightFromYearStats(a) {
+    const stats = model.stats;
+    let timesIndex;
+
+    let highestValue = Math.max.apply(Math, stats);
+    if (highestValue < 10) { timesIndex = 100 / highestValue }
+    if (highestValue > 10) { timesIndex = highestValue / 100 }
+
+    let calculatedArray = new Array(stats.length).fill(0);
+    for (let i = 0; i < stats.length; i++) {
+        if (highestValue < 10) { calculatedArray[i] = Math.floor(stats[i] * timesIndex); }
+        else { calculatedArray[i] = Math.floor(stats[i] / timesIndex); }
     }
 
+    return calculatedArray[a];  
+}
+
+
+function getBarHeightFromMonthStats(a) {
+    const stats = model.statsMonth;
+    let timesIndex;
+
+    let highestValue = Math.max.apply(Math, stats);
+    if (highestValue < 10) { timesIndex = 100 / highestValue }
+    if (highestValue > 10) { timesIndex = highestValue / 100 }
+
+    let calculatedArray = new Array(stats.length);
+    for (let i = 0; i < stats.length; i++) {
+        if (highestValue < 10) {
+            calculatedArray[i] = Math.floor(stats[i] * timesIndex);
+        } else { calculatedArray[i] = Math.floor(stats[i] / timesIndex); }
+    }
+
+    return calculatedArray[a];
+}
+
+
+function monthName(month) {
+    if (month == 0) return 'Januar';
+    if (month == 1) return 'Februar';
+    if (month == 2) return 'Mars';
+    if (month == 3) return 'April';
+    if (month == 4) return 'Mai';
+    if (month == 5) return 'Juni';
+    if (month == 6) return 'Juli';
+    if (month == 7) return 'August';
+    if (month == 8) return 'September';
+    if (month == 9) return 'Oktober';
+    if (month == 10) return 'November';
+    if (month == 11) return 'Desember';
+}
+
+function findMonth(datestring) {
+    const date = new Date(datestring);
+    return date.getMonth();
+}
+function findYear(datestring) {
+    const date = new Date(datestring);
+    return date.getFullYear();
+}
+function findDay(datestring) {
+    const date = new Date(datestring);
+    return date.getDate();
+}

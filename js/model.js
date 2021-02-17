@@ -79,6 +79,7 @@ const  model = {
     statsYear: [],
     statsMonth: [],
     searchResultCount: 0,
+    archiveAmountOfRows: 10
 };
 
 let archive = [
@@ -101,9 +102,6 @@ let searchResult = [];
 
 let errors = [];
 let animationSatus = false;
-
-let rows = 10;
-
 function randomDate(start, end) {
     let date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
     let dateString =  date.toISOString().substring(0, 16);
@@ -126,7 +124,7 @@ const randomNameGenerator = num => {
 async function randomData() {
     const randomName = await faker.name.findName();
     const randomD =  randomDate(new Date(2020, 0, 0), new Date());
-    const randomNumber = getRandomInt(90000000, 99999999);
+    const randomNumber = getRandomInt(90000000, 99999999).toString();
 
     archive.push({
         table: randomChair(),
@@ -143,12 +141,13 @@ async function randomData() {
     })
     
 
+
 }
 
 async function randomData2() {
     const randomName = await faker.name.findName();
     const randomD =  randomDate(new Date(2021, 0, 0), new Date(2021, 4, 0));
-    const randomNumber = getRandomInt(90000000, 99999999);
+    const randomNumber = getRandomInt(90000000, 99999999).toString();
 
     model.bookingTimes.push({
         table: randomChair(),
@@ -168,13 +167,13 @@ async function randomData2() {
 
 }
 
-while (count < 10000) {
+while (count < 3000) {
     randomData();
     count++
 }
 let count2 = 0; 
 
-while(count2 < 400) {
+while(count2 < 50) {
     randomData2();
     count2++
 } 
@@ -197,3 +196,7 @@ function getRandomInt(min, max) {
 
 //     document.getElementById('app').style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
 // });
+
+
+// getStatsFromMonth();
+// getStatsFromYear();

@@ -97,6 +97,8 @@ p
 
 - Edittableview trenger å tegne opp loopene på nytt! med å bruke tablelist -> tables inni i lista
 
+- Kunne lage bord på editTableView! (-Theodor) [Donee]
 - Kunne lage bord på editTableView! (-Theodor) [Done]
 
 - Kunne sortere lister etter hva de heter av tall (-Sigve) [Done]
+

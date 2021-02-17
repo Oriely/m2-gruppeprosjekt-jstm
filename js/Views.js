@@ -104,7 +104,7 @@ function createBookingsView() {
     }
 
     html += `</div></div>`
-    document.getElementById('app').innerHTML = html;
+    app.innerHTML = html;
     stopAnimations();
 }
 
@@ -248,7 +248,7 @@ function manageBookingsView() {
         </div>
     </div>
     `;
-    document.getElementById('app').innerHTML = html;
+    app.innerHTML = html;
     stopAnimations();
 }
 
@@ -370,7 +370,7 @@ function archiveView() {
     </div>
     `;
 
-    document.getElementById('app').innerHTML = html;
+    app.innerHTML = html;
     stopAnimations();
 
 }
@@ -537,7 +537,7 @@ function statisticsView() {
     }
     html += '</div></div>';
 
-    document.getElementById('app').innerHTML = html;
+    app.innerHTML = html;
 }
 
 

@@ -5,7 +5,6 @@ let multipleTableBool = false;
 let checkedChildChair = false;
 
 function viewCreateBooking() {
-
     let error = '';
     let rangeCount;
     for (let tableCategory in model.tables) {
@@ -16,18 +15,12 @@ function viewCreateBooking() {
             }
         }
     }
-    // if (model.tables.fits4.includes(model.app.selectedTable)) {
-    //     rangeCount = 4;
-    // } else if (model.tables.fits6.includes(model.app.selectedTable)) {
-    //     rangeCount = 6;
-    // }
-
     let date = new Date();
     date = date.toISOString()
     var date1 = date.substring(0, 10);
     date1 = new Date(date1).toLocaleDateString()
     var date2 = date.substring(11, 16);
-    date = `${date1}  ${date2}`;
+    date = `${date1}  ${date2}`;    
 
 
     let html = '';
@@ -103,17 +96,13 @@ function viewCreateBooking() {
 
     for (let tableList in model.tables) {
         const tableFitsX = tableList.match(/(\d+)/);
-
-
         if(model.tables[tableList].length != 0) {
             html+= `<div class="table-category-wrapper">`;
             html+= `<div class="table-category-label"> ${tableFitsX[0]}</div>`;
             html+= `<div class="col">`;
     
             for (let i = 0; i < model.tables[tableList].length; i++) {
-                
                 const table = model.tables[tableList][i];
-    
                 html += `
                 <div class="box-outer ${model.app.selectedTable.includes(table) ? 'selectedTable' : ''}">
                     <div class="box" onclick="selectTable('${table}')">
@@ -121,7 +110,6 @@ function viewCreateBooking() {
                     </div>
                 </div>
                 `;
-               
             }
             html += `</div>`;
             html += `</div>`;
@@ -131,9 +119,7 @@ function viewCreateBooking() {
         html += `<div class="col">`;
 
         for (let i = 0; i < model.tables[tableList].length; i++) {
-
             const table = model.tables[tableList][i];
-
             html += `
             <div class="box-outer ${model.app.selectedTable.includes(table) ? 'selectedTable' : ''}">
                 <div class="box" onclick="selectTable('${table}')">
@@ -141,13 +127,13 @@ function viewCreateBooking() {
                 </div>
             </div>
             `;
-
-
         }
     }
 
     document.getElementById('app').innerHTML = html;
     stopAnimations();
+}
+
 }
 
 
@@ -361,14 +347,6 @@ function editBookingsSave() {
 
 function archiveBookingList() {
     let html = '';
-
-    html += `
-    
-    
-    `;
-
-
-
     if (archive.length != 0) {
         let onpage =  model.archiveOnPage;
         onpage--;
@@ -412,16 +390,12 @@ function archiveBookingList() {
         html += `<div class="pagination-buttons">`
         
         html += (page_count > 1 ? `<div><button onclick="decPagination(${page_count});"><</button></div>` : '');
-        let i;
-        for (i = pageStart; i <= pageEnd; i++) {
+       
+        
+        for (let i = pageStart; i <= pageEnd; i++) {
             if(i != model.archiveOnPage) {
                 html +=  paginationButton(i);
-            } else  {
-               html += paginationButton(i)
-            }
-         
-           
-
+            } else  { html += paginationButton(i) }
         }
 
         html +=  (page_count > 1 ? `<div><button onclick="incPagination(${page_count})">></button></div>` : '');
@@ -661,15 +635,10 @@ function statisticsView() {
         `;
     }
     html += `</div></div>`;
-
-    // check if month mode
-    if(model.statisticMode == 'month') {
-
-    }
     
     svgWidth = 800;
 
-    html += `<div></div><div class="statistic-outer">
+    html += `<div class="statistic-outer">
             <h2> ${(model.inputStatsMonth != null  ? 'Måndedlig statistikk for <i>' + monthName(model.inputStatsMonth) + '</i>': '')}</h2>
     <div class="statistic" style="height: ${statHeight}px;width:${svgWidth}px">`;
     barWidth = (svgWidth / model.statsMonth.length);
@@ -712,15 +681,9 @@ function statsFixDataMonth() {
             if (findYear(time) === findYear(selectedYear) && findMonth(time) === selectedMonth) {
                 let count = 1;
 
-               if(findDay(time) === 0) {
-                   alert('testing')
-               }
                 while(count < stats.length) {
-
                     if (findDay(time) === count) { stats[findDay(time) -1 ] = stats[findDay(time)- 1 ] + 1; }
-
                     count++;
-               
                 }
             }
 
@@ -740,59 +703,35 @@ function statsFixData() {
     const selectedDate = (!model.inputStatsDate ? new Date() : model.inputStatsDate);
 
     if (model.stats) {
-
         bookings.forEach(item => {
-
-            const time = item.bookedInfo.bookedTime
-
+            const time = item.bookedInfo.bookedTime;
             if (findYear(time) === findYear(selectedDate)) {
-
                 let count = 0;
-
                 while(count < 12) {
-
                     if (findMonth(time) === count) { stats[findMonth(time)] = stats[findMonth(time)] + 1; }
-
                     count++
-
                 }
-
             }
-
         });
-
         model.stats = stats;
-
     }
-
-
 }
 
 function testing(a) {
     const stats = model.stats;
     var timesIndex;
 
-        var highestValue = Math.max.apply(Math, stats);
-        if (highestValue < 10) { timesIndex = 100 / highestValue };
-        if (highestValue > 10) { timesIndex = highestValue / 100 }
-        
+    var highestValue = Math.max.apply(Math, stats);
+    if (highestValue < 10) { timesIndex = 100 / highestValue }
+    if (highestValue > 10) { timesIndex = highestValue / 100 }
 
-        var calculatedArray = new Array(stats.length).fill(0);
-        for (let i = 0; i < stats.length; i++) {
-            if (highestValue < 10) {
+    var calculatedArray = new Array(stats.length).fill(0);
+    for (let i = 0; i < stats.length; i++) {
+        if (highestValue < 10) { calculatedArray[i] = Math.floor(stats[i] * timesIndex); }
+        else { calculatedArray[i] = Math.floor(stats[i] / timesIndex); }
+    }
 
-                calculatedArray[i] = Math.floor(stats[i] * timesIndex);
-
-            }
-            else {
-                calculatedArray[i] = Math.floor(stats[i] / timesIndex);
-
-            }
-
-
-        }
-
-    return calculatedArray[a];
+    return calculatedArray[a];  
 }
 
 
@@ -800,29 +739,16 @@ function statisticBarHeights(a) {
     const stats = model.statsMonth;
     var timesIndex;
 
-        var highestValue = Math.max.apply(Math, stats);
-        if (highestValue < 10) { timesIndex = 100 / highestValue };
-        if (highestValue > 10) { timesIndex = highestValue / 100 }
-        
+    var highestValue = Math.max.apply(Math, stats);
+    if (highestValue < 10) { timesIndex = 100 / highestValue }
+    if (highestValue > 10) { timesIndex = highestValue / 100 }
 
-        var calculatedArray = new Array(stats.length);
-        for (let i = 0; i < stats.length; i++) {
-            if (highestValue < 10) {
-
-                calculatedArray[i] = Math.floor(stats[i] * timesIndex);
-
-            }
-            else {
-                calculatedArray[i] = Math.floor(stats[i] / timesIndex);
-
-            }
-
-
-        }
-
+    var calculatedArray = new Array(stats.length);
+    for (let i = 0; i < stats.length; i++) {
+        if (highestValue < 10) {
+            calculatedArray[i] = Math.floor(stats[i] * timesIndex);
+        } else { calculatedArray[i] = Math.floor(stats[i] / timesIndex); }
     }
-
-
 
     return calculatedArray[a];
 }
@@ -855,4 +781,3 @@ function findDay(datestring) {
     const date = new Date(datestring);
     return date.getDate();
 }
-

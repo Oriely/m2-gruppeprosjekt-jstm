@@ -1,26 +1,9 @@
 function selectTable(index) {
-
     const tables = model.app.selectedTable;
     if (tables.includes(index)) {
         const tIndex = tables.indexOf(index);
         model.app.selectedTable.splice(tIndex, 1);
-
-    } else {
-        model.app.selectedTable.push(index)
-
-    }
-
-    // if (model.app.selectMultipleTables) {
-    //     if (model.app.selectedTable.includes(index)) {
-    //         model.app.selectedTable.indexOf()
-    //     } else {
-    //         model.app.selectedTable.push(index)
-    //     }
-
-    // } else {
-    //     model.app.selectedTable = [index];
-    // }
-
+    } else { model.app.selectedTable.push(index) }
     viewCreateBooking();
 }
 
@@ -37,9 +20,7 @@ function selectTableForEdit(table) {
             }
         }
     }
-
-
-    editTablesView();
+    updateView();
 }
 
 function createNewTable() {
@@ -63,53 +44,50 @@ function createNewTable() {
     }
 
     model.app.selectedTableForEdit = '';
-    sortObj(tables);
-    editTablesView()
+    sortObj(model.tables);
+    updateView();
 
 }
-    function deleteTable() {
-        var selectedTable = model.selectedTable.selectedTableForEdit;
-        var tables = model.tables;
-        for (let tableList in model.tables) {
-            if (tables[tableList].includes(selectedTable)) {
-                tables[tableList].splice(tables[tableList].indexOf(selectedTable), 1);
-            }
-            if (tables[tableList].length == 0) {
-                delete tables[tableList];
-            }
-        }
-        model.app.selectedTableForEdit = '';
-        editTablesView()
-    }
 
-    sortObj(tables);
-    editTablesView()
+function deleteTable() {    
+    var selectedTable = model.selectedTable.selectedTableForEdit;
+    var tables = model.tables;
+    for (let tableList in model.tables) {
+        if (tables[tableList].includes(selectedTable)) {
+            tables[tableList].splice(tables[tableList].indexOf(selectedTable), 1);
+        }
+        if (tables[tableList].length == 0) {
+            delete tables[tableList];
+        }
+    }
+    model.app.selectedTableForEdit = '';
+    sortObj(model.tables);
+    updateView();
 }
 
-
-    function changeTableInformation() {
-        if (model.selectedTable.selectedTableGuests == '') {
-            alert('Du må velge ny verdi for antall gjester')
-            return
-        }
-        var selectedTable = model.selectedTable.selectedTableForEdit;
-        var selectedTableGuests = model.selectedTable.selectedTableGuests;
-        var tables = model.tables;
-        deleteTable(selectedTable)
-
-        if (selectedTableGuests) {
-            var Table = `fits${selectedTableGuests}`;
-            if (tables[Table] == undefined) {
-                tables[Table] = []
-                tables[Table].push(selectedTable)
-            } else {
-
-                tables[Table].push(selectedTable)
-            }
-        }
-
-        editTablesView()
+function changeTableInformation() {
+    if (model.selectedTable.selectedTableGuests == '') {
+        alert('Du må velge ny verdi for antall gjester')
+        return
     }
+    var selectedTable = model.selectedTable.selectedTableForEdit;
+    var selectedTableGuests = model.selectedTable.selectedTableGuests;
+    var tables = model.tables;
+    deleteTable(selectedTable);
+
+    if (selectedTableGuests) {
+        var Table = `fits${selectedTableGuests}`;
+        if (tables[Table] == undefined) {
+            tables[Table] = []
+            tables[Table].push(selectedTable)
+        } else {
+
+            tables[Table].push(selectedTable)
+        }
+    }
+
+    updateView()
+}
 
 
 function removeFromArchive(bookingIndex) { 
@@ -186,8 +164,6 @@ function removeFromArchive(bookingIndex) {
 
     }
 
-    return count;
-}
 
 function sortObj(obj) {
     const data = Object.keys(obj).sort((x, y) => {
@@ -207,9 +183,7 @@ function daysInMonth(year, month) {
 }
 
 function search(event) {
-
     event.preventDefault();
-
 
     let input = model.archiveInputs.searchInput;
     let searchBy = model.archiveInputs.searchBy;
@@ -252,11 +226,8 @@ function search(event) {
                 }
 
                 if(searchBy == 'date') {
-                    if (date.includes(inputTest)) {
-                        searchResult.push(_archive[i]);
-                    } else {
-                        console.log('did not find anythingffff')
-                    }
+                    if (date.includes(inputTest)) { searchResult.push(_archive[i]);
+                    } else {  console.log('did not find anythingffff') }
                 }
 
     
@@ -280,8 +251,6 @@ function resetSearchQuery() {
         const count = 0;
         for (const tables in model.tables) {
             count += tables.length;
-
-
         }
         console.log(count);
         return count;

@@ -37,7 +37,7 @@ function createNewTable() {
             if (!tempList.includes(fitsX)) {
                 model.tables[fitsX] = [];
                 model.tables[fitsX].push(tableLetter)
-                alert('Lagd ett nytt bord')
+                // alert('Lagd ett nytt bord')
             }
         }
         updateView()

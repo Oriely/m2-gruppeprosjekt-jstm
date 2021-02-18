@@ -3,8 +3,9 @@ let childBool = false;
 let rangeCount;
 let multipleTableBool = false;
 let checkedChildChair = false;
-
+checkTableStatus()   
 function createBookingsView() {
+    console.log(model.status)
     let error = '';
     let rangeCount;
 
@@ -91,8 +92,8 @@ function createBookingsView() {
             for (let i = 0; i < model.tables[tableList].length; i++) {
                 const table = model.tables[tableList][i];
                 html += `
-                <div class="box-outer ${model.app.selectedTable.includes(table) ? 'selectedTable' : ''}">
-                    <div class="box" onclick="selectTable('${table}')">
+                <div class="box-outer   ${model.app.selectedTable.includes(table) ? 'selectedTable' : ''}">
+                    <div class="box ${bookingStatusCheck(table)}" onclick="selectTable('${table}')">
                         ${table}
                     </div>
                 </div>
@@ -100,7 +101,7 @@ function createBookingsView() {
             }
         }   
 
-        html += `</div></div>       `;
+        html += `</div></div>`;
     }
 
     html += `</div></div>`
@@ -109,11 +110,14 @@ function createBookingsView() {
 }
 
 
-function bookingStatusCheck(i) {
-    let allTables = model.tables.allTables;
-    if (model.status[allTables[i]].bookingStatus == 0) return;
-    if (model.status[allTables[i]].bookingStatus == 1) return 'bookedSoon';
-    if (model.status[allTables[i]].bookingStatus == 2) return 'booked';
+function bookingStatusCheck(table) {
+    console.log(table)
+
+    if (model.status[table] == undefined) return;
+    if (model.status[table].bookingStatus == -1) return;
+    if (model.status[table].bookingStatus == 0) return;
+    if (model.status[table].bookingStatus == 1) return 'bookedSoon';
+    if (model.status[table].bookingStatus == 2) return 'booked';
 }
 
 function addUpTotGuests() {

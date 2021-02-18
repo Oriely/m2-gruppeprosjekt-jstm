@@ -208,7 +208,7 @@ function checkTableStatus() {
     }
 
     model.status = statusObj;
-    updateView();
+
 }
 
 

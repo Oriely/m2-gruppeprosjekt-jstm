@@ -79,7 +79,8 @@ const  model = {
     statsYear: [],
     statsMonth: [],
     searchResultCount: 0,
-    archiveAmountOfRows: 10
+    archiveAmountOfRows: 10,
+    bookingsPaginationPage: 1,
 };
 
 let archive = [

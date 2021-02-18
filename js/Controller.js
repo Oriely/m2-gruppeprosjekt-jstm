@@ -293,32 +293,66 @@ function resolveStatusConflict(tableLetter, bookingStatus, statusObj) {
 
 
 function decPagination() {
-    let page = model.archiveOnPage
-    console.log(page)
+    let page = parseInt(model.archiveOnPage)
     if((page - 1) < 1) return;
-    page - 1;
-    model.archiveOnPage = page - 1 ;
+    model.archiveOnPage = page - 1;
     updateView();
 }
 
 function incPagination() {
     console.log(model.archiveOnPage, ' inc')
     let bookings = model.bookingTimes;
-    let page_count = Math.ceil(bookings.length / rows);
-    let page = model.archiveOnPage;
+    let page_count = Math.ceil(bookings.length / model.archiveAmountOfRows);
+    let page = parseInt(model.archiveOnPage);
     if(page + 1 > page_count) return;
-    page++
-    model.archiveOnPage = page;
+    
+    model.archiveOnPage = page + 1;
     updateView();
 }
 function changePaginationPage(page) {
-    model.archiveOnPage = page;
+    model.archiveOnPage = parseInt(page);
+    updateView();
+}
+
+function selectPaginationPage(){
+    let page = prompt('Velg side:   ')
+    if(!page) return
+    model.archiveOnPage = parseInt(page);
     updateView();
 }
 
 function changeAmountOfRowsInTable(rows_num) {
     console.log(rows_num);
     if(!rows_num) return;
-    model.archiveAmountOfRows = rows_num;
+    model.archiveAmountOfRows = parseInt(rows_num);
     updateView(); 
+}
+
+function decPagination2() {
+    let page = parseInt(model.bookingsPaginationPage)
+    if((page - 1) < 1) return;
+    model.bookingsPaginationPage = page - 1;
+    updateView();
+}
+
+function incPagination2() {
+    let bookings = model.bookingTimes;
+    let page_count = Math.ceil(bookings.length / model.archiveAmountOfRows);
+    console.log(page_count)
+    let page = parseInt(model.bookingsPaginationPage );
+    if(page + 1 > page_count) return;
+    
+    model.bookingsPaginationPage = page + 1;
+    updateView();
+}
+function changePaginationPage2(page) {
+    model.bookingsPaginationPage = parseInt(page);
+    updateView();
+}
+
+function selectPaginationPage2(){
+    let page = prompt('Velg side:   ')
+    if(!page) return;
+    model.bookingsPaginationPage = parseInt(page);
+    updateView();
 }

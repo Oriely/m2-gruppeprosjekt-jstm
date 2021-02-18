@@ -148,9 +148,8 @@ function manageBookingsView() {
     let html = '';
     html = `
     <div class="page  ${(animationSatus == false ? 'animate-fade-in' : '')}">
-            <div class="chosenTable  ">
+            <div class="chosenTable">
                 <div class="inputs">
-
                 <div>
                     <div>
                         <label>Nummer:</label>
@@ -214,22 +213,81 @@ function manageBookingsView() {
             
                     <div id="bookingsOverview">
                     `;
-    html += `
-                    <div class="booked-tables-outer ${(animationSatus == false ? 'animation' : '')}">
-                    <div class="table-labels">
-                    <div>Bord</div>
-                    <div>Navn</div>
-                    <div>Mobil Nummer</div>
-                    <div>Booket fra</div>
-                    <div>Booket til</div>
+                    let onpage = model.bookingsPaginationPage;
+                    onpage--; 
+                    let bookings = model.bookingTimes;
+                    let count = 0;
+                    let page_count = Math.ceil(bookings.length / model.archiveAmountOfRows); 
+                    let range = pageRange(model.bookingsPaginationPage, page_count);
+                    let start = model.archiveAmountOfRows * onpage;
+                    let end = start + model.archiveAmountOfRows;
+                    let paginatedBookings = bookings.slice(start, end);
+                    let pageStart = range.start;
+                    let pageEnd = range.end;
                     
-                
-                </div>
-                        <div class="booked-tables ">
-                
+                    html += `<div class="archive-page-inputs">`
+                    html += `<div class="pagination-buttons">`;
+                    if(page_count > 1) {
+                        html += `
+                        <div>
+                            <button onclick="decPagination2(${page_count});">
+                            <i class="fas fa-chevron-left"></i>
+                            </button>
+                        </div>
+                        `;
+                    }
+                    if(pageStart > 3 ) {
+                        html += paginationButton2(1);
+                    }
+                    // make buttons betweeen pageStart and pageEnd
+                    for (let i = pageStart; i <= pageEnd; i++) {
+                        if(i != model.bookingsPaginationPage) {
+                            html +=  paginationButton2(i);
+                        } else  { html += paginationButton2(i) }
+                    }
+                   
+                            // next page in pagination
+                    if(page_count > 1) {
+                        html += `<div><button onclick="selectPaginationPage2()">...</button></div>`;
+                     }
+            
+                    // button for last page
+                    if(pageEnd < page_count ) {
+                        html += paginationButton2(page_count);
+                    }
+                    // next page in pagination
+                    if(page_count > 1) {
+                        html += `<div><button onclick="incPagination2(${page_count})"><i class="fas fa-chevron-right"></i></button></div>`;
+                    }
+            
+                    html += `</div>`;
+                    html += `
+                        <div>
+                            <label for="rows">Rader</label>
+                            <select onchange="changeAmountOfRowsInTable(this.value)" name="rowsCount" id="rows">
+                                <option ${(model.archiveAmountOfRows == '5' ? 'selected' : '')} value="5">5</option>
+                                <option ${(model.archiveAmountOfRows == '10' ? 'selected' : '')} value="10">10</option>
+                                <option ${(model.archiveAmountOfRows == '15' ? 'selected' : '')} value="15">15</option>
+                                <option ${(model.archiveAmountOfRows == '20 ' ? 'selected' : '')} value="20">20</option>
+                                <option ${(model.archiveAmountOfRows == '25' ? 'selected' : '')} value="25">25</option>
+                                <option ${(model.archiveAmountOfRows == '50' ? 'selected' : '')} value="50">50</option>
+                                <option ${(model.archiveAmountOfRows == '100' ? 'selected' : '')} value="100">100</option>
+                            </select> 
+                        </div>
+                        </div>
                     `;
-    for (let i = 0; i < model.bookingTimes.length; i++) {
-        let bookingTimes = model.bookingTimes;
+                    html += `
+                    <div class="booked-tables">
+                    <div class="table-labels">
+                        <div>Bord</div>
+                        <div>Navn</div> 
+                        <div>Mobil Nummer</div>
+                        <div>Booket fra</div>
+                        <div>Booket til</div>
+                    </div>
+                    `;
+    for (let i = 0; i < paginatedBookings.length; i++) {
+        let bookingTimes = paginatedBookings;
         html += `
                         <div class="table-row  " >
                             <div onclick="editBookingsSelect(${i}), updateView()">${bookingTimes[i].table}</div>
@@ -289,9 +347,6 @@ function archiveView() {
         
         html += `<div class="archive-page-inputs">`
         html += `<div class="pagination-buttons">`;
-        if(pageStart > 3 ) {
-            html += paginationButton(1);
-        }
         if(page_count > 1) {
             html += `
             <div>
@@ -301,23 +356,29 @@ function archiveView() {
             </div>
             `;
         }
-
+        if(pageStart > 3 ) {
+            html += paginationButton(1);
+        }
+        // make buttons betweeen pageStart and pageEnd
         for (let i = pageStart; i <= pageEnd; i++) {
             if(i != model.archiveOnPage) {
                 html +=  paginationButton(i);
             } else  { html += paginationButton(i) }
         }
        
-        // next page in pagination
+                // next page in pagination
         if(page_count > 1) {
-            html += `<div><button onclick="incPagination(${page_count})"><i class="fas fa-chevron-right"></i></button></div>`;
-        }
+            html += `<div><button onclick="selectPaginationPage()">...</button></div>`;
+         }
 
         // button for last page
         if(pageEnd < page_count ) {
             html += paginationButton(page_count);
         }
-
+        // next page in pagination
+        if(page_count > 1) {
+            html += `<div><button onclick="incPagination(${page_count})"><i class="fas fa-chevron-right"></i></button></div>`;
+        }
 
         html += `</div>`;
         html += `
@@ -404,6 +465,14 @@ function paginationButton(page) {
     `;
 }
 
+function paginationButton2(page) {
+    return `
+        <div>
+            <button onclick="changePaginationPage2(${page})" class="${(model.bookingsPaginationPage == page?  'archive-current-page' : '')}">${page}</button></div>
+    `;
+}
+
+
 
 function editTablesView() {
     let html = '';
@@ -434,7 +503,6 @@ function editTablesView() {
         html += `</div>`;
     }
 
-
     html += `
     <hr>
     <div>
@@ -463,7 +531,8 @@ function editTablesView() {
     </div>
     `;
 
-    document.getElementById('app').innerHTML = html;
+    app.innerHTML = html;
+    stopAnimations();
 }
 
 

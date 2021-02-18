@@ -4,7 +4,7 @@ function selectTable(index) {
         const tIndex = tables.indexOf(index);
         model.app.selectedTable.splice(tIndex, 1);
     } else { model.app.selectedTable.push(index) }
-    viewCreateBooking();
+    updateView();
 }
 
 function selectTableForEdit(table) {

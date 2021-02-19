@@ -457,6 +457,11 @@ color:white;
 .new-table-inputs {
 }
 
+.new-table-inputs > div {
+    margin-top:5px;
+
+}
+
 .archive-page-inputs div{
     display:flex;
     align-content:center;
@@ -566,3 +571,9 @@ color:white;
 }
 
 @media only screen and (max-width : 320px) {}
+
+h1 {
+    border-bottom:1px solid white;
+    margin-top:10px;
+    margin-bottom: 10px;
+}

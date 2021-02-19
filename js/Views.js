@@ -301,7 +301,7 @@ function manageBookingsView() {
                             <div onclick="editBookingsSelect(${i}), updateView()"><a href="tel:${bookingTimes[i].bookedInfo.bookedNumber}">${model.bookingTimes[i].bookedInfo.bookedNumber}</a></div>
                             <div onclick="editBookingsSelect(${i}), updateView()">${bookingTimes[i].bookedInfo.bookedTime}</div>
                             <div onclick="editBookingsSelect(${i}), updateView()">${bookingTimes[i].bookedInfo.bookedTimeEnd}</div>
-                            <div><button onclick="editBookingsSelect(${pageStart + i})">Velg</button><button onclick="endBooking(${i})">Slett booking</button></div>
+                            <div><button onclick="editBookingsSelect()">Velg</button><button onclick="endBooking(${i})">Slett booking</button></div>
                             
                             
                         </div>
@@ -422,7 +422,7 @@ function archiveView() {
                 <div><a href="tel:${item.bookedInfo.bookedNumber}">${item.bookedInfo.bookedNumber}</a></div>
                 <div>${item.bookedInfo.bookedTime}</div>
                 <div>${item.bookedInfo.bookedTimeEnd}</div>
-                <div><button onclick="removeFromArchive(${count})">Fjern fra arkiv</button></div>
+                <div><button onclick="removeFromArchive(${i})">Fjern fra arkiv</button></div>
                 
                 
             </div>
@@ -516,13 +516,16 @@ html += `
     </div> 
     <div class="new-table-inputs">
         <div>
-            halo    
             <input type="text" oninput="model.selectedTable.selectedTableGuests = this.value;" value ="${model.selectedTable.selectedTableGuests}">
 
-        </div><br>
-        <div>
-        <input oninput="model.selectedTable.selectedTableLetter = this.value"></input>
         </div>
+        <div>
+            <label>ID på bord</label>
+        </div>
+        <div>
+            <input oninput="model.selectedTable.selectedTableLetter = this.value"></input>
+        </div>
+
         <div>
             <button onclick="createNewTable()">Lag nytt bord</button>
         </div>
@@ -532,7 +535,7 @@ html += `
     </div>
 </div>
     `;
-    html += `<div class="tables ${(animationSatus == false ? 'animate-fade-in' : '')}">`;
+    html += `<div class="tables ${(animationSatus == false ? 'animate-fade-in' : '')}" style="margin-left: 0 !important;">`;
 
     for (let tableList in model.tables) {
         const tableFitsX = tableList.match(/(\d+)/);

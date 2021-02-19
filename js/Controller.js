@@ -138,6 +138,7 @@ function editBookingsSelect(i) {
             editChair: model.bookingTimes[i].chairCount,
         }
     );
+    updateView();
 }
 function changeDateValue(value) {
     console.log(value, 'changedate');

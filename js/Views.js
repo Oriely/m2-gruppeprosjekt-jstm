@@ -78,23 +78,25 @@ function createBookingsView() {
     `;
     html += `
     <div>
-        <span class="tables-list-title">Velg bord:</span>  
         <div class="tables ${(animationSatus == false ? 'animate-slide-in-2' : '')}">
     `;
 
     for (let tableList in model.tables) {
         const tableFitsX = tableList.match(/(\d+)/);
+       
+
         if(model.tables[tableList].length != 0) {
+            
             html += `<div class="table-category-wrapper">`;
-            html += `<div class="table-category-label">${tableFitsX[0]}</div>`;
+            html += `<div class="table-category-label">Plass til: ${tableFitsX[0]}</div>`;
             html += `<div class="col">`;
 
             for (let i = 0; i < model.tables[tableList].length; i++) {
                 const table = model.tables[tableList][i];
                 html += `
-                <div class="box-outer   ${model.app.selectedTable.includes(table) ? 'selectedTable' : ''}">
+                <div class="box-outer ${model.app.selectedTable.includes(table) ? 'selectedTable' : ''}">
                     <div class="box ${bookingStatusCheck(table)}" onclick="selectTable('${table}')">
-                        ${table}
+                    ${table}
                     </div>
                 </div>
                 `;
@@ -228,7 +230,6 @@ function manageBookingsView() {
                     let paginatedBookings = bookings.slice(start, end);
                     let pageStart = range.start;
                     let pageEnd = range.end;
-                    
                     html += `<div class="archive-page-inputs">`
                     html += `<div class="pagination-buttons">`;
                     if(page_count > 1) {
@@ -291,6 +292,7 @@ function manageBookingsView() {
                     </div>
                     `;
     for (let i = 0; i < paginatedBookings.length; i++) {
+        console.log(pageStart)
         let bookingTimes = paginatedBookings;
         html += `
                         <div class="table-row  " >
@@ -299,7 +301,7 @@ function manageBookingsView() {
                             <div onclick="editBookingsSelect(${i}), updateView()"><a href="tel:${bookingTimes[i].bookedInfo.bookedNumber}">${model.bookingTimes[i].bookedInfo.bookedNumber}</a></div>
                             <div onclick="editBookingsSelect(${i}), updateView()">${bookingTimes[i].bookedInfo.bookedTime}</div>
                             <div onclick="editBookingsSelect(${i}), updateView()">${bookingTimes[i].bookedInfo.bookedTimeEnd}</div>
-                            <div><button onclick="editBookingsSelect(${i}), updateView()">Velg</button><button onclick="endBooking(${i})">Slett booking</button></div>
+                            <div><button onclick="editBookingsSelect(${pageStart + i})">Velg</button><button onclick="endBooking(${i})">Slett booking</button></div>
                             
                             
                         </div>
@@ -481,12 +483,61 @@ function paginationButton2(page) {
 function editTablesView() {
     let html = '';
     let selectedTable = model.selectedTable;
+    html += `
+    <div class="manage-tables-page  ">
+    <div>
+    <h1>Endre bord</h1>
+    <p>Her kan du endre og legge til nye bord i systemet.
+    </div>
+`;
+
+
+html += `
+<div class="manage-tables">
+    <div>
+        Bord ${selectedTable.selectedTableForEdit ? `${selectedTable.selectedTableForEdit.toUpperCase()}` : ' velg bord'}
+    </div>
+    <div>
+        Bordet har plass til ${selectedTable.selectedTableFits ? `${selectedTable.selectedTableFits}` : 'velg bord'}
+    </div>
+
+    <div>
+        <input type="range" min="1" max="10" oninput="model.selectedTable.selectedTableGuests = this.value; document.getElementById('slider').innerHTML = this.value" value="model.selctedTable.selectedTableFits"></input>
+        <div>
+            Endre bordet til:
+                
+            
+        </div>
+    </div>
+
+    <div>
+        <button onclick="deleteTable(model.app.selectedTableForEdit)">Slette Bord</button>
+        <button onclick="changeTableInformation(model.app.selectedTableForEdit)">Endre Bord</button>
+    </div> 
+    <div class="new-table-inputs">
+        <div>
+            halo    
+            <input type="text" oninput="model.selectedTable.selectedTableGuests = this.value;" value ="${model.selectedTable.selectedTableGuests}">
+
+        </div><br>
+        <div>
+        <input oninput="model.selectedTable.selectedTableLetter = this.value"></input>
+        </div>
+        <div>
+            <button onclick="createNewTable()">Lag nytt bord</button>
+        </div>
+        <div id="sliderInput"></div>    
+        
+
+    </div>
+</div>
+    `;
     html += `<div class="tables ${(animationSatus == false ? 'animate-fade-in' : '')}">`;
 
     for (let tableList in model.tables) {
         const tableFitsX = tableList.match(/(\d+)/);
         html += `<div class="table-category-wrapper">`;
-        html += `<div class="table-category-label">${tableFitsX[0]}</div>`;
+        html += `<div class="table-category-label">Plass til: ${tableFitsX[0]}</div>`;
         html += `<div class="col">`;
 
 
@@ -506,34 +557,8 @@ function editTablesView() {
         html += `</div>`;
         html += `</div>`;
     }
+    html += `</div>`;
 
-    html += `
-    <hr>
-    <div>
-    <div>${selectedTable.selectedTableForEdit ? `Bord ${selectedTable.selectedTableForEdit.toUpperCase()}` : ''}</div>
-    <div>${selectedTable.selectedTableFits ? `Bordet har plass til ${selectedTable.selectedTableFits}` : ''}</div>
-    
-    <div>${selectedTable.selectedTableForEdit ? `
-    <div></div>
-    <input type="range" min="1" max="10" oninput="model.selectedTable.selectedTableGuests = this.value; document.getElementById('slider').innerHTML = this.value" value="model.selctedTable.selectedTableFits"></input>
-    <div>Endre bordet til:
-        <div id="slider">${selectedTable.selectedTableFits}</div>
-        Personer
-    </div>`
-            : ''}</div>
-    <button onclick="deleteTable(model.app.selectedTableForEdit)">Slette Bord</button>
-    <button onclick="changeTableInformation(model.app.selectedTableForEdit)">Endre Bord</button>
-    <div>
-        ${selectedTable.selectedTableForEdit ? '' : `
-        <input type="range" min="1" max="10" oninput="model.selectedTable.selectedTableGuests = this.value; document.getElementById('sliderInput').innerHTML = this.value"></input>
-        
-        <input oninput="model.selectedTable.selectedTableLetter = this.value"></input>
-        <button onclick="createNewTable()">Lag nytt bord</button>
-        <div id="sliderInput"></div>
-        `}
-        
-    </div>
-    `;
 
     app.innerHTML = html;
     stopAnimations();

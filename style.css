@@ -193,7 +193,7 @@ nav div:active {
 
 .box-outer {
     padding: 2px;
-    margin: 5px;
+
 
 }
 .box-outer1 {
@@ -207,8 +207,7 @@ nav div:active {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    overflow-y: scroll;
-    max-height:90   vh;
+    margin-left:10px;
 }
 
 .box:hover {
@@ -244,20 +243,23 @@ nav div:active {
 
 }
 
-.box-category-wrapper {
-    display:grid;
-    grid-template-columns: 1fr;
+.table-category-wrapper {
+    background:rgb(204, 203, 203);
+    margin:5px;
+    padding:5px;
 }
 
 .table-category-label {
-    font-weight:bold;
-    padding-left:5px;
-    user-select: none;
+    font-size:15px;
+    padding-left:2px;
+    padding-bottom:5px;
+    user-select: none; 
+
 }
 
 .col {
     display:grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr 1fr ;
 }
 /* CUSTOM TABLE WITH GRID */
 .table-row {
@@ -323,7 +325,7 @@ nav div:active {
 /* ANIMATION classes AND KEYFRAMES */
 
 .animate-slide-in {
-    overflow-x:hidden;
+    overflow:hidden;
     animation: slideIn 0.3s forwards;
 }
 
@@ -443,13 +445,16 @@ color:white;
 }
 
 .tables-list-title{
-    display:block;
-    margin-bottom:10px;
+    display:block;  
+    padding-bottom:6px;
 }
 
 .archive-page-inputs {
     display:flex;
     justify-content: space-between;
+}
+
+.new-table-inputs {
 }
 
 .archive-page-inputs div{
@@ -463,6 +468,10 @@ color:white;
     height:100%;
     width:50px;
     margin-left:10px;
+}
+
+.manage-tables-page {
+    
 }
 
 @keyframes bounce-4 {

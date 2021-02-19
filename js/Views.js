@@ -294,13 +294,20 @@ function manageBookingsView() {
     for (let i = 0; i < paginatedBookings.length; i++) {
         console.log(pageStart)
         let bookingTimes = paginatedBookings;
+        var tableIndex;
+        if (model.bookingsPaginationPage > 1) {
+            tableIndex = ( i + (model.archiveAmountOfRows * (model.bookingsPaginationPage - 1)));
+        } else {
+            tableIndex = i;
+        }
+        console.log(tableIndex)
         html += `
                         <div class="table-row  " >
-                            <div onclick="editBookingsSelect(${i}), updateView()">${bookingTimes[i].table}</div>
-                            <div onclick="editBookingsSelect(${i}), updateView()">${bookingTimes[i].bookedInfo.bookedName}</div>
-                            <div onclick="editBookingsSelect(${i}), updateView()"><a href="tel:${bookingTimes[i].bookedInfo.bookedNumber}">${model.bookingTimes[i].bookedInfo.bookedNumber}</a></div>
-                            <div onclick="editBookingsSelect(${i}), updateView()">${bookingTimes[i].bookedInfo.bookedTime}</div>
-                            <div onclick="editBookingsSelect(${i}), updateView()">${bookingTimes[i].bookedInfo.bookedTimeEnd}</div>
+                            <div onclick="editBookingsSelect(${tableIndex}), updateView()">${bookingTimes[i].table}</div>
+                            <div onclick="editBookingsSelect(${tableIndex}), updateView()">${bookingTimes[i].bookedInfo.bookedName}</div>
+                            <div onclick="editBookingsSelect(${tableIndex}), updateView()"><a href="tel:${bookingTimes[i].bookedInfo.bookedNumber}">${model.bookingTimes[i].bookedInfo.bookedNumber}</a></div>
+                            <div onclick="editBookingsSelect(${tableIndex}), updateView()">${bookingTimes[i].bookedInfo.bookedTime}</div>
+                            <div onclick="editBookingsSelect(${tableIndex}), updateView()">${bookingTimes[i].bookedInfo.bookedTimeEnd}</div>
                             <div><button onclick="editBookingsSelect(${pageStart + i})">Velg</button><button onclick="endBooking(${i})">Slett booking</button></div>
                             
                             

@@ -138,7 +138,7 @@ async function randomData() {
 
 async function randomData2() {
     const randomName = await faker.name.findName();
-    const randomD =  randomDate(new Date(2021, 0, 0), new Date(2021, 4, 0));
+    const randomD =  randomDate(new Date(2021, 1, 0), new Date(2021, 3, 0));
     const randomNumber = getRandomInt(90000000, 99999999).toString();
 
     model.bookingTimes.push({
@@ -159,13 +159,13 @@ async function randomData2() {
 
 }
 
-while (count < 3000) {
+while (count < 10000) {
     randomData();
     count++;
 }
 let count2 = 0; 
 
-while(count2 < 50) {
+while(count2 < 1000) {
     randomData2();
     count2++;
 } 

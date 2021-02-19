@@ -20,6 +20,11 @@ function createBookingsView() {
 
     let html = '';
     html = `
+    <div>
+    <div class="header">
+    <h1>Reservering</h1>
+    <p>Reserver et bord.</p>
+    </div>
     <div class="page-outer">
         <div class="inputs ${(animationSatus == false ? 'animate-fade-in' : '')}">
             <div class="input-name">
@@ -106,7 +111,7 @@ function createBookingsView() {
         html += `</div></div>`;
     }
 
-    html += `</div></div>`
+    html += `</div></div></div>`
     app.innerHTML = html;
     stopAnimations();
 }
@@ -332,9 +337,14 @@ function archiveView() {
         const bookings = (searchResult.length > 0 ? searchResult : archive)
         html += `
         <div class="page-archive  ${(animationSatus == false ? 'animate-fade-in' : '')}">
+            <div class="header">
+            <h1>Arkiv</h1>
+            <p>Har kan du gå gjennom arkiverte reservasjoner</p> 
+            </div>
+
             <div class="search">
                 <div class="search-input">
-                    <input class="testing" autofocus value="${model.archiveInputs.searchInput}"  type="text" oninput="model.archiveInputs.searchInput =  this.value" onkeyup="search(event)" placeholder="eks: Johnny">
+                    <input class="testing" onload="this.focus()" value="${model.archiveInputs.searchInput}"  type="text" oninput="model.archiveInputs.searchInput =  this.value" onkeyup="search(event)" placeholder="eks: Johnny">
                 </div>
                 <div>
                     <select onchange="model.archiveInputs.searchBy = this.value" name="searchby " id="searchby">
@@ -491,46 +501,43 @@ function editTablesView() {
     let html = '';
     let selectedTable = model.selectedTable;
     html += `
-    <div class="manage-tables-page  ">
-    <div>
-    <h1>Endre bord</h1>
-    <p>Her kan du endre og legge til nye bord i systemet.
-    </div>
-`;
+        <div class="manage-tables-page  ">
+        <div class="header">
+        <h1>Administrere bord</h1>
+        <p>Her kan du endre og legge til nye bord i systemet.
+        </div>
+    `;
 
 
 html += `
-<div class="manage-tables">
+<div class="manage-tables  ${(animationSatus == false ? 'animate-fade-in' : '')}">
+<div class="edit-tables-input">
+    <div>Endre bord:</div>
     <div>
-        Bord ${selectedTable.selectedTableForEdit ? `${selectedTable.selectedTableForEdit.toUpperCase()}` : ' velg bord'}
+        <label>Seter: </label>
     </div>
-    <div>
-        Bordet har plass til ${selectedTable.selectedTableFits ? `${selectedTable.selectedTableFits}` : 'velg bord'}
-    </div>
-
-    <div>
-        <input type="range" min="1" max="10" oninput="model.selectedTable.selectedTableGuests = this.value; document.getElementById('slider').innerHTML = this.value" value="model.selctedTable.selectedTableFits"></input>
-        <div>
-            Endre bordet til:
-                
-            
-        </div>
+    <div class="input-range">
+        <input type="range" min="1" max="10" oninput="model.selectedTable.selectedTableGuests = this.value; document.getElementById('slider').innerHTML = this.value;" value="${(selectedTable.selectedTableFits ? selectedTable.selectedTableFits : '1')}"><span id="slider">${(selectedTable.selectedTableFits ? selectedTable.selectedTableFits : '1')}</span>
     </div>
 
     <div>
         <button onclick="deleteTable(model.app.selectedTableForEdit)">Slette Bord</button>
         <button onclick="changeTableInformation(model.app.selectedTableForEdit)">Endre Bord</button>
-    </div> 
+    </div>
+    </div>
     <div class="new-table-inputs">
+        <div>Nytt bord</div>
+        <div class="abcdef">
         <div>
-            <input type="text" oninput="model.selectedTable.selectedTableGuests = this.value;" value ="${model.selectedTable.selectedTableGuests}">
+            <div>
+                <input oninput="model.selectedTable.selectedTableLetter = this.value" placeholder="E">
+            </div>
+        </div>
+        <div class="input-range">
+            <label>Seter:&nbsp;</label> 
+            <input type="range" min="1" max="10" oninput="model.selectedTable.selectedTableGuests = this.value; document.getElementById('slider2').innerHTML = this.value;" value="${(model.selectedTable.selectedTableGuests ? model.selectedTable.selectedTableGuests : '1') }"><span id="slider2">${(model.selectedTable.selectedTableGuests ? model.selectedTable.selectedTableGuests : '1') }</span>
 
         </div>
-        <div>
-            <label>ID på bord</label>
-        </div>
-        <div>
-            <input oninput="model.selectedTable.selectedTableLetter = this.value"></input>
         </div>
 
         <div>
@@ -542,7 +549,7 @@ html += `
     </div>
 </div>
     `;
-    html += `<div class="tables ${(animationSatus == false ? 'animate-fade-in' : '')}" style="margin-left: 0 !important;">`;
+    html += `<div class="tables" style="margin-left: 0 !important;">`;
 
     for (let tableList in model.tables) {
         const tableFitsX = tableList.match(/(\d+)/);
@@ -585,15 +592,26 @@ function statisticsView() {
     let barWidth = (svgWidth / model.stats.length);
 
     html += `
-    <div class="">
+    <div class="statistics-page">
+    <div class="header">
     <h1>Statistikk</h1>
-    <label>Velg år</label><input autofocus type="number" oninput="changeDateValue(this.value)" value="${(model.inputStatsDate === '' ? new Date().getFullYear() : model.inputStatsDate)}">
+    <p>Årlig og månedlig statistikk</p>
+    </div>
+
     `;  
 
     svgWidth = 600;
     html += `
     <div class="statistic-outer" style="width:${svgWidth}px" >
-        <div class="statistic-header"><h2>Års statistikk for ${(model.inputStatsDate === '' ? new Date().getFullYear() : model.inputStatsDate)}</h2><span>Klikk på en av månedene for og se månedlig statistikk.</span></div>
+        <div class="statistic-header">
+   
+        <div class="stats-year-title">
+        <span>
+            Års statistikk for 
+        <span>
+            <input autofocus type="number" oninput="changeDateValue(this.value)" value="${(model.inputStatsDate === '' ? new Date().getFullYear() : model.inputStatsDate)}"></div>
+            <span>Klikk på en av månedene for og se månedlig statistikk.</span>
+        </div>
         <div class="statistic" style="height: ${statHeight}px;width:${svgWidth}px">`;
 
     for (const hm in model.stats) {

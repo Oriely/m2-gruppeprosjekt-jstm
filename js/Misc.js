@@ -290,8 +290,8 @@ function getBarHeightFromYearStats(a) {
     let timesIndex;
 
     let highestValue = Math.max.apply(Math, stats);
-    if (highestValue < 10) { timesIndex = 100 / highestValue }
-    if (highestValue > 10) { timesIndex = highestValue / 100 }
+    if (highestValue <= 10) { timesIndex = 100 / highestValue }
+    if (highestValue >= 10) { timesIndex = highestValue / 100 }
 
     let calculatedArray = new Array(stats.length).fill(0);
     for (let i = 0; i < stats.length; i++) {
@@ -308,8 +308,8 @@ function getBarHeightFromMonthStats(a) {
     let timesIndex;
 
     let highestValue = Math.max.apply(Math, stats);
-    if (highestValue < 10) { timesIndex = 100 / highestValue }
-    if (highestValue > 10) { timesIndex = highestValue / 100 }
+    if (highestValue <= 10) { timesIndex = 100 / highestValue }
+    if (highestValue >= 10) { timesIndex = highestValue / 100 }
 
     let calculatedArray = new Array(stats.length);
     for (let i = 0; i < stats.length; i++) {

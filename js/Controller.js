@@ -141,10 +141,11 @@ function editBookingsSelect(i) {
     updateView();
 }
 function changeDateValue(value) {
+    model.statsMonth = [];
+    inputStatsMonth = null;
     console.log(value, 'changedate');
     model.inputStatsDate = value.toString();
     getStatsFromYear()
-    getStatsFromMonth();
     updateView();
 }
 

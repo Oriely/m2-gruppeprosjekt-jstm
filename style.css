@@ -353,8 +353,28 @@ nav div:active {
 }
 
 
+.stats-year-title input {
+    background:inherit;
+    font-size: 22px; 
+    width:5em;
+    padding:0;
+}
+.stats-year-title span {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.input-range {
+    display:flex;
+    align-items: center;
+}
+
+.input-range span {
+    font-size:20px;
+    margin-left:10px;
+}
 .statistic-outer {
-    padding:10px;
+    margin-bottom:10px;
 }
 .statistic {    
 margin-top:10px;
@@ -454,11 +474,34 @@ color:white;
     justify-content: space-between;
 }
 
-.new-table-inputs {
+.abcdef {
+    display:flex;
+    justify-content: space-between;
+}
+
+
+.abcdef > div{
+    display:flex;
+    align-items: center;
+}
+
+.new-table-inputs div{
+}
+
+.new-table-inputs button {
+    width:100%;
+}
+
+.edit-tables-input button {
+
+}
+
+.edit-tables-input div {
+    margin-bottom:5px;
 }
 
 .new-table-inputs > div {
-    margin-top:5px;
+    margin-bottom:5px;
 
 }
 
@@ -474,7 +517,13 @@ color:white;
     width:50px;
     margin-left:10px;
 }
+.manage-tables {
+    display:flex;
+}
 
+.manage-tables div  {
+    width:100%
+}
 .manage-tables-page {
     
 }
@@ -572,8 +621,13 @@ color:white;
 
 @media only screen and (max-width : 320px) {}
 
-h1 {
-    border-bottom:1px solid white;
-    margin-top:10px;
-    margin-bottom: 10px;
+.header {
+    border-bottom:1px solid rgb(113, 112, 112);
+    padding-top:10px;
+    padding-bottom:5px;
+    margin-bottom:10px;  
+}
+
+.header{
+
 }

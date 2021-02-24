@@ -34,11 +34,12 @@ function createNewTable() {
             if (tableList == fitsX) {
                 model.tables[fitsX].push(tableLetter)
             }
-            if (!tempList.includes(fitsX)) {
-                model.tables[fitsX] = [];
-                model.tables[fitsX].push(tableLetter)
-                // alert('Lagd ett nytt bord')
-            }
+            
+        }
+        if (!tempList.includes(fitsX)) {
+            model.tables[fitsX] = [];
+            model.tables[fitsX].push(tableLetter)
+            // alert('Lagd ett nytt bord')
         }
         updateView()
     }
@@ -76,16 +77,16 @@ function changeTableInformation() {
     deleteTable(selectedTable);
 
     if (selectedTableGuests) {
-        var Table = `fits${selectedTableGuests}`;
-        if (tables[Table] == undefined) {
-            tables[Table] = []
-            tables[Table].push(selectedTable)
+        var table = `fits${selectedTableGuests}`;
+        if (tables[table] == undefined) {
+            
+            model.tables[table] = []
+            
+            model.tables[table].push(selectedTable)
         } else {
-
-            tables[Table].push(selectedTable)
+            tables[table].push(selectedTable)
         }
-    }
-
+    }   
     updateView()
 }
 

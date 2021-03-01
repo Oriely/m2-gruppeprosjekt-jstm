@@ -3,9 +3,10 @@ let childBool = false;
 let rangeCount;
 let multipleTableBool = false;
 let checkedChildChair = false;
-checkTableStatus()   
+ 
+
 function createBookingsView() {
-    console.log(model.status)
+    
     let error = '';
     let rangeCount;
 
@@ -44,7 +45,7 @@ function createBookingsView() {
                     <label>Reservert fra </label>
                     <input type="time" onchange="model.inputTime.fromInputTime = this.value" value="${model.inputTime.fromInputTime}"></input>
                     <input type="date" oninput="model.inputTime.fromInputDate = this.value" value="${model.inputTime.fromInputDate}"></input>
-                    <button onclick="setTimeToCurrentTime()">Nåværende Tid</button>
+                    <button onclick="setTimeToCurrentTime();">Nåværende Tid</button>
                 </div>
                 <div>
                     <label>til</label>
@@ -118,8 +119,6 @@ function createBookingsView() {
 
 
 function bookingStatusCheck(table) {
-    console.log(table)
-
     if (model.status[table] == undefined) return;
     if (model.status[table].bookingStatus == -1) return;
     if (model.status[table].bookingStatus == 0) return;

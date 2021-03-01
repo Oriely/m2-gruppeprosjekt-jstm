@@ -514,6 +514,12 @@ html += `
 <div class="edit-tables-input">
     <div>Endre bord:</div>
     <div>
+Bord ${selectedTable.selectedTableForEdit ? `${selectedTable.selectedTableForEdit.toUpperCase()}` : ' velg bord'}
+</div>
+<div>
+Bordet har plass til ${selectedTable.selectedTableFits ? `${selectedTable.selectedTableFits}` : 'velg bord'}
+</div>
+    <div>
         <label>Seter: </label>
     </div>
     <div class="input-range">

@@ -110,65 +110,65 @@ function randomDate(start, end) {
     return dateString;
 }
 
-// let count = 0;
+let count = 0;
 
-// const num = 8;
-// async function randomData() {
-//     const randomName = await faker.name.findName();
-//     const randomD =  randomDate(new Date(2020, 0, 0), new Date());
-//     const randomNumber = getRandomInt(90000000, 99999999).toString();
+const num = 8;
+async function randomData() {
+    const randomName = await faker.name.findName();
+    const randomD =  randomDate(new Date(2020, 0, 0), new Date());
+    const randomNumber = getRandomInt(90000000, 99999999).toString();
 
-//     archive.push({
-//         table: randomChair(),
-//         chairCount: 4,
-//         extraTable: '', 
-//         bookedInfo: {
-//             bookedName: randomName,
-//             bookedNumber: randomNumber,
-//             bookedTime: randomD,
-//             bookedTimeEnd: '',
-//             bookedChild: false,
-//             bookedGuestCount: 5,
-//         }
-//     })
+    archive.push({
+        table: randomChair(),
+        chairCount: 4,
+        extraTable: '', 
+        bookedInfo: {
+            bookedName: randomName,
+            bookedNumber: randomNumber,
+            bookedTime: randomD,
+            bookedTimeEnd: '',
+            bookedChild: false,
+            bookedGuestCount: 5,
+        }
+    })
     
 
 
-// }
+}
 
-// async function randomData2() {
-//     const randomName = await faker.name.findName();
-//     const randomD =  randomDate(new Date(2021, 1, 0), new Date(2021, 3, 0));
-//     const randomNumber = getRandomInt(90000000, 99999999).toString();
+async function randomData2() {
+    const randomName = await faker.name.findName();
+    const randomD =  randomDate(new Date(2021, 1, 0), new Date(2021, 3, 0));
+    const randomNumber = getRandomInt(90000000, 99999999).toString();
 
-//     model.bookingTimes.push({
-//         table: randomChair(),
-//         chairCount: 4,
-//         extraTable: '', 
-//         bookedInfo: {
-//             bookedName: randomName,
-//             bookedNumber: randomNumber,
-//             bookedTime: randomD,
-//             bookedTimeEnd: '',
-//             bookedChild: false,
-//             bookedGuestCount: 4,
-//             bookedMessage: ''
-//         }
-//     })
+    model.bookingTimes.push({
+        table: randomChair(),
+        chairCount: 4,
+        extraTable: '', 
+        bookedInfo: {
+            bookedName: randomName,
+            bookedNumber: randomNumber,
+            bookedTime: randomD,
+            bookedTimeEnd: '',
+            bookedChild: false,
+            bookedGuestCount: 4,
+            bookedMessage: ''
+        }
+    })
     
 
-// }
+}
 
-// while (count < 10000) {
-//     randomData();
-//     count++;
-// }
-// let count2 = 0; 
+while (count < 10000) {
+    randomData();
+    count++;
+}
+let count2 = 0; 
 
-// while(count2 < 1000) {
-//     randomData2();
-//     count2++;
-// } 
+while(count2 < 1000) {
+    randomData2();
+    count2++;
+} 
 
 function randomChair() {
     let letters = 'abcdefghjklmonpqrstuvw';

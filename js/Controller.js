@@ -78,10 +78,8 @@ function checkChairCount(index) {
 function setTimeToCurrentTime() {
     
     model.inputs.inputTime = new Date().toISOString().substring(0, 16)
-    console.log(model.inputs.inputTime)
     model.inputTime.fromInputTime = model.inputs.inputTime.substring(11, 16);
     model.inputTime.fromInputDate = model.inputs.inputTime.substring(0, 10);
-    updateView()
 }
 
 function editBookingsSave() {

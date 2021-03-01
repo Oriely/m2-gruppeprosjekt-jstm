@@ -1,6 +1,6 @@
 const app = document.getElementById('app');
-setTimeToCurrentTime()
-checkTableStatus()
+setTimeToCurrentTime();
+checkTableStatus();
 updateView();
 
 
